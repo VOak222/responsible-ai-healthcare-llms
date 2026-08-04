@@ -1,0 +1,6 @@
+hallucination_category,count,mean
+Incomplete Information,250,0.724
+Misinterpretation of #Question#,1525,0.7521311475409836
+No Hallucination,2000,0.767
+Mechanism and Pathway Misattribution,215,0.8558139534883721
+Methodological and Evidence Fabrication,10,1.0

@@ -6,3 +6,6 @@ __pycache__/
 .ipynb_checkpoints/
 models/
 .env
+results/baseline/baseline_tfidf_predictions.csv
+results/baseline/false_positives.csv
+results/baseline/false_negatives.csv
