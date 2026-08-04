@@ -1,0 +1,48 @@
+
+=== pqa_labeled ===
+Shape: (1000, 6)
+Columns: ['Question', 'Knowledge', 'Ground Truth', 'Difficulty Level', 'Hallucinated Answer', 'Category of Hallucination']
+
+Missing values:
+Question                     0
+Knowledge                    0
+Ground Truth                 0
+Difficulty Level             0
+Hallucinated Answer          0
+Category of Hallucination    0
+dtype: int64
+
+Data types:
+Question                        str
+Knowledge                    object
+Ground Truth                    str
+Difficulty Level                str
+Hallucinated Answer             str
+Category of Hallucination       str
+dtype: object
+
+Skipping value counts for Knowledge because it contains lists/dicts.
+
+=== pqa_artificial ===
+Shape: (9000, 6)
+Columns: ['Question', 'Knowledge', 'Ground Truth', 'Difficulty Level', 'Hallucinated Answer', 'Category of Hallucination']
+
+Missing values:
+Question                     0
+Knowledge                    0
+Ground Truth                 0
+Difficulty Level             0
+Hallucinated Answer          0
+Category of Hallucination    0
+dtype: int64
+
+Data types:
+Question                        str
+Knowledge                    object
+Ground Truth                    str
+Difficulty Level                str
+Hallucinated Answer             str
+Category of Hallucination       str
+dtype: object
+
+Skipping value counts for Knowledge because it contains lists/dicts.
