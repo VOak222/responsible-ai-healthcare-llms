@@ -1,0 +1,20 @@
+Baseline Model: Sentence Transformer Embeddings + Logistic Regression
+Embedding Model: sentence-transformers/all-MiniLM-L6-v2
+Training rows: 16000
+Testing rows: 4000
+Accuracy: 0.5988
+F1 Score: 0.6067
+
+Classification Report:
+                  precision    recall  f1-score   support
+
+Not Hallucinated       0.60      0.58      0.59      2000
+    Hallucinated       0.59      0.62      0.61      2000
+
+        accuracy                           0.60      4000
+       macro avg       0.60      0.60      0.60      4000
+    weighted avg       0.60      0.60      0.60      4000
+
+Confusion Matrix:
+[[1157  843]
+ [ 762 1238]]

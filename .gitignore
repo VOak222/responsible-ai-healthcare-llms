@@ -10,3 +10,4 @@ results/baseline/baseline_tfidf_predictions.csv
 results/baseline/false_positives.csv
 results/baseline/false_negatives.csv
 results/baseline/manual_error_review_sample.csv
+results/sentence_transformer_baseline/sentence_transformer_baseline_predictions.csv
