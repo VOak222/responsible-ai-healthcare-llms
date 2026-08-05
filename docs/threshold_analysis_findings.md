@@ -1,0 +1,1 @@
+The threshold analysis shows that 0.45 is a better operating threshold than the default 0.50 for this baseline. It reduces false negatives from 478 to 262 and improves recall from 76.1% to 86.9%, which is important in healthcare hallucination detection because missed hallucinations are higher-risk errors.

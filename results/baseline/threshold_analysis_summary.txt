@@ -1,0 +1,15 @@
+Threshold Analysis for Baseline Hallucination Detector
+
+ threshold  accuracy  precision  recall  f1_score  true_negatives  false_positives  false_negatives  true_positives
+      0.30   0.58700   0.548199  0.9895  0.705526             369             1631               21            1979
+      0.35   0.63600   0.581291  0.9725  0.727647             599             1401               55            1945
+      0.40   0.69150   0.627752  0.9410  0.753101             884             1116              118            1882
+      0.45   0.73950   0.690230  0.8690  0.769367            1220              780              262            1738
+      0.50   0.76400   0.765594  0.7610  0.763290            1534              466              478            1522
+      0.55   0.74450   0.839583  0.6045  0.702907            1769              231              791            1209
+      0.60   0.69325   0.893986  0.4385  0.588393            1896              104             1123             877
+      0.65   0.62225   0.934281  0.2630  0.410456            1963               37             1474             526
+      0.70   0.56900   0.975862  0.1415  0.247162            1993                7             1717             283
+
+Interpretation:
+Lowering the threshold usually increases recall and reduces false negatives, but it can also increase false positives. In healthcare hallucination detection, false negatives are especially important because they allow hallucinated medical answers to pass as safe or grounded.
