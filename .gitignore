@@ -6,8 +6,11 @@ __pycache__/
 .ipynb_checkpoints/
 models/
 .env
+# Row-level outputs contain dataset text, so keep them local.
 results/baseline/baseline_tfidf_predictions.csv
 results/baseline/false_positives.csv
 results/baseline/false_negatives.csv
 results/baseline/manual_error_review_sample.csv
 results/sentence_transformer_baseline/sentence_transformer_baseline_predictions.csv
+results/grounding/paired_answer_comparison.csv
+results/trustworthiness/clinical_trustworthiness_scores.csv

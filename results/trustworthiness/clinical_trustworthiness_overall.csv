@@ -1,0 +1,2 @@
+rows_scored,mean_clinical_trustworthiness_score,mean_hallucination_score,mean_groundedness_score,mean_safety_score
+4000,0.6096054883478552,0.5054505724566694,0.5209269338352069,0.9560375

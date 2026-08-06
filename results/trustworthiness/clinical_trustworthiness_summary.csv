@@ -1,0 +1,8 @@
+safety_risk_level,recommended_action,count
+high,mandatory_human_review,171
+low,accept,1402
+low,human_review,1860
+low,revise,431
+medium,accept,26
+medium,human_review,59
+medium,revise,51
