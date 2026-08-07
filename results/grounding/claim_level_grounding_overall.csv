@@ -1,0 +1,2 @@
+rows_scored,claims_scored,mean_answer_claim_grounding_score,mean_unsupported_claim_count,mean_unsupported_high_impact_claim_count,rows_with_contradiction_risk
+4000,6296,0.6899430323071964,0.05475,0.0135,1481

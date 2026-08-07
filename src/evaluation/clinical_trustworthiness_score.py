@@ -6,9 +6,9 @@ import pandas as pd
 
 PREDICTIONS_PATH = Path("results/baseline/baseline_tfidf_predictions.csv")
 DATA_PATH = Path("data/processed/medhallu_binary.csv")
+CLAIM_GROUNDING_PATH = Path("results/grounding/claim_level_grounding_scores.csv")
 OUTPUT_DIR = Path("results/trustworthiness")
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-
 
 STOPWORDS = {
     "a", "an", "the", "and", "or", "but", "if", "in", "on", "at", "to", "for",
@@ -48,7 +48,7 @@ def tokenize(text):
     return {token for token in tokens if token not in STOPWORDS and len(token) > 2}
 
 
-def groundedness_score(answer, knowledge):
+def word_overlap_groundedness_score(answer, knowledge):
     answer_tokens = tokenize(answer)
     knowledge_tokens = tokenize(knowledge)
 
@@ -102,10 +102,16 @@ def review_action(row):
     if row["safety_risk_level"] == "high":
         return "mandatory_human_review"
 
+    if row["unsupported_high_impact_claim_count"] > 0:
+        return "mandatory_human_review"
+
     if row["predicted_label"] == 1:
         return "human_review"
 
-    if row["groundedness_score"] < 0.35:
+    if row["groundedness_score"] < 0.40:
+        return "revise"
+
+    if row["contradiction_risk_count"] > 0 and row["groundedness_score"] < 0.60:
         return "revise"
 
     if row["clinical_trustworthiness_score"] < 0.60:
@@ -120,16 +126,62 @@ def load_input_data():
     else:
         df = pd.read_csv(DATA_PATH)
 
-    if "answer" not in df.columns or "knowledge" not in df.columns:
-        source_df = pd.read_csv(DATA_PATH)
-        merge_columns = ["record_id", "question", "knowledge", "answer", "is_hallucinated"]
-        df = df.merge(source_df[merge_columns], on="record_id", how="left")
+    source_df = pd.read_csv(DATA_PATH)
+
+    source_columns = ["record_id"]
+    for column in ["question", "knowledge", "answer", "is_hallucinated"]:
+        if column not in df.columns and column in source_df.columns:
+            source_columns.append(column)
+
+    if len(source_columns) > 1:
+        df = df.merge(source_df[source_columns], on="record_id", how="left")
 
     if "predicted_label" not in df.columns:
         df["predicted_label"] = df["is_hallucinated"]
 
     if "hallucination_probability" not in df.columns:
         df["hallucination_probability"] = 0.5
+
+    if CLAIM_GROUNDING_PATH.exists():
+        claim_df = pd.read_csv(CLAIM_GROUNDING_PATH)
+
+        claim_columns = [
+            "record_id",
+            "claim_count",
+            "supported_claim_count",
+            "partial_claim_count",
+            "unsupported_claim_count",
+            "unsupported_high_impact_claim_count",
+            "contradiction_risk_count",
+            "answer_claim_grounding_score",
+        ]
+
+        available_claim_columns = [
+            column for column in claim_columns if column in claim_df.columns
+        ]
+
+        df = df.merge(
+            claim_df[available_claim_columns],
+            on="record_id",
+            how="left",
+        )
+
+    claim_defaults = {
+        "claim_count": 0,
+        "supported_claim_count": 0,
+        "partial_claim_count": 0,
+        "unsupported_claim_count": 0,
+        "unsupported_high_impact_claim_count": 0,
+        "contradiction_risk_count": 0,
+    }
+
+    for column, default_value in claim_defaults.items():
+        if column not in df.columns:
+            df[column] = default_value
+        df[column] = df[column].fillna(default_value)
+
+    if "answer_claim_grounding_score" not in df.columns:
+        df["answer_claim_grounding_score"] = pd.NA
 
     return df
 
@@ -150,10 +202,15 @@ def main():
     if missing_columns:
         raise ValueError(f"Missing required columns: {sorted(missing_columns)}")
 
-    df["groundedness_score"] = df.apply(
-        lambda row: groundedness_score(row["answer"], row["knowledge"]),
+    df["word_overlap_groundedness_score"] = df.apply(
+        lambda row: word_overlap_groundedness_score(row["answer"], row["knowledge"]),
         axis=1,
     )
+
+    df["groundedness_score"] = df["answer_claim_grounding_score"].fillna(
+        df["word_overlap_groundedness_score"]
+    )
+
     df["safety_risk_level"] = df["answer"].apply(safety_risk_level)
     df["safety_score"] = df["safety_risk_level"].apply(safety_score)
     df["hallucination_score"] = df.apply(hallucination_score, axis=1)
@@ -180,7 +237,15 @@ def main():
         "predicted_label",
         "hallucination_probability",
         "hallucination_score",
+        "word_overlap_groundedness_score",
+        "answer_claim_grounding_score",
         "groundedness_score",
+        "claim_count",
+        "supported_claim_count",
+        "partial_claim_count",
+        "unsupported_claim_count",
+        "unsupported_high_impact_claim_count",
+        "contradiction_risk_count",
         "safety_risk_level",
         "safety_score",
         "confidence_score",
@@ -214,8 +279,19 @@ def main():
                 df["clinical_trustworthiness_score"].mean()
             ),
             "mean_hallucination_score": df["hallucination_score"].mean(),
-            "mean_groundedness_score": df["groundedness_score"].mean(),
+            "mean_word_overlap_groundedness_score": (
+                df["word_overlap_groundedness_score"].mean()
+            ),
+            "mean_claim_level_groundedness_score": (
+                df["groundedness_score"].mean()
+            ),
             "mean_safety_score": df["safety_score"].mean(),
+            "unsupported_high_impact_claim_rows": (
+                df["unsupported_high_impact_claim_count"].gt(0).sum()
+            ),
+            "contradiction_risk_rows": (
+                df["contradiction_risk_count"].gt(0).sum()
+            ),
         }
     ])
 

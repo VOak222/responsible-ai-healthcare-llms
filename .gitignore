@@ -14,3 +14,6 @@ results/baseline/manual_error_review_sample.csv
 results/sentence_transformer_baseline/sentence_transformer_baseline_predictions.csv
 results/grounding/paired_answer_comparison.csv
 results/trustworthiness/clinical_trustworthiness_scores.csv
+# Local detailed claim-level grounding outputs
+results/grounding/claim_level_grounding_scores.csv
+results/grounding/claim_level_grounding_claims.csv
