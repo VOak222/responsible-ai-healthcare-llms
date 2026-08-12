@@ -1,0 +1,2 @@
+rows_evaluated,baseline_accuracy,baseline_f1_score,baseline_false_positives,baseline_false_negatives,mean_claim_grounding_score,mean_trustworthiness_score,accept_rows,revise_rows,human_review_rows,mandatory_human_review_rows
+4000,0.764,0.7632898696088265,466,478,0.6899430323071964,0.6795472150873322,161,2510,1231,98

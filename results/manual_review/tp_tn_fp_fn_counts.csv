@@ -1,0 +1,5 @@
+case_type,row_count
+true_negative,1534
+true_positive,1522
+false_negative,478
+false_positive,466

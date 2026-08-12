@@ -1,0 +1,2 @@
+rows_scored,claims_scored,mean_semantic_claim_support_score,mean_combined_claim_support_score,combined_unsupported_claims
+4000,6296,0.7186883997720616,0.7080265776115856,95
