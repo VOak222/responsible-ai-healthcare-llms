@@ -1,0 +1,2 @@
+method,dataset,threshold_selected_on_train,train_rows,test_rows,test_accuracy,test_precision,test_recall,test_f1_score
+Semantic similarity,medhalt_reasoning_fct,0.95,30101,7537,0.9893856972270134,1.0,0.9787460148777896,0.9892588614393125
