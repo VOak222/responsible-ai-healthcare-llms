@@ -1,0 +1,3 @@
+file,rows,purpose
+equitymedqa_fairness_review_sample.csv,40,Manual review sample by fairness category
+equitymedqa_paired_prompt_review_sample.csv,20,Paired prompt sample for demographic comparison
