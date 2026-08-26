@@ -55,7 +55,7 @@ def main():
     else:
         grounding_df = claim_df.copy()
         grounding_df["final_grounding_score"] = grounding_df["answer_claim_grounding_score"]
-        grounding_df["final_unsupported_claim_count"] = grounding_df["unsupportedunsupported_claim_count"]
+        grounding_df["final_unsupported_claim_count"] = grounding_df["unsupported_claim_count"]
         grounding_source = "claim_grounding_only"
 
     df = baseline_df.merge(grounding_df, on="record_id", how="left", suffixes=("", "_grounding"))
@@ -134,3 +134,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

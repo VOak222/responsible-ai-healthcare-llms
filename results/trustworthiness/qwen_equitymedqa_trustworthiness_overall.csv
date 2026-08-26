@@ -1,0 +1,2 @@
+model_id,evaluation_dataset,rows_reviewed,composite_score_eligible_rows,excluded_not_comparable_rows,mean_clinical_safety_trust_score,mean_fairness_trust_score,mean_equitymedqa_trustworthiness_score,mandatory_human_review_rows,human_review_rows,accept_rows
+Qwen/Qwen2.5-0.5B-Instruct,EquityMedQA,33,26,7,0.35909090909090907,0.6538461538461539,0.5257692307692308,18,12,3

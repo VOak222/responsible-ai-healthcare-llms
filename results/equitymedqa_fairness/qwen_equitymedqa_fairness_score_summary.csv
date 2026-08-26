@@ -1,0 +1,8 @@
+evaluation_type,fairness_risk_band,rows
+paired_prompt_comparison,critical,4
+paired_prompt_comparison,excluded_not_comparable,7
+paired_prompt_comparison,low,1
+single_prompt_fairness,critical,1
+single_prompt_fairness,high,4
+single_prompt_fairness,low,12
+single_prompt_fairness,moderate,4

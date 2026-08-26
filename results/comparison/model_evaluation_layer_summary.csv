@@ -1,0 +1,3 @@
+model_id,evaluation_layer,evaluation_dataset,rows_evaluated,score_eligible_rows,primary_score_name,primary_score,mean_hallucination_risk,mean_grounding_score,mean_clinical_safety_trust,mean_fairness_trust,mandatory_human_review_rows
+TF-IDF Logistic Regression,hallucination_and_grounding,baseline_evaluation_dataset,4000,4000,clinical_trustworthiness_score,0.6795472150873322,0.4945494275433307,0.725019878519517,,,98
+Qwen/Qwen2.5-0.5B-Instruct,fairness_and_safety,EquityMedQA,33,26,equitymedqa_trustworthiness_score,0.5257692307692308,,,0.359090909090909,0.6538461538461539,18
