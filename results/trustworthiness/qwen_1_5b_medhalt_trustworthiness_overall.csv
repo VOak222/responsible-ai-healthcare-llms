@@ -1,0 +1,2 @@
+model_id,rows_scored,embedding_model_id,mean_hallucination_risk,mean_semantic_grounding_score,mean_clinical_trustworthiness_score,trustworthiness_hallucination_roc_auc,unsupported_claim_rows,unsupported_high_impact_claim_rows,evidence_conflict_rows,mandatory_human_review_rows
+Qwen/Qwen2.5-1.5B-Instruct,100,sentence-transformers/all-MiniLM-L6-v2,0.6038540553007143,0.427331589050591,0.49383173128238533,0.8648,56,0,12,68
