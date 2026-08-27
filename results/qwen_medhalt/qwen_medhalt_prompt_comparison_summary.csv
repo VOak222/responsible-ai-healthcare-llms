@@ -1,0 +1,7 @@
+prompt_variant,dataset_name,rows,accuracy,precision,recall,f1_score,roc_auc,predicted_hallucination_rate,mean_hallucination_probability
+fewshot_descriptive,combined,20,0.4,0.375,0.3,0.3333333333333333,0.48,0.4,0.4413315077543409
+fewshot_descriptive,medhalt_reasoning_fake,10,0.3,0.375,0.6,0.46153846153846156,0.0,0.8,0.602505689953423
+fewshot_descriptive,medhalt_reasoning_fct,10,0.5,0.0,0.0,0.0,0.92,0.0,0.2801573255552587
+zero_shot_numeric,combined,20,0.5,0.0,0.0,0.0,0.45999999999999996,0.0,0.09990441055278976
+zero_shot_numeric,medhalt_reasoning_fake,10,0.5,0.0,0.0,0.0,0.8,0.0,0.08361235622543879
+zero_shot_numeric,medhalt_reasoning_fct,10,0.5,0.0,0.0,0.0,0.16,0.0,0.11619646488014072
