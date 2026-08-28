@@ -1,0 +1,4 @@
+action_column,accepted_rows,accepted_supported_rows,accepted_hallucinated_rows,mandatory_human_review_rows,human_review_rows,revise_rows,logic_risk_rows
+recommended_action,25,24,1,68,6,1,4
+tuned_recommended_action,25,24,1,68,6,1,4
+logic_aware_recommended_action,24,24,0,75,1,0,4

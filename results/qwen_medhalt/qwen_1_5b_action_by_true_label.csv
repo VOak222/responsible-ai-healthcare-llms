@@ -1,0 +1,7 @@
+is_hallucinated,recommended_action,rows
+0,accept,24
+0,mandatory_human_review,25
+0,revise,1
+1,accept,1
+1,human_review,6
+1,mandatory_human_review,43
