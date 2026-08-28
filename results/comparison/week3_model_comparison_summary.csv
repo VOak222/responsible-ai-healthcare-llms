@@ -1,0 +1,5 @@
+model_or_method,dataset,rows,accuracy,f1_score,recall,main_result,project_decision
+TF-IDF baseline + trust score,Baseline healthcare evaluation set,4000,,,,Mean trustworthiness score 0.68,Useful baseline reference
+Qwen 0.5B,Med-HALT balanced sample,100,0.52,0.2,0.12,Too weak for main hallucination detection,Do not use as primary detector
+Qwen 1.5B,Med-HALT balanced sample,100,0.86,0.875,0.98,Strong improvement over Qwen 0.5B,Keep validating with safety routing
+Qwen 1.5B + logic-aware routing,Med-HALT balanced sample,100,,,,Accepted hallucinated rows reduced to 0,Use logic-aware routing for negative exam-style prompts
