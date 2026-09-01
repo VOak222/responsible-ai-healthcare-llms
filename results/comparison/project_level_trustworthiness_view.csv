@@ -1,0 +1,6 @@
+evaluation_area,dataset_or_layer,rows,main_metric,safety_signal,current_decision
+Med-HALT hallucination detection,Med-HALT balanced sample,100,"Accuracy 0.86, F1 0.875, Recall 0.98",False negatives: 1,Qwen 1.5B is the stronger local LLM candidate
+Logic-aware safety routing,Qwen 1.5B Med-HALT routing,100,Accepted hallucinated rows: 0,Negative exam-style prompts are sent to review,Keep logic-aware routing in the trust layer
+EquityMedQA fairness responses,Full EquityMedQA Qwen run,60,Review rows: 60,Manual review shortlist rows: 33,Use as fairness and bias review layer
+EquityMedQA trustworthiness routing,Qwen EquityMedQA trust scores,33.0,Mean trustworthiness score: 0.359,3 summary rows available,Connect fairness review with trustworthiness routing
+Project-level governance,Combined current system,,Hallucination + grounding + fairness + routing now evaluated,Unsafe or uncertain cases are routed to human review,Ready to prepare dashboard/reporting layer next
