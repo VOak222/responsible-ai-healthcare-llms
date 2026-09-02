@@ -1,0 +1,15 @@
+fairness_category,manual_overall_risk,manual_review_outcome,rows
+age,high,fail,1
+age,low,pass,1
+age,medium,needs_revision,1
+disability,low,pass,1
+disability,medium,needs_revision,1
+gender_sexuality,medium,needs_revision,4
+general_equity_or_clinical_prompt,high,fail,1
+general_equity_or_clinical_prompt,low,pass,1
+general_equity_or_clinical_prompt,medium,needs_revision,3
+geography,medium,needs_revision,1
+income_access,medium,needs_revision,1
+race_ethnicity,high,fail,1
+religion_culture,high,fail,2
+religion_culture,medium,needs_revision,2

@@ -1,0 +1,235 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Responsible AI Healthcare LLM Final Dashboard</title>
+<style>
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f7f8fb;
+  color: #172033;
+}
+header {
+  background: white;
+  color: #172033;
+  padding: 32px 48px 20px;
+  border-bottom: 1px solid #dfe4ec;
+}
+header h1 {
+  margin: 0 0 8px;
+  font-size: 34px;
+}
+header p {
+  margin: 0;
+  color: #64748b;
+  font-size: 18px;
+}
+main {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 28px 32px 44px;
+}
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.metric, section {
+  background: white;
+  border: 1px solid #dfe4ec;
+  border-radius: 8px;
+}
+.metric {
+  padding: 18px;
+}
+.metric span, .metric small {
+  display: block;
+  color: #64748b;
+}
+.metric strong {
+  display: block;
+  font-size: 34px;
+  margin: 8px 0;
+}
+section {
+  padding: 20px;
+  margin-bottom: 18px;
+  break-inside: avoid;
+}
+h2 {
+  margin: 0 0 12px;
+  font-size: 21px;
+}
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid #dfe4ec;
+  border-radius: 8px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+th, td {
+  border-bottom: 1px solid #dfe4ec;
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+th {
+  background: #f1f5f9;
+}
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+.bar-row {
+  display: grid;
+  grid-template-columns: 230px 1fr 44px;
+  gap: 12px;
+  align-items: center;
+  margin: 12px 0;
+}
+.bar-row div {
+  background: #e5e7eb;
+  height: 12px;
+  border-radius: 999px;
+  overflow: hidden;
+}
+.bar-row i {
+  display: block;
+  height: 100%;
+  background: #1f6feb;
+}
+.muted {
+  color: #64748b;
+}
+@media print {
+  body { background: white; }
+  main { padding-top: 18px; }
+  .metrics { grid-template-columns: repeat(4, 1fr); }
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Responsible AI Healthcare LLM Dashboard</h1>
+  <p>Project-level summary of hallucination detection, grounding, fairness review, and safety routing.</p>
+</header>
+
+<main>
+  <div class="metrics">
+    <div class='metric'><span>Qwen 1.5B Accuracy</span><strong>0.86</strong><small>Med-HALT balanced sample</small></div>
+    <div class='metric'><span>Qwen 1.5B F1</span><strong>0.875</strong><small>Hallucination detection</small></div>
+    <div class='metric'><span>Qwen 1.5B Recall</span><strong>0.98</strong><small>Hallucination catch rate</small></div>
+    <div class='metric'><span>Accepted Hallucinations</span><strong>0</strong><small>After logic-aware routing</small></div>
+  </div>
+
+  <section>
+    <h2>Project-Level Summary</h2>
+    <div class='table-wrap'><table><thead><tr><th>evaluation_area</th><th>dataset_or_layer</th><th>rows</th><th>main_metric</th><th>safety_signal</th><th>current_decision</th></tr></thead><tbody><tr><td>Med-HALT hallucination detection</td><td>Med-HALT balanced sample</td><td>100.0</td><td>Accuracy 0.86, F1 0.875, Recall 0.98</td><td>False negatives: 1</td><td>Qwen 1.5B is the stronger local LLM candidate</td></tr><tr><td>Logic-aware safety routing</td><td>Qwen 1.5B Med-HALT routing</td><td>100.0</td><td>Accepted hallucinated rows: 0</td><td>Negative exam-style prompts are sent to review</td><td>Keep logic-aware routing in the trust layer</td></tr><tr><td>EquityMedQA fairness responses</td><td>Full EquityMedQA Qwen run</td><td>60.0</td><td>Review rows: 60</td><td>Manual review shortlist rows: 33</td><td>Use as fairness and bias review layer</td></tr><tr><td>EquityMedQA trustworthiness routing</td><td>Qwen EquityMedQA trust scores</td><td>33.0</td><td>Mean trustworthiness score: 0.359</td><td>3 summary rows available</td><td>Connect fairness review with trustworthiness routing</td></tr><tr><td>Project-level governance</td><td>Combined current system</td><td></td><td>Hallucination + grounding + fairness + routing now evaluated</td><td>Unsafe or uncertain cases are routed to human review</td><td>Ready to prepare dashboard/reporting layer next</td></tr></tbody></table></div>
+  </section>
+
+  <section>
+    <h2>Week 3 Model Comparison</h2>
+    <div class='table-wrap'><table><thead><tr><th>model_or_method</th><th>dataset</th><th>rows</th><th>accuracy</th><th>f1_score</th><th>recall</th><th>main_result</th><th>project_decision</th></tr></thead><tbody><tr><td>TF-IDF baseline + trust score</td><td>Baseline healthcare evaluation set</td><td>4000</td><td></td><td></td><td></td><td>Mean trustworthiness score 0.68</td><td>Useful baseline reference</td></tr><tr><td>Qwen 0.5B</td><td>Med-HALT balanced sample</td><td>100</td><td>0.52</td><td>0.2</td><td>0.12</td><td>Too weak for main hallucination detection</td><td>Do not use as primary detector</td></tr><tr><td>Qwen 1.5B</td><td>Med-HALT balanced sample</td><td>100</td><td>0.86</td><td>0.875</td><td>0.98</td><td>Strong improvement over Qwen 0.5B</td><td>Keep validating with safety routing</td></tr><tr><td>Qwen 1.5B + logic-aware routing</td><td>Med-HALT balanced sample</td><td>100</td><td></td><td></td><td></td><td>Accepted hallucinated rows reduced to 0</td><td>Use logic-aware routing for negative exam-style prompts</td></tr></tbody></table></div>
+  </section>
+
+  <div class="two-col">
+    <section>
+      <h2>EquityMedQA Trust Routing</h2>
+      <p class="muted">Rows routed by the trustworthiness layer.</p>
+      
+        <div class="bar-row">
+          <span>mandatory_human_review</span>
+          <div><i style="width:54.5%"></i></div>
+          <b>18</b>
+        </div>
+        
+        <div class="bar-row">
+          <span>human_review</span>
+          <div><i style="width:36.4%"></i></div>
+          <b>12</b>
+        </div>
+        
+        <div class="bar-row">
+          <span>accept</span>
+          <div><i style="width:9.1%"></i></div>
+          <b>3</b>
+        </div>
+        
+    </section>
+
+    <section>
+      <h2>Fairness Categories Needing Review</h2>
+      <p class="muted">Manual review shortlist grouped by fairness category.</p>
+      
+        <div class="bar-row">
+          <span>general_equity_or_clinical_prompt</span>
+          <div><i style="width:23.8%"></i></div>
+          <b>5</b>
+        </div>
+        
+        <div class="bar-row">
+          <span>gender_sexuality</span>
+          <div><i style="width:19.0%"></i></div>
+          <b>4</b>
+        </div>
+        
+        <div class="bar-row">
+          <span>religion_culture</span>
+          <div><i style="width:19.0%"></i></div>
+          <b>4</b>
+        </div>
+        
+        <div class="bar-row">
+          <span>age</span>
+          <div><i style="width:14.3%"></i></div>
+          <b>3</b>
+        </div>
+        
+        <div class="bar-row">
+          <span>disability</span>
+          <div><i style="width:9.5%"></i></div>
+          <b>2</b>
+        </div>
+        
+        <div class="bar-row">
+          <span>geography</span>
+          <div><i style="width:4.8%"></i></div>
+          <b>1</b>
+        </div>
+        
+        <div class="bar-row">
+          <span>income_access</span>
+          <div><i style="width:4.8%"></i></div>
+          <b>1</b>
+        </div>
+        
+        <div class="bar-row">
+          <span>race_ethnicity</span>
+          <div><i style="width:4.8%"></i></div>
+          <b>1</b>
+        </div>
+        
+    </section>
+  </div>
+
+  <section>
+    <h2>Review Flags Needing Attention</h2>
+    <p class="muted">The dashboard shows review themes instead of long clinical responses. Full cases remain in the generated CSV files.</p>
+    <div class='table-wrap'><table><thead><tr><th>review_flag</th><th>review_rows</th></tr></thead><tbody><tr><td>missing_professional_care_guidance</td><td>23</td></tr><tr><td>possible_unsafe_clinical_advice</td><td>7</td></tr><tr><td>possible_stereotype_language</td><td>3</td></tr><tr><td>paired_response_length_difference</td><td>3</td></tr><tr><td>pregnancy_medication_caution_needed</td><td>1</td></tr></tbody></table></div>
+  </section>
+
+  <section>
+    <h2>EquityMedQA Review Summary</h2>
+    <div class='table-wrap'><table><thead><tr><th>evaluation_type</th><th>overall_fairness_safety_risk</th><th>rows</th></tr></thead><tbody><tr><td>paired_prompt_comparison</td><td>low_observed_risk</td><td>8</td></tr><tr><td>paired_prompt_comparison</td><td>review_needed</td><td>12</td></tr><tr><td>single_prompt_fairness</td><td>low_observed_risk</td><td>19</td></tr><tr><td>single_prompt_fairness</td><td>review_needed</td><td>21</td></tr></tbody></table></div>
+  </section>
+</main>
+</body>
+</html>
