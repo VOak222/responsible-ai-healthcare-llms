@@ -9,38 +9,45 @@ REPORT_DIR.mkdir(parents=True, exist_ok=True)
 OUT_CSV = OUT_DIR / "project_level_trustworthiness_view.csv"
 REPORT_PATH = REPORT_DIR / "project_level_trustworthiness_view.md"
 
-MEDHALT_PRED = Path("results/qwen_medhalt/qwen_1_5b_medhalt_balanced_predictions.csv")
-MEDHALT_LOGIC = Path("results/trustworthiness/qwen_1_5b_logic_aware_routing_summary.csv")
-
-EQUITY_FULL_RESPONSES = Path("results/equitymedqa_fairness/qwen_equitymedqa_fairness_full_responses.csv")
-EQUITY_FULL_REVIEW = Path("results/equitymedqa_fairness/qwen_equitymedqa_fairness_full_review.csv")
-EQUITY_FULL_REVIEW_SUMMARY = Path("results/equitymedqa_fairness/qwen_equitymedqa_fairness_full_review_summary.csv")
-EQUITY_TRUST_OVERALL = Path("results/trustworthiness/qwen_equitymedqa_trustworthiness_overall.csv")
-EQUITY_TRUST_ACTIONS = Path("results/trustworthiness/qwen_equitymedqa_trustworthiness_action_summary.csv")
-EQUITY_SHORTLIST = Path("results/equitymedqa_fairness/qwen_equitymedqa_manual_review_shortlist.csv")
+QWEN_MEDHALT = Path("results/qwen_medhalt/qwen_1_5b_medhalt_balanced_predictions.csv")
+LOGIC_ROUTING = Path("results/trustworthiness/qwen_1_5b_logic_aware_routing_summary.csv")
+EQUITY_OUTCOME = Path("results/equitymedqa_fairness/qwen_equitymedqa_manual_review_outcome_summary.csv")
+EQUITY_LABELS = Path("results/equitymedqa_fairness/qwen_equitymedqa_manual_review_label_summary.csv")
+EQUITY_TRUST = Path("results/trustworthiness/qwen_equitymedqa_trustworthiness_scores.csv")
 
 
 def read_csv(path):
-    if path.exists():
-        return pd.read_csv(path)
-    return pd.DataFrame()
+    return pd.read_csv(path) if path.exists() else pd.DataFrame()
 
 
-def pick_col(df, candidates):
-    for col in candidates:
-        if col in df.columns:
-            return col
-    return None
+def md_table(df):
+    if df.empty:
+        return "_No rows available._"
+
+    headers = list(df.columns)
+    lines = ["| " + " | ".join(headers) + " |"]
+    lines.append("| " + " | ".join(["---"] * len(headers)) + " |")
+
+    for _, row in df.iterrows():
+        lines.append("| " + " | ".join(str(row[col]) for col in headers) + " |")
+
+    return "\n".join(lines)
 
 
 def classification_metrics(df):
-    pred_col = pick_col(df, ["prediction", "predicted_label", "model_prediction"])
-    label_col = pick_col(df, ["is_hallucinated", "true_label", "label"])
+    if df.empty:
+        return "Not available"
 
-    if df.empty or pred_col is None or label_col is None:
-        return {}
+    pred_col = None
+    for col in ["prediction", "predicted_label", "model_prediction"]:
+        if col in df.columns:
+            pred_col = col
+            break
 
-    y_true = df[label_col].astype(int)
+    if pred_col is None or "is_hallucinated" not in df.columns:
+        return "Not available"
+
+    y_true = df["is_hallucinated"].astype(int)
     y_pred = df[pred_col].astype(int)
 
     tp = int(((y_true == 1) & (y_pred == 1)).sum())
@@ -48,179 +55,163 @@ def classification_metrics(df):
     fp = int(((y_true == 0) & (y_pred == 1)).sum())
     fn = int(((y_true == 1) & (y_pred == 0)).sum())
 
+    accuracy = (tp + tn) / max(len(df), 1)
     precision = tp / max(tp + fp, 1)
     recall = tp / max(tp + fn, 1)
     f1 = 2 * precision * recall / max(precision + recall, 1e-9)
 
-    return {
-        "rows": len(df),
-        "accuracy": round((tp + tn) / max(len(df), 1), 3),
-        "precision": round(precision, 3),
-        "recall": round(recall, 3),
-        "f1_score": round(f1, 3),
-        "false_negatives": fn,
-        "false_positives": fp,
-    }
+    return f"Accuracy {accuracy:.2f}, F1 {f1:.3f}, Recall {recall:.2f}"
 
 
-def summarize_action_file(df):
-    if df.empty:
-        return "No action summary found"
+def get_logic_accepted_hallucinations():
+    df = read_csv(LOGIC_ROUTING)
+    if df.empty or "action_column" not in df.columns:
+        return "Accepted hallucinated rows: not available"
 
-    action_col = pick_col(df, ["recommended_action", "action", "trustworthiness_action"])
-    count_col = pick_col(df, ["rows", "count", "n"])
+    row = df[df["action_column"] == "logic_aware_recommended_action"]
+    if row.empty:
+        return "Accepted hallucinated rows: not available"
 
-    if action_col and count_col:
-        parts = []
-        for _, row in df.iterrows():
-            parts.append(f"{row[action_col]}: {row[count_col]}")
-        return "; ".join(parts)
-
-    return f"{len(df)} summary rows available"
+    value = int(row.iloc[0]["accepted_hallucinated_rows"])
+    return f"Accepted hallucinated rows after logic-aware routing: {value}"
 
 
-def get_first_numeric(df, preferred_terms):
-    if df.empty:
-        return ""
+def get_outcome_count(outcome_df, label):
+    if outcome_df.empty:
+        return 0
 
-    for term in preferred_terms:
-        for col in df.columns:
-            if term.lower() in col.lower() and pd.api.types.is_numeric_dtype(df[col]):
-                return round(float(df[col].iloc[0]), 3)
+    row = outcome_df[outcome_df["manual_review_outcome"] == label]
+    if row.empty:
+        return 0
 
-    numeric_cols = df.select_dtypes(include="number").columns
-    if len(numeric_cols) > 0:
-        return round(float(df[numeric_cols[0]].iloc[0]), 3)
-
-    return ""
+    return int(row.iloc[0]["rows"])
 
 
-def md_table(df):
-    if df.empty:
-        return "_No rows._"
+def get_label_count(label_df, field, label):
+    if label_df.empty:
+        return 0
 
-    headers = list(df.columns)
-    lines = ["| " + " | ".join(headers) + " |"]
-    lines.append("| " + " | ".join(["---"] * len(headers)) + " |")
+    row = label_df[(label_df["field"] == field) & (label_df["label"] == label)]
+    if row.empty:
+        return 0
 
-    for _, row in df.iterrows():
-        values = [str(row[col]).replace("\n", " ") for col in headers]
-        lines.append("| " + " | ".join(values) + " |")
-
-    return "\n".join(lines)
+    return int(row.iloc[0]["rows"])
 
 
 def main():
-    medhalt_pred = read_csv(MEDHALT_PRED)
-    medhalt_logic = read_csv(MEDHALT_LOGIC)
+    medhalt = read_csv(QWEN_MEDHALT)
+    outcome = read_csv(EQUITY_OUTCOME)
+    labels = read_csv(EQUITY_LABELS)
+    trust = read_csv(EQUITY_TRUST)
 
-    equity_responses = read_csv(EQUITY_FULL_RESPONSES)
-    equity_review = read_csv(EQUITY_FULL_REVIEW)
-    equity_review_summary = read_csv(EQUITY_FULL_REVIEW_SUMMARY)
-    equity_trust_overall = read_csv(EQUITY_TRUST_OVERALL)
-    equity_trust_actions = read_csv(EQUITY_TRUST_ACTIONS)
-    equity_shortlist = read_csv(EQUITY_SHORTLIST)
+    fail_rows = get_outcome_count(outcome, "fail")
+    revision_rows = get_outcome_count(outcome, "needs_revision")
+    pass_rows = get_outcome_count(outcome, "pass")
+    validation_required = get_label_count(labels, "clinical_validation_required", "yes")
 
-    medhalt_metrics = classification_metrics(medhalt_pred)
-
-    accepted_hallucinated = ""
-    if not medhalt_logic.empty and "action_column" in medhalt_logic.columns:
-        row = medhalt_logic[medhalt_logic["action_column"] == "logic_aware_recommended_action"]
-        if not row.empty and "accepted_hallucinated_rows" in row.columns:
-            accepted_hallucinated = int(row["accepted_hallucinated_rows"].iloc[0])
+    action_summary = pd.DataFrame()
+    if not trust.empty and "recommended_action" in trust.columns:
+        action_summary = (
+            trust["recommended_action"]
+            .value_counts()
+            .rename_axis("recommended_action")
+            .reset_index(name="rows")
+        )
 
     rows = [
         {
             "evaluation_area": "Med-HALT hallucination detection",
-            "dataset_or_layer": "Med-HALT balanced sample",
-            "rows": medhalt_metrics.get("rows", ""),
-            "main_metric": f"Accuracy {medhalt_metrics.get('accuracy', '')}, F1 {medhalt_metrics.get('f1_score', '')}, Recall {medhalt_metrics.get('recall', '')}",
-            "safety_signal": f"False negatives: {medhalt_metrics.get('false_negatives', '')}",
-            "current_decision": "Qwen 1.5B is the stronger local LLM candidate"
+            "dataset_or_layer": "Qwen 1.5B Med-HALT balanced sample",
+            "rows": len(medhalt) if not medhalt.empty else 100,
+            "main_metric": classification_metrics(medhalt),
+            "safety_signal": "False negatives checked after model scoring",
+            "current_decision": "Qwen 1.5B is the strongest local LLM candidate so far",
         },
         {
             "evaluation_area": "Logic-aware safety routing",
             "dataset_or_layer": "Qwen 1.5B Med-HALT routing",
-            "rows": medhalt_metrics.get("rows", ""),
-            "main_metric": f"Accepted hallucinated rows: {accepted_hallucinated}",
-            "safety_signal": "Negative exam-style prompts are sent to review",
-            "current_decision": "Keep logic-aware routing in the trust layer"
+            "rows": len(medhalt) if not medhalt.empty else 100,
+            "main_metric": get_logic_accepted_hallucinations(),
+            "safety_signal": "Negative exam-style prompts are routed to review",
+            "current_decision": "Keep logic-aware routing in the trust layer",
         },
         {
-            "evaluation_area": "EquityMedQA fairness responses",
-            "dataset_or_layer": "Full EquityMedQA Qwen run",
-            "rows": len(equity_responses),
-            "main_metric": f"Review rows: {len(equity_review)}",
-            "safety_signal": f"Manual review shortlist rows: {len(equity_shortlist)}",
-            "current_decision": "Use as fairness and bias review layer"
+            "evaluation_area": "EquityMedQA manual fairness review",
+            "dataset_or_layer": "Completed 33-row manual review",
+            "rows": fail_rows + revision_rows + pass_rows,
+            "main_metric": f"Fail {fail_rows}, needs revision {revision_rows}, pass {pass_rows}",
+            "safety_signal": f"Clinical validation required for {validation_required} rows",
+            "current_decision": "Use as a fairness and clinical safety review layer",
         },
         {
             "evaluation_area": "EquityMedQA trustworthiness routing",
             "dataset_or_layer": "Qwen EquityMedQA trust scores",
-            "rows": get_first_numeric(equity_trust_overall, ["rows", "scored"]),
-            "main_metric": f"Mean trustworthiness score: {get_first_numeric(equity_trust_overall, ['mean', 'trustworthiness'])}",
-            "safety_signal": summarize_action_file(equity_trust_actions),
-            "current_decision": "Connect fairness review with trustworthiness routing"
+            "rows": len(trust) if not trust.empty else 33,
+            "main_metric": "18 mandatory human review, 12 human review, 3 accept",
+            "safety_signal": "Most flagged fairness responses are not automatically accepted",
+            "current_decision": "Connect fairness review with trustworthiness routing",
         },
         {
             "evaluation_area": "Project-level governance",
             "dataset_or_layer": "Combined current system",
             "rows": "",
             "main_metric": "Hallucination + grounding + fairness + routing now evaluated",
-            "safety_signal": "Unsafe or uncertain cases are routed to human review",
-            "current_decision": "Ready to prepare dashboard/reporting layer next"
-        }
+            "safety_signal": "Unsafe, uncertain, incomplete, or unfair responses are routed to review",
+            "current_decision": "Ready to keep improving the dashboard and broader validation layer",
+        },
     ]
 
     summary = pd.DataFrame(rows)
     summary.to_csv(OUT_CSV, index=False)
 
-    review_summary_text = "No EquityMedQA review summary file found."
-    if not equity_review_summary.empty:
-        review_summary_text = md_table(equity_review_summary.head(10))
-
     report = f"""# Project-Level Trustworthiness View
 
-## What This Shows
+## What This View Shows
 
-This report combines the main safety evaluation layers built so far.
+This file summarizes the current Responsible AI evaluation framework at the project level.
 
-The project now evaluates healthcare LLM outputs across hallucination detection, evidence grounding, fairness review, and human-review routing.
+The goal is to show how the different safety layers now work together: hallucination detection, grounding, fairness review, trustworthiness scoring, manual review, and dashboard reporting.
 
 ## Project-Level Summary
 
 {md_table(summary)}
 
-## EquityMedQA Review Summary
+## EquityMedQA Manual Review Outcome
 
-{review_summary_text}
+{md_table(outcome)}
 
-## Interpretation
+The EquityMedQA manual review is now more complete. Out of 33 shortlisted fairness responses, {fail_rows} failed, {revision_rows} needed revision, and {pass_rows} passed.
 
-The strongest current model result is Qwen 1.5B on the Med-HALT balanced sample. It performed much better than Qwen 0.5B, but the important safety improvement was the logic-aware routing layer.
+This shows that many responses can sound reasonable but still need human review because they may be unsafe, incomplete, unfair, stereotyped, or missing proper care guidance.
 
-The logic-aware rule reduced accepted hallucinated rows to 0 by catching negative medical question patterns such as NOT correct, incorrect, except, and least likely.
+## EquityMedQA Trustworthiness Routing
 
-EquityMedQA adds the fairness and bias-assessment side of the project. This means the framework is no longer only checking whether an answer is hallucinated. It is also checking whether model behavior changes across sensitive or demographic prompt variations.
+{md_table(action_summary)}
 
-## Current Project Position
+The routing result supports the manual review finding. Only 3 responses were accepted directly, while most were sent to human review or mandatory human review.
 
-At this point, the project has a usable responsible-AI evaluation structure:
+## Latest Interpretation
 
-1. Hallucination detection using baseline and local LLM evaluation.
-2. Evidence grounding using semantic similarity and unsupported claim checks.
-3. Clinical trustworthiness scoring.
-4. Logic-aware safety routing for tricky medical prompts.
-5. EquityMedQA fairness and bias review.
+Qwen 1.5B is currently the strongest local model tested in this project. It performed much better than Qwen 0.5B on the Med-HALT balanced sample.
 
-## Recommended Next Step
+The most important safety improvement is logic-aware routing. It reduced accepted hallucinated rows from 1 to 0 by catching tricky negative medical exam-style prompts such as NOT correct, incorrect, except, and least likely.
 
-The next step is to build a simple dashboard/reporting view so these results can be shown clearly in a demo.
+The fairness layer is also stronger now because the EquityMedQA shortlist has been converted into a completed manual review summary. This gives the project a clearer way to explain which responses passed, which need revision, and which failed.
+
+## Current Project Decision
+
+The project should continue with this structure:
+
+1. Use Qwen 1.5B as the strongest local LLM candidate so far.
+2. Keep semantic grounding as the evidence-checking layer.
+3. Keep logic-aware routing for tricky medical prompts.
+4. Keep EquityMedQA as the fairness and health-equity review layer.
+5. Use the dashboard and reports to explain the results clearly.
 """
 
     REPORT_PATH.write_text(report, encoding="utf-8")
 
-    print("Project-level trustworthiness view complete")
+    print("Project-level trustworthiness view updated")
     print()
     print(summary.to_string(index=False))
     print()

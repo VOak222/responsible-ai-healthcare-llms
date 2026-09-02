@@ -1,48 +1,57 @@
 # Project-Level Trustworthiness View
 
-## What This Shows
+## What This View Shows
 
-This report combines the main safety evaluation layers built so far.
+This file summarizes the current Responsible AI evaluation framework at the project level.
 
-The project now evaluates healthcare LLM outputs across hallucination detection, evidence grounding, fairness review, and human-review routing.
+The goal is to show how the different safety layers now work together: hallucination detection, grounding, fairness review, trustworthiness scoring, manual review, and dashboard reporting.
 
 ## Project-Level Summary
 
 | evaluation_area | dataset_or_layer | rows | main_metric | safety_signal | current_decision |
 | --- | --- | --- | --- | --- | --- |
-| Med-HALT hallucination detection | Med-HALT balanced sample | 100 | Accuracy 0.86, F1 0.875, Recall 0.98 | False negatives: 1 | Qwen 1.5B is the stronger local LLM candidate |
-| Logic-aware safety routing | Qwen 1.5B Med-HALT routing | 100 | Accepted hallucinated rows: 0 | Negative exam-style prompts are sent to review | Keep logic-aware routing in the trust layer |
-| EquityMedQA fairness responses | Full EquityMedQA Qwen run | 60 | Review rows: 60 | Manual review shortlist rows: 33 | Use as fairness and bias review layer |
-| EquityMedQA trustworthiness routing | Qwen EquityMedQA trust scores | 33.0 | Mean trustworthiness score: 0.359 | 3 summary rows available | Connect fairness review with trustworthiness routing |
-| Project-level governance | Combined current system |  | Hallucination + grounding + fairness + routing now evaluated | Unsafe or uncertain cases are routed to human review | Ready to prepare dashboard/reporting layer next |
+| Med-HALT hallucination detection | Qwen 1.5B Med-HALT balanced sample | 100 | Accuracy 0.86, F1 0.875, Recall 0.98 | False negatives checked after model scoring | Qwen 1.5B is the strongest local LLM candidate so far |
+| Logic-aware safety routing | Qwen 1.5B Med-HALT routing | 100 | Accepted hallucinated rows after logic-aware routing: 0 | Negative exam-style prompts are routed to review | Keep logic-aware routing in the trust layer |
+| EquityMedQA manual fairness review | Completed 33-row manual review | 33 | Fail 16, needs revision 14, pass 3 | Clinical validation required for 29 rows | Use as a fairness and clinical safety review layer |
+| EquityMedQA trustworthiness routing | Qwen EquityMedQA trust scores | 33 | 18 mandatory human review, 12 human review, 3 accept | Most flagged fairness responses are not automatically accepted | Connect fairness review with trustworthiness routing |
+| Project-level governance | Combined current system |  | Hallucination + grounding + fairness + routing now evaluated | Unsafe, uncertain, incomplete, or unfair responses are routed to review | Ready to keep improving the dashboard and broader validation layer |
 
-## EquityMedQA Review Summary
+## EquityMedQA Manual Review Outcome
 
-| evaluation_type | overall_fairness_safety_risk | rows |
-| --- | --- | --- |
-| paired_prompt_comparison | low_observed_risk | 8 |
-| paired_prompt_comparison | review_needed | 12 |
-| single_prompt_fairness | low_observed_risk | 19 |
-| single_prompt_fairness | review_needed | 21 |
+| manual_review_outcome | rows |
+| --- | --- |
+| fail | 16 |
+| needs_revision | 14 |
+| pass | 3 |
 
-## Interpretation
+The EquityMedQA manual review is now more complete. Out of 33 shortlisted fairness responses, 16 failed, 14 needed revision, and 3 passed.
 
-The strongest current model result is Qwen 1.5B on the Med-HALT balanced sample. It performed much better than Qwen 0.5B, but the important safety improvement was the logic-aware routing layer.
+This shows that many responses can sound reasonable but still need human review because they may be unsafe, incomplete, unfair, stereotyped, or missing proper care guidance.
 
-The logic-aware rule reduced accepted hallucinated rows to 0 by catching negative medical question patterns such as NOT correct, incorrect, except, and least likely.
+## EquityMedQA Trustworthiness Routing
 
-EquityMedQA adds the fairness and bias-assessment side of the project. This means the framework is no longer only checking whether an answer is hallucinated. It is also checking whether model behavior changes across sensitive or demographic prompt variations.
+| recommended_action | rows |
+| --- | --- |
+| mandatory_human_review | 18 |
+| human_review | 12 |
+| accept | 3 |
 
-## Current Project Position
+The routing result supports the manual review finding. Only 3 responses were accepted directly, while most were sent to human review or mandatory human review.
 
-At this point, the project has a usable responsible-AI evaluation structure:
+## Latest Interpretation
 
-1. Hallucination detection using baseline and local LLM evaluation.
-2. Evidence grounding using semantic similarity and unsupported claim checks.
-3. Clinical trustworthiness scoring.
-4. Logic-aware safety routing for tricky medical prompts.
-5. EquityMedQA fairness and bias review.
+Qwen 1.5B is currently the strongest local model tested in this project. It performed much better than Qwen 0.5B on the Med-HALT balanced sample.
 
-## Recommended Next Step
+The most important safety improvement is logic-aware routing. It reduced accepted hallucinated rows from 1 to 0 by catching tricky negative medical exam-style prompts such as NOT correct, incorrect, except, and least likely.
 
-The next step is to build a simple dashboard/reporting view so these results can be shown clearly in a demo.
+The fairness layer is also stronger now because the EquityMedQA shortlist has been converted into a completed manual review summary. This gives the project a clearer way to explain which responses passed, which need revision, and which failed.
+
+## Current Project Decision
+
+The project should continue with this structure:
+
+1. Use Qwen 1.5B as the strongest local LLM candidate so far.
+2. Keep semantic grounding as the evidence-checking layer.
+3. Keep logic-aware routing for tricky medical prompts.
+4. Keep EquityMedQA as the fairness and health-equity review layer.
+5. Use the dashboard and reports to explain the results clearly.
