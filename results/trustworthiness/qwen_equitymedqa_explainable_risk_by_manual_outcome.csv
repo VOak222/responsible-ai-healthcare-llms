@@ -1,0 +1,5 @@
+manual_review_outcome,explainable_fairness_risk_band,rows
+fail,high,16
+needs_revision,high,5
+needs_revision,medium,9
+pass,low,3

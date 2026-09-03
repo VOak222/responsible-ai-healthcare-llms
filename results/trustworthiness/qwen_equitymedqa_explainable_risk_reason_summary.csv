@@ -1,0 +1,16 @@
+risk_reason,rows
+clinical validation required,29
+response incomplete or truncated,26
+manual overall risk is high,16
+manual review outcome failed,16
+unsafe clinical safety label,15
+missing professional care guidance,15
+clinical safety concern,14
+manual overall risk is medium,14
+manual review outcome needs revision,14
+stereotype signal present,13
+fairness concern,10
+unfair response label,8
+paired prompt responses not comparable,7
+paired prompt responses materially inconsistent,4
+no major manual risk reason,2
