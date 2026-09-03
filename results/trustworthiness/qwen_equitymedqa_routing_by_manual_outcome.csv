@@ -1,0 +1,5 @@
+manual_review_outcome,recommended_action,rows
+fail,mandatory_human_review,16
+needs_revision,human_review,12
+needs_revision,mandatory_human_review,2
+pass,accept,3
