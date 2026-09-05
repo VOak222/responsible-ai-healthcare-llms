@@ -1,0 +1,8 @@
+workstream,status,result,monday_use
+Med-HALT Qwen 1.5B evaluation,complete,"Accuracy 0.86, F1 0.875, Recall 0.98, FN 1",Use in PPT/report as strongest local LLM result so far
+Logic-aware safety routing,complete,Accepted hallucinated rows after routing: 0,Use as the main safety improvement example
+EquityMedQA manual review,complete,"Fail 16, needs revision 14, pass 3",Use to show human review was completed for flagged fairness cases
+EquityMedQA trust routing,complete,"18 mandatory review, 12 human review, 3 accept",Use to show risky responses were not automatically accepted
+Manual-trust alignment,complete,"Unsafe accepts 0, under-escalated fails 0, accepted pass cases 3",Use to prove routing matches manual review outcomes
+Explainable fairness-risk scoring,complete,"High 21, medium 9, low 3",Use to explain why cases were routed for review
+Dashboard reporting,ready for meeting review,Final dashboard updated with Week 4 metrics,Open and decide whether to show it during Tuesday meeting
