@@ -1,0 +1,5 @@
+candidate,type,purpose,status,readiness_check,risk,next_action
+Qwen/Qwen2.5-3B-Instruct,model,Stronger local LLM comparison after Qwen 0.5B and Qwen 1.5B,planned,Use first if local memory and disk are sufficient,May be slower or heavier than Qwen 1.5B,Run a 5-row smoke test before full evaluation
+microsoft/Phi-3.5-mini-instruct,model,Alternative small open model for comparison,backup candidate,Use if Qwen2.5-3B is too slow or unstable locally,Different chat format and output behavior may need parsing adjustment,Keep as second model option after Qwen2.5-3B test
+MedMCQA,dataset,Additional medical multiple-choice reasoning benchmark,planned,Use a controlled sample first instead of the full dataset,Needs clean answer-choice formatting and evaluation parser,Create a small sample loader and validate columns
+Final governance/reporting layer,project feature,"Combine model result, trust score, risk reason, action, and review decision",planned,Build after Qwen2.5-3B and MedMCQA are tested,Should stay clear and not become overcomplicated,Extend project-level view after new model/dataset results exist
