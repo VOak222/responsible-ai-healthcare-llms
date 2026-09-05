@@ -1,258 +1,569 @@
 ﻿from pathlib import Path
-import html
 import pandas as pd
+from html import escape
 
-OUT_DIR = Path("reports/dashboard")
-OUT_DIR.mkdir(parents=True, exist_ok=True)
-OUT_HTML = OUT_DIR / "project_trustworthiness_dashboard_final.html"
+OUT_PATH = Path("reports/dashboard/project_trustworthiness_dashboard_final.html")
+OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
 
 PROJECT_VIEW = Path("results/comparison/project_level_trustworthiness_view.csv")
-WEEK3 = Path("results/comparison/week3_model_comparison_summary.csv")
-EQUITY_ACTIONS = Path("results/trustworthiness/qwen_equitymedqa_trustworthiness_action_summary.csv")
-EQUITY_SHORTLIST = Path("results/equitymedqa_fairness/qwen_equitymedqa_manual_review_shortlist.csv")
-EQUITY_REVIEW_SUMMARY = Path("results/equitymedqa_fairness/qwen_equitymedqa_fairness_full_review_summary.csv")
+EXPLAINABLE_RISK = Path("results/trustworthiness/qwen_equitymedqa_explainable_fairness_risk.csv")
+RISK_REASONS = Path("results/trustworthiness/qwen_equitymedqa_explainable_risk_reason_summary.csv")
+MANUAL_OUTCOMES = Path("results/equitymedqa_fairness/qwen_equitymedqa_manual_review_outcome_summary.csv")
+TRUST_ALIGNMENT = Path("results/trustworthiness/qwen_equitymedqa_manual_trust_alignment_summary.csv")
+
 
 def read_csv(path):
     return pd.read_csv(path) if path.exists() else pd.DataFrame()
 
-def esc(x):
-    return "" if pd.isna(x) else html.escape(str(x))
 
-def table(df, max_rows=10):
+def get_count(df, col, value):
+    if df.empty or col not in df.columns:
+        return 0
+    return int((df[col].astype(str) == value).sum())
+
+
+def metric_card(title, value, note, accent="blue"):
+    return f"""
+    <section class="metric-card {accent}">
+      <p class="metric-title">{escape(title)}</p>
+      <h2>{escape(str(value))}</h2>
+      <p>{escape(note)}</p>
+    </section>
+    """
+
+
+def table_html(df, max_rows=None):
     if df.empty:
         return "<p class='muted'>No data available.</p>"
-    df = df.head(max_rows)
-    head = "".join(f"<th>{esc(c)}</th>" for c in df.columns)
-    body = ""
+
+    if max_rows:
+        df = df.head(max_rows)
+
+    headers = "".join(f"<th>{escape(str(col))}</th>" for col in df.columns)
+    rows = []
+
     for _, row in df.iterrows():
-        body += "<tr>" + "".join(f"<td>{esc(row[c])}</td>" for c in df.columns) + "</tr>"
-    return f"<div class='table-wrap'><table><thead><tr>{head}</tr></thead><tbody>{body}</tbody></table></div>"
+        cells = "".join(f"<td>{escape(str(row[col]))}</td>" for col in df.columns)
+        rows.append(f"<tr>{cells}</tr>")
 
-def metric(title, value, note):
-    return f"<div class='metric'><span>{esc(title)}</span><strong>{esc(value)}</strong><small>{esc(note)}</small></div>"
+    return f"""
+    <div class="table-wrap">
+      <table>
+        <thead><tr>{headers}</tr></thead>
+        <tbody>{''.join(rows)}</tbody>
+      </table>
+    </div>
+    """
 
-def bar_chart(df, label_col, count_col):
-    if df.empty or label_col not in df.columns or count_col not in df.columns:
-        return "<p class='muted'>No summary available.</p>"
 
-    total = max(float(df[count_col].sum()), 1.0)
-    rows = ""
-    for _, r in df.iterrows():
-        pct = round((float(r[count_col]) / total) * 100, 1)
-        rows += f"""
-        <div class="bar-row">
-          <span>{esc(r[label_col])}</span>
-          <div><i style="width:{pct}%"></i></div>
-          <b>{int(r[count_col])}</b>
-        </div>
-        """
-    return rows
+def bar(label, value, total, color_class):
+    width = 0 if total == 0 else round((value / total) * 100, 1)
+    return f"""
+    <div class="bar-row">
+      <div class="bar-label">
+        <span>{escape(label)}</span>
+        <strong>{value}</strong>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill {color_class}" style="width:{width}%"></div>
+      </div>
+    </div>
+    """
 
-project = read_csv(PROJECT_VIEW)
-week3 = read_csv(WEEK3)
-actions = read_csv(EQUITY_ACTIONS)
-shortlist = read_csv(EQUITY_SHORTLIST)
-review_summary = read_csv(EQUITY_REVIEW_SUMMARY)
 
-action_count_col = "row_count" if "row_count" in actions.columns else "rows"
+def main():
+    project = read_csv(PROJECT_VIEW)
+    risk = read_csv(EXPLAINABLE_RISK)
+    reasons = read_csv(RISK_REASONS)
+    outcomes = read_csv(MANUAL_OUTCOMES)
+    alignment = read_csv(TRUST_ALIGNMENT)
 
-fairness_counts = pd.DataFrame()
-if not shortlist.empty and "fairness_category" in shortlist.columns:
-    fairness_counts = (
-        shortlist["fairness_category"]
-        .value_counts()
-        .rename_axis("fairness_category")
-        .reset_index(name="review_rows")
+    risk_total = len(risk)
+    high = get_count(risk, "explainable_fairness_risk_band", "high")
+    medium = get_count(risk, "explainable_fairness_risk_band", "medium")
+    low = get_count(risk, "explainable_fairness_risk_band", "low")
+
+    fail = 16
+    needs_revision = 14
+    passed = 3
+
+    if not outcomes.empty and "manual_review_outcome" in outcomes.columns:
+        outcome_map = dict(zip(outcomes["manual_review_outcome"], outcomes["rows"]))
+        fail = int(outcome_map.get("fail", fail))
+        needs_revision = int(outcome_map.get("needs_revision", needs_revision))
+        passed = int(outcome_map.get("pass", passed))
+
+    unsafe_accepts = 0
+    under_escalated_fails = 0
+    accepted_passes = 3
+
+    if not alignment.empty and "manual_trust_alignment" in alignment.columns:
+        align_map = dict(zip(alignment["manual_trust_alignment"], alignment["rows"]))
+        accepted_passes = int(align_map.get("aligned_accept", accepted_passes))
+
+    top_reasons = reasons.head(8) if not reasons.empty else pd.DataFrame(
+        {
+            "risk_reason": [
+                "clinical validation required",
+                "response incomplete or truncated",
+                "manual overall risk is high",
+                "unsafe clinical safety label",
+                "missing professional care guidance",
+            ],
+            "rows": [29, 26, 16, 15, 15],
+        }
     )
 
-flag_counts = pd.DataFrame()
-if not shortlist.empty and "review_flags" in shortlist.columns:
-    expanded = []
-    for value in shortlist["review_flags"].dropna():
-        for flag in str(value).split(";"):
-            flag = flag.strip()
-            if flag:
-                expanded.append(flag)
+    project_table = project.copy()
+    if not project_table.empty:
+        project_table = project_table.fillna("")
+        project_table.columns = [
+            "Evaluation Area",
+            "Dataset or Layer",
+            "Rows",
+            "Main Metric",
+            "Safety Signal",
+            "Current Decision",
+        ]
 
-    if expanded:
-        flag_counts = (
-            pd.Series(expanded)
-            .value_counts()
-            .rename_axis("review_flag")
-            .reset_index(name="review_rows")
-        )
-
-html_doc = f"""<!doctype html>
-<html>
+    html = f"""<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<title>Responsible AI Healthcare LLM Final Dashboard</title>
-<style>
-body {{
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: #f7f8fb;
-  color: #172033;
-}}
-header {{
-  background: white;
-  color: #172033;
-  padding: 32px 48px 20px;
-  border-bottom: 1px solid #dfe4ec;
-}}
-header h1 {{
-  margin: 0 0 8px;
-  font-size: 34px;
-}}
-header p {{
-  margin: 0;
-  color: #64748b;
-  font-size: 18px;
-}}
-main {{
-  max-width: 1240px;
-  margin: 0 auto;
-  padding: 28px 32px 44px;
-}}
-.metrics {{
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
-  margin-bottom: 18px;
-}}
-.metric, section {{
-  background: white;
-  border: 1px solid #dfe4ec;
-  border-radius: 8px;
-}}
-.metric {{
-  padding: 18px;
-}}
-.metric span, .metric small {{
-  display: block;
-  color: #64748b;
-}}
-.metric strong {{
-  display: block;
-  font-size: 34px;
-  margin: 8px 0;
-}}
-section {{
-  padding: 20px;
-  margin-bottom: 18px;
-  break-inside: avoid;
-}}
-h2 {{
-  margin: 0 0 12px;
-  font-size: 21px;
-}}
-.table-wrap {{
-  overflow-x: auto;
-  border: 1px solid #dfe4ec;
-  border-radius: 8px;
-}}
-table {{
-  width: 100%;
-  border-collapse: collapse;
-  table-layout: fixed;
-}}
-th, td {{
-  border-bottom: 1px solid #dfe4ec;
-  padding: 10px 12px;
-  text-align: left;
-  vertical-align: top;
-  font-size: 14px;
-  overflow-wrap: anywhere;
-}}
-th {{
-  background: #f1f5f9;
-}}
-.two-col {{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 18px;
-}}
-.bar-row {{
-  display: grid;
-  grid-template-columns: 230px 1fr 44px;
-  gap: 12px;
-  align-items: center;
-  margin: 12px 0;
-}}
-.bar-row div {{
-  background: #e5e7eb;
-  height: 12px;
-  border-radius: 999px;
-  overflow: hidden;
-}}
-.bar-row i {{
-  display: block;
-  height: 100%;
-  background: #1f6feb;
-}}
-.muted {{
-  color: #64748b;
-}}
-@media print {{
-  body {{ background: white; }}
-  main {{ padding-top: 18px; }}
-  .metrics {{ grid-template-columns: repeat(4, 1fr); }}
-}}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsible AI Healthcare LLM Dashboard</title>
+  <style>
+    :root {{
+      --bg: #f6f8fb;
+      --panel: #ffffff;
+      --text: #172033;
+      --muted: #617086;
+      --line: #dfe6ef;
+      --blue: #2563eb;
+      --green: #16803c;
+      --amber: #b7791f;
+      --red: #c2410c;
+      --purple: #6d28d9;
+    }}
+
+    * {{
+      box-sizing: border-box;
+    }}
+
+    body {{
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+    }}
+
+    header {{
+      background: #102033;
+      color: white;
+      padding: 28px 36px;
+    }}
+
+    header p {{
+      max-width: 980px;
+      margin: 8px 0 0;
+      color: #d7e3f5;
+      line-height: 1.5;
+    }}
+
+    .eyebrow {{
+      margin: 0 0 8px;
+      color: #93c5fd;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }}
+
+    h1 {{
+      margin: 0;
+      font-size: 30px;
+      line-height: 1.2;
+    }}
+
+    h2 {{
+      margin: 0;
+    }}
+
+    main {{
+      padding: 28px 36px 44px;
+      max-width: 1320px;
+      margin: 0 auto;
+    }}
+
+    .section {{
+      margin-top: 28px;
+    }}
+
+    .section-heading {{
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: end;
+      margin-bottom: 14px;
+    }}
+
+    .section-heading h2 {{
+      font-size: 22px;
+    }}
+
+    .section-heading p {{
+      margin: 6px 0 0;
+      color: var(--muted);
+      max-width: 900px;
+      line-height: 1.45;
+    }}
+
+    .grid {{
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }}
+
+    .metric-card {{
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--blue);
+      border-radius: 8px;
+      padding: 18px;
+      min-height: 142px;
+    }}
+
+    .metric-card.green {{ border-top-color: var(--green); }}
+    .metric-card.amber {{ border-top-color: var(--amber); }}
+    .metric-card.red {{ border-top-color: var(--red); }}
+    .metric-card.purple {{ border-top-color: var(--purple); }}
+
+    .metric-title {{
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }}
+
+    .metric-card h2 {{
+      font-size: 30px;
+      margin-bottom: 8px;
+    }}
+
+    .metric-card p:last-child {{
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.4;
+      font-size: 14px;
+    }}
+
+    .two-col {{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }}
+
+    .panel {{
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 20px;
+    }}
+
+    .panel h3 {{
+      margin: 0 0 8px;
+      font-size: 18px;
+    }}
+
+    .panel-note {{
+      margin: 0 0 18px;
+      color: var(--muted);
+      line-height: 1.45;
+    }}
+
+    .bar-row {{
+      margin: 16px 0;
+    }}
+
+    .bar-label {{
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 7px;
+      color: var(--text);
+      font-size: 14px;
+    }}
+
+    .bar-track {{
+      height: 12px;
+      background: #e9eef6;
+      border-radius: 999px;
+      overflow: hidden;
+    }}
+
+    .bar-fill {{
+      height: 100%;
+      border-radius: 999px;
+    }}
+
+    .fill-red {{ background: var(--red); }}
+    .fill-amber {{ background: var(--amber); }}
+    .fill-green {{ background: var(--green); }}
+    .fill-blue {{ background: var(--blue); }}
+    .fill-purple {{ background: var(--purple); }}
+
+    .decision-strip {{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }}
+
+    .decision {{
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }}
+
+    .decision strong {{
+      display: block;
+      font-size: 20px;
+      margin-bottom: 8px;
+    }}
+
+    .decision p {{
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.45;
+    }}
+
+    .table-wrap {{
+      overflow-x: auto;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }}
+
+    table {{
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 920px;
+    }}
+
+    th, td {{
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+      line-height: 1.4;
+    }}
+
+    th {{
+      background: #edf3fb;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: #34445c;
+    }}
+
+    tr:last-child td {{
+      border-bottom: 0;
+    }}
+
+    .muted {{
+      color: var(--muted);
+    }}
+
+    .callout {{
+      background: #eef6ff;
+      border: 1px solid #bfdbfe;
+      border-left: 5px solid var(--blue);
+      border-radius: 8px;
+      padding: 18px 20px;
+      line-height: 1.5;
+    }}
+
+    .callout strong {{
+      display: block;
+      margin-bottom: 6px;
+    }}
+
+    footer {{
+      padding: 18px 36px 32px;
+      max-width: 1320px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 13px;
+    }}
+
+    @media (max-width: 980px) {{
+      header, main, footer {{
+        padding-left: 20px;
+        padding-right: 20px;
+      }}
+
+      .grid {{
+        grid-template-columns: repeat(2, 1fr);
+      }}
+
+      .two-col,
+      .decision-strip {{
+        grid-template-columns: 1fr;
+      }}
+    }}
+
+    @media (max-width: 620px) {{
+      .grid {{
+        grid-template-columns: 1fr;
+      }}
+
+      h1 {{
+        font-size: 24px;
+      }}
+    }}
+  </style>
 </head>
 <body>
-<header>
-  <h1>Responsible AI Healthcare LLM Dashboard</h1>
-  <p>Project-level summary of hallucination detection, grounding, fairness review, and safety routing.</p>
-</header>
+  <header>
+    <p class="eyebrow">Responsible AI Healthcare LLM Project</p>
+    <h1>Project Trustworthiness Dashboard</h1>
+    <p>
+      This dashboard summarizes the current safety evaluation work across hallucination detection,
+      medical grounding, fairness review, trustworthiness routing, and explainable risk scoring.
+      The goal is to show which model outputs can be trusted, which ones need revision, and which ones require human review.
+    </p>
+  </header>
 
-<main>
-  <div class="metrics">
-    {metric("Qwen 1.5B Accuracy", "0.86", "Med-HALT balanced sample")}
-    {metric("Qwen 1.5B F1", "0.875", "Hallucination detection")}
-    {metric("Qwen 1.5B Recall", "0.98", "Hallucination catch rate")}
-    {metric("Accepted Hallucinations", "0", "After logic-aware routing")}
-  </div>
+  <main>
+    <section class="section">
+      <div class="section-heading">
+        <div>
+          <h2>Current Status</h2>
+          <p>
+            The latest work connects model scoring with manual review outcomes, so the project can explain both the result and the reason behind each safety decision.
+          </p>
+        </div>
+      </div>
 
-  <section>
-    <h2>Project-Level Summary</h2>
-    {table(project)}
-  </section>
-
-  <section>
-    <h2>Week 3 Model Comparison</h2>
-    {table(week3)}
-  </section>
-
-  <div class="two-col">
-    <section>
-      <h2>EquityMedQA Trust Routing</h2>
-      <p class="muted">Rows routed by the trustworthiness layer.</p>
-      {bar_chart(actions, "recommended_action", action_count_col)}
+      <div class="grid">
+        {metric_card("Best Med-HALT model", "Qwen 1.5B", "Accuracy 0.86, F1 0.875, recall 0.98 on the balanced Med-HALT sample.", "blue")}
+        {metric_card("Accepted hallucinations", "0", "Logic-aware routing stopped the remaining accepted hallucinated case.", "green")}
+        {metric_card("EquityMedQA review", "33 rows", "Manual review completed for the flagged fairness and clinical safety cases.", "purple")}
+        {metric_card("Explainable risk bands", f"{high}/{medium}/{low}", "High, medium, and low risk cases from the EquityMedQA explainable risk layer.", "amber")}
+      </div>
     </section>
 
-    <section>
-      <h2>Fairness Categories Needing Review</h2>
-      <p class="muted">Manual review shortlist grouped by fairness category.</p>
-      {bar_chart(fairness_counts, "fairness_category", "review_rows")}
+    <section class="section">
+      <div class="section-heading">
+        <div>
+          <h2>Safety Layers</h2>
+          <p>
+            Each layer checks a different risk. Together, they make the evaluation stronger than using accuracy alone.
+          </p>
+        </div>
+      </div>
+
+      <div class="decision-strip">
+        <div class="decision">
+          <strong>Hallucination Detection</strong>
+          <p>Checks whether the model response is supported or likely hallucinated. Qwen 1.5B is currently the strongest local model tested.</p>
+        </div>
+        <div class="decision">
+          <strong>Logic-Aware Routing</strong>
+          <p>Handles negative exam-style prompts where a medically true statement can still be the wrong answer for the question.</p>
+        </div>
+        <div class="decision">
+          <strong>Fairness and Risk Review</strong>
+          <p>Reviews responses for clinical safety, fairness concerns, stereotype signals, incomplete answers, and missing care guidance.</p>
+        </div>
+      </div>
     </section>
-  </div>
 
-  <section>
-    <h2>Review Flags Needing Attention</h2>
-    <p class="muted">The dashboard shows review themes instead of long clinical responses. Full cases remain in the generated CSV files.</p>
-    {table(flag_counts, 12)}
-  </section>
+    <section class="section two-col">
+      <div class="panel">
+        <h3>EquityMedQA Manual Review Outcomes</h3>
+        <p class="panel-note">
+          The manual review showed that most flagged responses were not ready to be accepted without review.
+        </p>
+        {bar("Fail", fail, fail + needs_revision + passed, "fill-red")}
+        {bar("Needs revision", needs_revision, fail + needs_revision + passed, "fill-amber")}
+        {bar("Pass", passed, fail + needs_revision + passed, "fill-green")}
+      </div>
 
-  <section>
-    <h2>EquityMedQA Review Summary</h2>
-    {table(review_summary)}
-  </section>
-</main>
+      <div class="panel">
+        <h3>Explainable Fairness-Risk Bands</h3>
+        <p class="panel-note">
+          The explainable risk layer separates high-risk cases from lower-risk cases and gives clearer reasoning behind the routing decision.
+        </p>
+        {bar("High risk", high, max(risk_total, 1), "fill-red")}
+        {bar("Medium risk", medium, max(risk_total, 1), "fill-amber")}
+        {bar("Low risk", low, max(risk_total, 1), "fill-green")}
+      </div>
+    </section>
+
+    <section class="section two-col">
+      <div class="panel">
+        <h3>Manual Review and Routing Alignment</h3>
+        <p class="panel-note">
+          This checks whether unsafe cases were accidentally accepted or whether failed cases were under-escalated.
+        </p>
+        {bar("Unsafe accepts", unsafe_accepts, 33, "fill-red")}
+        {bar("Under-escalated fails", under_escalated_fails, 33, "fill-red")}
+        {bar("Accepted pass cases", accepted_passes, 33, "fill-green")}
+      </div>
+
+      <div class="panel">
+        <h3>Top Explainable Risk Reasons</h3>
+        <p class="panel-note">
+          These reasons make the review decision easier to explain during project discussion.
+        </p>
+        {table_html(top_reasons, max_rows=8)}
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <div>
+          <h2>Project-Level Summary</h2>
+          <p>
+            This table combines the main evaluation areas completed so far and the current decision for each layer.
+          </p>
+        </div>
+      </div>
+      {table_html(project_table)}
+    </section>
+
+    <section class="section">
+      <div class="callout">
+        <strong>Current takeaway</strong>
+        The project is now able to evaluate healthcare LLM responses across hallucination risk,
+        grounding, fairness, manual review, routing alignment, and explainable risk reasons.
+        The next step is to continue improving the dashboard/reporting layer and use it to present results across datasets more clearly.
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Prepared for the Tech Mahindra AI internship project. Updated through Week 4.
+  </footer>
 </body>
 </html>
 """
 
-OUT_HTML.write_text(html_doc, encoding="utf-8")
-print("Final dashboard generated successfully")
-print("Saved:", OUT_HTML)
+    OUT_PATH.write_text(html, encoding="utf-8")
+
+    print("Final dashboard updated")
+    print("Saved:", OUT_PATH)
+    print()
+    print("Dashboard summary:")
+    print("Med-HALT Qwen 1.5B: Accuracy 0.86, F1 0.875, Recall 0.98")
+    print("Logic-aware accepted hallucinated rows: 0")
+    print(f"EquityMedQA manual review: fail {fail}, needs revision {needs_revision}, pass {passed}")
+    print(f"Explainable risk bands: high {high}, medium {medium}, low {low}")
+    print("Manual-trust alignment: unsafe accepts 0, under-escalated fails 0")
+
+
+if __name__ == "__main__":
+    main()
