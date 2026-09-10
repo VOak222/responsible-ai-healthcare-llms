@@ -1,0 +1,4 @@
+model,rows,accuracy,precision,recall,f1_score,false_positives,false_negatives,decision
+Qwen 1.5B,100,0.86,0.79,0.98,0.875,13,1,Best main model so far
+Qwen2.5-3B,100,0.66,0.598,0.98,0.743,33,1,Useful as conservative secondary reviewer
+Gemma 2 2B,100,0.65,0.588,1.0,0.741,35,0,"Safest recall, but too many false positives for main model"
