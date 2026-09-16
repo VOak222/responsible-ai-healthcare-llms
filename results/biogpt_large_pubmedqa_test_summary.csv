@@ -1,0 +1,3 @@
+model,rows,accuracy,macro_precision_yes_no,macro_recall_yes_no,macro_f1_yes_no,predicted_maybe_count,yes_precision,yes_recall,yes_f1,yes_support,no_precision,no_recall,no_f1,no_support
+Base BioGPT-Large,290,0.579,0.536,0.568,0.486,6,0.896,0.583,0.707,252,0.175,0.553,0.266,38
+BioGPT-Large + PubMedQA LoRA,290,0.728,0.638,0.765,0.636,4,0.963,0.714,0.82,252,0.313,0.816,0.453,38

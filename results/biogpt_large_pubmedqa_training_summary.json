@@ -1,0 +1,27 @@
+{
+  "model": "microsoft/BioGPT-Large",
+  "epochs": 3,
+  "train_rows": 510,
+  "validation_rows": 200,
+  "history": [
+    {
+      "epoch": 1,
+      "global_step": 64,
+      "train_loss": 2.6913,
+      "validation_loss": 0.6183
+    },
+    {
+      "epoch": 2,
+      "global_step": 128,
+      "train_loss": 0.542,
+      "validation_loss": 0.5138
+    },
+    {
+      "epoch": 3,
+      "global_step": 192,
+      "train_loss": 0.4588,
+      "validation_loss": 0.344
+    }
+  ],
+  "final_adapter_path": "C:\\responsible-ai-healthcare-llms\\artifacts\\adapters\\biogpt_large_pubmedqa_lora"
+}
