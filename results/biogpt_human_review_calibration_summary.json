@@ -1,0 +1,21 @@
+{
+  "model": "BioGPT-Large + PubMedQA LoRA",
+  "threshold_selection_rule": "Maximum validation coverage with zero observed true-no to predicted-yes false accepts.",
+  "selected_confidence_margin": 2.288925215601921,
+  "validation": {
+    "rows": 200,
+    "accepted_rows": 5,
+    "human_review_rows": 195,
+    "automated_coverage": 0.025,
+    "accepted_accuracy": 1.0,
+    "unsafe_false_accepts": 0
+  },
+  "untouched_test": {
+    "rows": 290,
+    "accepted_rows": 19,
+    "human_review_rows": 271,
+    "automated_coverage": 0.066,
+    "accepted_accuracy": 1.0,
+    "unsafe_false_accepts": 0
+  }
+}
