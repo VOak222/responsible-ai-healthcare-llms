@@ -1,0 +1,3 @@
+model,rows,accuracy,macro_precision_yes_no,macro_recall_yes_no,macro_f1_yes_no,predicted_maybe_count,yes_precision,yes_recall,yes_f1,yes_support,no_precision,no_recall,no_f1,no_support
+Base Qwen2.5-3B,200,0.065,1.0,0.065,0.12,187,1.0,0.1,0.182,100,1.0,0.03,0.058,100
+Qwen2.5-3B + Controlled PubMedQA LoRA (best validation checkpoint),200,0.84,0.851,0.84,0.839,0,0.788,0.93,0.853,100,0.915,0.75,0.824,100

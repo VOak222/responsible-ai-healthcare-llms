@@ -1,0 +1,27 @@
+{
+  "model": "Qwen/Qwen2.5-3B-Instruct",
+  "epochs": 3,
+  "train_rows": 486,
+  "validation_rows": 100,
+  "history": [
+    {
+      "epoch": 1,
+      "global_step": 61,
+      "train_loss": 2.2748,
+      "validation_loss": 0.2983
+    },
+    {
+      "epoch": 2,
+      "global_step": 122,
+      "train_loss": 0.3979,
+      "validation_loss": 0.4018
+    },
+    {
+      "epoch": 3,
+      "global_step": 183,
+      "train_loss": 0.2704,
+      "validation_loss": 0.4775
+    }
+  ],
+  "final_adapter_path": "C:\\responsible-ai-healthcare-llms\\artifacts\\adapters\\qwen2_5_3b_controlled_benchmark"
+}
