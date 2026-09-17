@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Healthcare LLM Model Selection Dashboard</title>
+  <style>
+    :root {
+      --navy: #0f2747;
+      --blue: #2563eb;
+      --green: #15803d;
+      --amber: #b45309;
+      --red: #b91c1c;
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --text: #172033;
+      --muted: #5d6b82;
+      --border: #dce3ee;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.5;
+    }
+
+    header {
+      background: var(--navy);
+      color: white;
+      padding: 34px 24px;
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    h1, h2, h3, p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 8px;
+      font-size: 30px;
+    }
+
+    .subtitle {
+      margin-bottom: 0;
+      color: #d7e5f7;
+    }
+
+    main {
+      padding: 28px 24px 48px;
+    }
+
+    .decision-banner {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #e9f8ee;
+      border-left: 6px solid var(--green);
+      border-radius: 8px;
+    }
+
+    .decision-banner h2 {
+      color: var(--green);
+      margin-bottom: 6px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .card {
+      padding: 18px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(15, 39, 71, 0.05);
+    }
+
+    .metric-label {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .metric-value {
+      margin: 7px 0 4px;
+      font-size: 30px;
+      font-weight: bold;
+    }
+
+    .metric-note {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .section {
+      margin-bottom: 24px;
+      padding: 24px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    .section h2 {
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+
+    .section-intro {
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 225px 1fr 70px;
+      gap: 12px;
+      align-items: center;
+      margin: 14px 0;
+    }
+
+    .bar-label {
+      font-weight: bold;
+    }
+
+    .bar-track {
+      height: 24px;
+      overflow: hidden;
+      background: #e6ebf2;
+      border-radius: 4px;
+    }
+
+    .bar {
+      height: 100%;
+      color: white;
+      padding-left: 9px;
+      font-size: 13px;
+      font-weight: bold;
+      line-height: 24px;
+    }
+
+    .qwen {
+      background: var(--blue);
+    }
+
+    .biogpt {
+      background: var(--green);
+    }
+
+    .base {
+      background: #7b8798;
+    }
+
+    .bar-value {
+      font-weight: bold;
+      text-align: right;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      color: var(--navy);
+      background: #f0f4f9;
+    }
+
+    .good {
+      color: var(--green);
+      font-weight: bold;
+    }
+
+    .warning {
+      color: var(--amber);
+      font-weight: bold;
+    }
+
+    .risk {
+      color: var(--red);
+      font-weight: bold;
+    }
+
+    .workflow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      align-items: stretch;
+      margin-top: 18px;
+    }
+
+    .step {
+      padding: 16px;
+      background: #f4f7fb;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .step-number {
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+      margin-bottom: 8px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: white;
+      font-weight: bold;
+      line-height: 28px;
+    }
+
+    .step h3 {
+      margin-bottom: 6px;
+      color: var(--navy);
+      font-size: 16px;
+    }
+
+    .step p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .safety-note {
+      margin-top: 20px;
+      padding: 18px;
+      background: #fff3f3;
+      border-left: 6px solid var(--red);
+      border-radius: 8px;
+    }
+
+    .safety-note h3 {
+      margin-bottom: 6px;
+      color: var(--red);
+    }
+
+    .safety-note p {
+      margin-bottom: 0;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    footer {
+      padding: 24px;
+      background: var(--navy);
+      color: #d7e5f7;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    @media (max-width: 850px) {
+      .grid,
+      .workflow {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .bar-row {
+        grid-template-columns: 1fr;
+        gap: 5px;
+      }
+
+      .bar-value {
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .grid,
+      .workflow {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 25px;
+      }
+
+      th, td {
+        font-size: 13px;
+        padding: 9px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Responsible AI Healthcare LLMs</h1>
+      <p class="subtitle">
+        Controlled PubMedQA model selection, safety evaluation, and human-review routing
+      </p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="decision-banner">
+      <h2>Final model decision: Qwen2.5-3B is the primary model</h2>
+      <p>
+        Qwen achieved the best performance on the frozen balanced benchmark.
+        BioGPT-Large is retained as an independent biomedical verifier.
+        Neither model is allowed to make autonomous clinical-facing decisions.
+      </p>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <div class="metric-label">Primary model</div>
+        <div class="metric-value">Qwen 2.5 3B</div>
+        <p class="metric-note">Controlled PubMedQA LoRA, epoch 1</p>
+      </div>
+
+      <div class="card">
+        <div class="metric-label">Best test accuracy</div>
+        <div class="metric-value">84.0%</div>
+        <p class="metric-note">Frozen 200-row balanced test set</p>
+      </div>
+
+      <div class="card">
+        <div class="metric-label">Best macro-F1</div>
+        <div class="metric-value">0.839</div>
+        <p class="metric-note">Balanced yes/no performance</p>
+      </div>
+
+      <div class="card">
+        <div class="metric-label">Final policy</div>
+        <div class="metric-value">Human review</div>
+        <p class="metric-note">Required for clinical-facing decisions</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Controlled benchmark comparison</h2>
+      <p class="section-intro">
+        Both models were fine-tuned with LoRA using the same 486-row training set,
+        selected using validation data, and evaluated on the same untouched 200-row
+        balanced yes/no test set.
+      </p>
+
+      <h3>Macro-F1 comparison</h3>
+
+      <div class="bar-row">
+        <div class="bar-label">Base BioGPT-Large</div>
+        <div class="bar-track">
+          <div class="bar base" style="width: 53.1%;">0.531</div>
+        </div>
+        <div class="bar-value">0.531</div>
+      </div>
+
+      <div class="bar-row">
+        <div class="bar-label">BioGPT-Large LoRA</div>
+        <div class="bar-track">
+          <div class="bar biogpt" style="width: 76.1%;">0.761</div>
+        </div>
+        <div class="bar-value">0.761</div>
+      </div>
+
+      <div class="bar-row">
+        <div class="bar-label">Qwen2.5-3B LoRA</div>
+        <div class="bar-track">
+          <div class="bar qwen" style="width: 83.9%;">0.839</div>
+        </div>
+        <div class="bar-value">0.839</div>
+      </div>
+
+      <br>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Fine-tuned model</th>
+            <th>Accuracy</th>
+            <th>Macro-F1</th>
+            <th>Yes recall</th>
+            <th>No recall</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>BioGPT-Large + Controlled PubMedQA LoRA</td>
+            <td>75.5%</td>
+            <td>0.761</td>
+            <td>65%</td>
+            <td class="good">86%</td>
+          </tr>
+          <tr>
+            <td><strong>Qwen2.5-3B + Controlled PubMedQA LoRA</strong></td>
+            <td class="good">84.0%</td>
+            <td class="good">0.839</td>
+            <td class="good">93%</td>
+            <td>75%</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>Safety-routing evaluation</h2>
+      <p class="section-intro">
+        Confidence thresholds were selected only from validation data. The frozen
+        test set was used once for final evaluation.
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Routing method</th>
+            <th>Test coverage</th>
+            <th>Accepted accuracy</th>
+            <th>Unsafe no-to-yes accepts</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Qwen confidence gate</td>
+            <td>22.0%</td>
+            <td>90.9%</td>
+            <td class="risk">4</td>
+          </tr>
+          <tr>
+            <td>Qwen + BioGPT agreement gate</td>
+            <td class="good">23.5%</td>
+            <td class="good">93.6%</td>
+            <td class="risk">3</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="safety-note">
+        <h3>Safety conclusion</h3>
+        <p>
+          BioGPT agreement improved accuracy and reduced unsafe errors, but did not
+          eliminate them. Therefore, model confidence and agreement are treated as
+          review-prioritization signals, not authorization for autonomous clinical decisions.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Final human-in-the-loop workflow</h2>
+
+      <div class="workflow">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Qwen decision</h3>
+          <p>Produces an evidence-based yes, no, or maybe decision and rationale.</p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>BioGPT verification</h3>
+          <p>Provides an independent biomedical decision signal.</p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Safety checks</h3>
+          <p>Records confidence, agreement, evidence grounding, and risk signals.</p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">4</div>
+          <h3>Human review</h3>
+          <p>Reviews any clinical-facing decision, uncertainty, disagreement, or risk.</p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">5</div>
+          <h3>Final decision</h3>
+          <p>A qualified reviewer remains responsible for the final conclusion.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Scope and limitations</h2>
+      <ul>
+        <li>This is a research-stage evidence-assistance framework, not a clinical deployment.</li>
+        <li>PubMedQA measures evidence-question decisions and is not a substitute for real clinical validation.</li>
+        <li>The controlled test set has 200 rows and cannot establish clinical safety.</li>
+        <li>Further evaluation is required across additional clinical, demographic, and expert-reviewed datasets.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    Responsible AI Healthcare LLMs Project &middot; Controlled PubMedQA Evaluation
+  </footer>
+</body>
+</html>
