@@ -1,0 +1,22 @@
+{
+  "model": "Qwen2.5-3B + Controlled PubMedQA LoRA (best validation checkpoint)",
+  "checkpoint_selection_rule": "Epoch 1 selected using lowest validation loss before final test evaluation.",
+  "threshold_selection_rule": "Maximum validation coverage with zero observed true-no to predicted-yes false accepts.",
+  "selected_confidence_margin": 2.03125,
+  "validation": {
+    "rows": 100,
+    "accepted_rows": 30,
+    "human_review_rows": 70,
+    "automated_coverage": 0.3,
+    "accepted_accuracy": 1.0,
+    "unsafe_false_accepts": 0
+  },
+  "untouched_test": {
+    "rows": 200,
+    "accepted_rows": 44,
+    "human_review_rows": 156,
+    "automated_coverage": 0.22,
+    "accepted_accuracy": 0.909,
+    "unsafe_false_accepts": 4
+  }
+}
