@@ -1,0 +1,1448 @@
+model,row_number,true_decision,predicted_decision,is_correct,raw_response
+Base Qwen2.5-3B,1,yes,maybe,False,"Maybe
+
+Rationale: The abstract provides mixed results regarding the impact of sex on the outcome of laparoscopic cholecystectomy. While it shows that males have a higher conversion rate and longer operating"
+Base Qwen2.5-3B,2,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that echocardiography and ECG can differentiate hereditary transthyretin V30M amyloidosis from hypertrophic cardiomyopathy,"
+Base Qwen2.5-3B,3,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract describes a specific case study involving a surge of mass-casualty victims from suicide bombings at a military trauma center in Afghanistan. While it does address the issue"
+Base Qwen2.5-3B,4,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence that the CYP2D6*4 allele is associated with decreased susceptibility to breast carcinoma in a Spanish population. Specifically, it states that ""the presence"
+Base Qwen2.5-3B,5,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that while many patients are open to being addressed by their first names by doctors, there is a significant minority who do not like this approach. This indicates that"
+Base Qwen2.5-3B,6,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that there are differences in where people with cancer die based on their ethnicity, but it does not conclusively answer whether ethnicity affects where people with cancer die."
+Base Qwen2.5-3B,7,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that airway surgery may have an impact on serum lipid levels in obstructive sleep apnea patients, particularly reducing levels of low-density lipoprotein (LD"
+Base Qwen2.5-3B,8,yes,yes,True,"Yes
+
+Rationale: The provided abstract evidence supports the research question by demonstrating that autoxidation products of both carbohydrates (pentosidine) and lipids (malondialdehyde-lysine"
+Base Qwen2.5-3B,9,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that HTLV-I infection may be associated with a slowly progressive myelopathy in some patients, but it does not explicitly confirm if this is a variant form"
+Base Qwen2.5-3B,10,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence that reviewers' scores are influenced by citations to their own work. Specifically, it shows that reviews from reviewers who cited their own work received lower scores on average"
+Base Qwen2.5-3B,11,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence that there is a significant relationship between the lunar position and the timing of spontaneous full-term deliveries, particularly in multiparae and plurigravidae."
+Base Qwen2.5-3B,12,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that quilting sutures may help prevent seromas in some patients undergoing abdominoplasty. However, the study has limitations such as small sample size ("
+Base Qwen2.5-3B,13,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract discusses voluntary asphyxiation in children and adolescents, which aligns with the concept of autoerotic asphyxiation (AEA). However, the focus"
+Base Qwen2.5-3B,14,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that there is some evidence of discordance in TEOAE and AABR outcomes being predictable in newborns, as it describes factors associated with discordant"
+Base Qwen2.5-3B,15,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that there is a significant difference in systolic blood pressure between arms in patients with subclavian steal syndrome, which aligns with the research question. However"
+Base Qwen2.5-3B,16,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests an association between fetal biometry in the first or early second trimester and severe macrosomia at delivery. It indicates that the difference between measured and expected"
+Base Qwen2.5-3B,17,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract discusses the use of double-balloon enteroscopy (DBE) in a community setting but does not directly compare its efficacy and safety to other diagnostic or therapeutic"
+Base Qwen2.5-3B,18,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that prostate morphology (bilobar vs. trilobar) does not significantly affect postoperative outcomes such as symptom scores, maximal flow rate, and complication rates"
+Base Qwen2.5-3B,19,yes,yes,True,"Yes
+Rationale: The provided abstract demonstrates that patients who received a written information sheet had significantly better recall (48% correct answers) compared to those who received verbal information (38% correct"
+Base Qwen2.5-3B,20,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that MRI can detect occult post-traumatic bone and cartilage injuries in the knee, comparable to findings from arthroscopy. However, it does not explicitly"
+Base Qwen2.5-3B,21,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence that pancreas retransplantation can be successful for diabetic patients who have previously undergone a pancreas transplant. It shows that the survival rates of second pancre"
+Base Qwen2.5-3B,22,yes,yes,True,"Yes
+
+Rationale: The provided abstract clearly indicates that low serum chloride levels are associated with increased risks of total and cardiovascular mortalities, both independently and after adjusting for various confounding factors such as age"
+Base Qwen2.5-3B,23,yes,yes,True,"Yes
+
+Rationale: The provided abstract clearly identifies four distinct clusters of unvaccinated seniors based on their knowledge and attitudes towards influenza vaccination. These clusters include ""Potentials,"" ""Fearful Un"
+Base Qwen2.5-3B,24,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that digital tomosynthesis (DT) can be a viable alternative to noncontrast computed tomography (NCCT) for the follow-up of nephrolith"
+Base Qwen2.5-3B,25,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence that populations with access to general practitioner hospitals (GP hospitals) utilize general hospitals less than those without such access. Specifically, it shows that the total rate of"
+Base Qwen2.5-3B,26,yes,yes,True,"Yes
+
+Rationale: The abstract clearly indicates that the study explored how senior medical students can contribute to quality assurance (QA) processes within a day surgery setting. It describes a program where students followed patients"
+Base Qwen2.5-3B,27,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence that patients with serious mental illness (SMI), specifically those diagnosed with schizophrenia or bipolar disorder, are more likely to be admitted to nursing homes with higher deficiencies"
+Base Qwen2.5-3B,28,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence that patients with ≤5 metastatic lesions had superior survival rates compared to those with >5 lesions. This directly supports the research question of identifying a favorable subset"
+Base Qwen2.5-3B,29,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that there may be a negative impact of weekend hospitalizations on certain cardiac procedures and health outcomes, but it does not definitively prove that hospitals provide lower quality"
+Base Qwen2.5-3B,30,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that there may be a gender difference in survival among patients with resected non-small cell lung cancer, particularly in cases of adenocarcinoma."
+Base Qwen2.5-3B,31,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that the patient characteristics and some aspects of care delivery at the residency teaching sites in northeast Ohio are similar to those observed in the broader community, as reflected by"
+Base Qwen2.5-3B,32,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that telmisartan may have some protective effects against hepatic fibrosis in diabetic rats, as evidenced by reduced hepatocyte density and absence of TGF"
+Base Qwen2.5-3B,33,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that orthostatic myoclonus (OM) can be a cause of unsteadiness, particularly in neurodegenerative diseases. It reports that"
+Base Qwen2.5-3B,34,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that laparoscopic sonography (LUS) can be a reliable and sensitive procedure for evaluating hepatic metastases in colorectal cancer patients, with high"
+Base Qwen2.5-3B,35,yes,maybe,False,"Maybe
+
+Rationale: The evidence suggests that the strategic use of Performance Measurement Systems (PMS) can directly enhance performance in terms of improved processes in health care organizations. However, it also indicates that"
+Base Qwen2.5-3B,36,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests an association between delayed transfer to rehabilitation units and increased total hospital length of stay for older patients with proximal femur fractures. However, it does not directly"
+Base Qwen2.5-3B,37,yes,yes,True,"Yes
+
+Rationale: The provided abstract evidence clearly shows a significant association between rheumatoid arthritis and periodontal disease. Specifically, it indicates that among individuals referred for periodontal care, the"
+Base Qwen2.5-3B,38,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that the Barthel Index alone may not be an adequate measure of long-term outcome in stroke patients, as it correlates poorly with other comprehensive outcome measures such as"
+Base Qwen2.5-3B,39,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that octogenarian patients undergoing cardiac reoperations had a relatively high mortality rate (32.1%) and a significant number of deaths during follow-up ("
+Base Qwen2.5-3B,40,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests an association between certain viral infections and benign paroxysmal positional vertigo (BPPV), as evidenced by higher serological markers of viral agents in"
+Base Qwen2.5-3B,41,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that open access endoscopy may lead to inadequate patient informed consent and understanding of the procedure compared to those referred from a subspecialty clinic. However,"
+Base Qwen2.5-3B,42,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that endothelial cell patterns can be indicative of astrocytoma grade, as different grades show distinct vascular patterns under confocal microscopy. However, the study"
+Base Qwen2.5-3B,43,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence that patients who have undergone prior benign prostate biopsies have more favorable pathologic features, including more organ-confined disease and less margin-positive disease, after"
+Base Qwen2.5-3B,44,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that there is no significant difference in the frequency of occupational exposure to nuclear radiation between infertile men and fertile controls. However, it does indicate that nuclear"
+Base Qwen2.5-3B,45,yes,yes,True,"Yes
+
+Rationale: The provided abstract directly addresses the research question by stating that 78% of surgeons who do not use percutaneous or laparoscopic techniques cite fear of anaphyl"
+Base Qwen2.5-3B,46,yes,yes,True,"Yes
+
+Rationale: The provided abstract evidence directly addresses the research question by showing that black patients are significantly more likely to have their asthma severity underestimated by their physicians compared to white patients. This finding supports"
+Base Qwen2.5-3B,47,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests a potential preventive effect of bezafibrate on colon cancer in patients with coronary artery disease, but the study design does not definitively prove causation. While"
+Base Qwen2.5-3B,48,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that topical N-acetylcysteine (NAC) application did not significantly improve the closure rate of tympanic membrane perforations compared to saline solution"
+Base Qwen2.5-3B,49,yes,yes,True,"Yes
+
+Rationale: The provided abstract clearly indicates that the first urinary albumin/creatinine ratio (ACR) in women with suspected preeclampsia is indeed a prognostic"
+Base Qwen2.5-3B,50,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests a link between acute fibrinous and organizing pneumonia (AFOP) and immune dysregulation, as evidenced by the patient's severe aplastic anemia ("
+Base Qwen2.5-3B,51,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that there may be common factors amenable to prevention among young men who die from injury and poisoning in England and Wales. It identifies alcohol/drug poisoning as"
+Base Qwen2.5-3B,52,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that certain cytokines like IL-4 and TNFα may be associated with the development of post-ERCP pancreatitis, but it does not compreh"
+Base Qwen2.5-3B,53,yes,maybe,False,"Maybe
+
+Rationale: The evidence suggests a potential protective effect of vitamin C against complex regional pain syndrome (CRPS) in patients with wrist fractures, particularly in elderly women. However, the study design"
+Base Qwen2.5-3B,54,yes,maybe,False,"Maybe
+
+Rationale: The evidence suggests that topical ropivacaine may have some short-term pain-relieving effects but does not show consistent long-term benefits or significant differences in other post-operative parameters like"
+Base Qwen2.5-3B,55,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that kidneys from elderly donors can be successfully transplanted into young recipients over a 10-year period, with comparable outcomes in terms of survival rates and"
+Base Qwen2.5-3B,56,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract discusses outcomes of quaternary cytoreductive surgery (QC) in ovarian cancer patients but does not directly compare surgical effort (e.g., duration of surgery)"
+Base Qwen2.5-3B,57,yes,maybe,False,"Maybe
+
+Rationale: The abstract provides information about the variability in outcomes for Cognitive Processing Therapy (CPT) among therapists within a VA setting. It indicates that approximately 12% of the variability"
+Base Qwen2.5-3B,58,yes,yes,True,"Yes
+
+Rationale: The study demonstrates that emergency physicians can accurately and reliably assess acute vertigo using the STANDING tool, achieving high sensitivity (92.9%) and specificity (96."
+Base Qwen2.5-3B,59,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that etoricoxib may be effective in preventing heterotopic ossification after primary total hip arthroplasty, as it showed a lower incidence"
+Base Qwen2.5-3B,60,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract discusses outcomes of split-liver transplantation (SLT) versus living-related liver transplantation (LRT) in pediatric patients. While it does not directly answer if L"
+Base Qwen2.5-3B,61,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence that patient coaching can potentially reduce racial/ethnic disparities in cancer pain control. It shows that among minority patients, there was a significant difference in pain levels at"
+Base Qwen2.5-3B,62,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence that wound cultures can give information about the microbiology of blood cultures in severe burn patients. Specifically, it states that 44% of blood isolates"
+Base Qwen2.5-3B,63,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that post-tonsillectomy late haemorrhages are more likely to occur at night-time compared to daytime. However, the study has some limitations"
+Base Qwen2.5-3B,64,yes,yes,True,"Yes
+
+Rationale: The provided abstract clearly indicates that the study investigated the role of mitochondria in programmed cell death (PCD) in lace plant leaves. It describes how the lace plant's leaves"
+Base Qwen2.5-3B,65,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that amoxapine has properties consistent with atypical antipsychotics, such as high 5-HT2 occupancy and lower D2 occupancy. However"
+Base Qwen2.5-3B,66,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that the risk of transitioning to psychosis increases in the order of Trait alone < APS < BLIPS, but this pattern is observed when combining the APS and Trait"
+Base Qwen2.5-3B,67,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that the eye movements (nystagmus) observed in different positions (left-ear-down, right-ear-down, supine, prone) were"
+Base Qwen2.5-3B,68,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence that automatic transmission can improve driving behavior in older drivers, specifically demonstrating safer speed adjustment, greater maneuvering skills, safer lane position, and adherence to speed regulations"
+Base Qwen2.5-3B,69,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that while most multidisciplinary team (MDT) decisions are concordant with subsequent patient management, there are instances of discordance. However, it"
+Base Qwen2.5-3B,70,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that there may be an association between increased uterine natural killer (uNK) cells and irregular endometrial bleeding in women using combined menopausal"
+Base Qwen2.5-3B,71,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that aberrant loss of Dickkopf-3 (DKK3) protein expression is associated with advanced stages, lymph node metastasis, and poor prognosis"
+Base Qwen2.5-3B,72,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence that supports the research question by demonstrating that patients with chronic low back pain (CLBP) exhibit poorer motor performance compared to healthy subjects. It specifically mentions that"
+Base Qwen2.5-3B,73,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence that micro-computed tomography (micro-CT) is reliable for assessing the microstructure of the maxillary alveolar bone. It demonstrates significant positive"
+Base Qwen2.5-3B,74,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests an inverse relationship between higher blood pressure and lower prevalence of low back pain in a cross-sectional study, but the prospective study results are mixed, showing only weak"
+Base Qwen2.5-3B,75,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that chemical shift MRI can contribute to the morphologic evaluation of solid breast masses, particularly in dense breast tissue where it demonstrates value for both benign and malignant lesion"
+Base Qwen2.5-3B,76,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that while positron emission tomography (PET) scans can change the management of primary rectal cancer, this change occurs in a minority of cases (1"
+Base Qwen2.5-3B,77,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that there are higher ""missed opportunities"" for influenza vaccination in office-based settings among racial and ethnic minorities compared to non-Hispanic whites. It also"
+Base Qwen2.5-3B,78,yes,yes,True,"Yes
+
+Rationale: The provided abstract evidence clearly shows that there are statistically significant differences in systolic blood pressure measurements between physicians and nurses compared to self-measurements. Specifically, it states that the"
+Base Qwen2.5-3B,79,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence that biofeedback training can enhance athletes' psychophysiological control over competitive anxiety and potentially improve athletic performance. It describes a study where athletes showed significant improvements in"
+Base Qwen2.5-3B,80,yes,yes,True,"Yes
+
+Rationale: The provided abstract demonstrates that there is a strong correlation between blood glucose levels measured from gingival crevicular blood and finger-prick blood samples. This indicates that gingival cre"
+Base Qwen2.5-3B,81,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that there is a need for expert breast pathology assessment in managing DCIS due to inter-observer variability in pathologic reporting. It indicates that expert review can"
+Base Qwen2.5-3B,82,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that there is a trend indicating lower ADMA levels in young adults born preterm at extremely low birth weight compared to a control group. However, it does"
+Base Qwen2.5-3B,83,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that some infants may experience symptoms similar to water-induced urticaria (aquagenic urticaria) during bathing, characterized by pallor, hypot"
+Base Qwen2.5-3B,84,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that ultrasound can be used to diagnose megarectum and assess fecal load in constipated children, and it indicates that there is a positive correlation between"
+Base Qwen2.5-3B,85,yes,yes,True,"Yes
+
+Rationale: The provided abstract presents a prospective study that evaluated the safety and acceptability of performing day-case laparoscopic cholecystectomy. It reports on 150 cases performed"
+Base Qwen2.5-3B,86,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence suggesting that certain type II supracondylar humerus fractures can be treated nonoperatively. It outlines a study where 150 out of "
+Base Qwen2.5-3B,87,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence that women who received radiotherapy around the time of pregnancy for Hodgkin's disease have a significantly higher risk of developing breast cancer compared to those who were not"
+Base Qwen2.5-3B,88,yes,yes,True,"Yes
+
+Rationale: The provided abstract evidence indicates that multiple clinical trials have compared the efficacy of dexamethasone versus oral prednisone in treating pediatric asthma exacerbations. These studies consistently show"
+Base Qwen2.5-3B,89,yes,yes,True,"Yes
+
+Rationale: The provided abstract evidence directly supports the research question by demonstrating a significant positive association between cumulative insulin exposure (both regular and intermediate-acting) and carotid intima-media thickness"
+Base Qwen2.5-3B,90,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that there were no significant differences in dose intensity and toxicity profiles between patients receiving chemotherapy at a tertiary cancer center (Townsville Cancer Centre) and those supervised by"
+Base Qwen2.5-3B,91,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests an association between over-the-counter pharmacy syringe sales and a decrease in reported crime, which aligns with the research question. However, it is important to"
+Base Qwen2.5-3B,92,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that partial remission is associated with a higher rate of relapse compared to complete remission, which partially addresses the research question. However, it does not"
+Base Qwen2.5-3B,93,yes,maybe,False,"Maybe
+
+The provided abstract suggests that intrapartum vibroacoustic stimulation (VAS) may be an effective predictor of fetal acidosis, particularly in terms of its ability to differentiate between normal and"
+Base Qwen2.5-3B,94,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that a scrotal approach can effectively diagnose and treat impalpable undescended testes, with a high success rate (78%) and"
+Base Qwen2.5-3B,95,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that there might be differences in mammographic screening outcomes between Sami-speaking municipalities and a control group, but these differences are not consistent across all measures. While"
+Base Qwen2.5-3B,96,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that in a series of 100 patients undergoing thoracic and thoracoabdominal aortic aneurysm repair, there was no occurrence"
+Base Qwen2.5-3B,97,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence that women residents perceive more significant career threats related to having children during residency compared to men. This perception is quantified through a validated scale, indicating that women"
+Base Qwen2.5-3B,98,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence that Chile's traffic law reform, combined with increased police traffic enforcement, led to significant reductions in traffic fatalities and severe injuries. Specifically, it mentions that the"
+Base Qwen2.5-3B,99,yes,yes,True,"Yes
+
+Rationale: The abstract clearly indicates that there is a significant influence of a physician's specialty on both the depth and frequency of medication history documentation in patient case notes. This directly supports the research"
+Base Qwen2.5-3B,100,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that pulmonary valve replacement (PVR) in adults late after repair of tetralogy of Fallot (TOF) does not significantly alter right ventricular"
+Base Qwen2.5-3B,101,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that combined therapy with hyperbaric oxygen and growth hormone may be more effective than either treatment alone in promoting healing of both ischemic and non-ischemic"
+Base Qwen2.5-3B,102,yes,yes,True,"Yes
+
+Rationale: The abstract indicates that a multi-site action research project successfully embedded an advance care planning model into three community palliative care services in Victoria, Australia. This demonstrates that the model is"
+Base Qwen2.5-3B,103,yes,yes,True,"Yes.
+
+Rationale: The abstract provides evidence that serum can be used for analyzing the EGFR mutation status in patients with advanced non-small cell lung cancer. It demonstrates that EGFR mutations were detected in"
+Base Qwen2.5-3B,104,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that surgery and radiation therapy may have an impact on survival for patients with extrapulmonary small cell carcinomas (EPSCC). However, the study"
+Base Qwen2.5-3B,105,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that while viable germ cell elements are occasionally found in the testicular remnants associated with vanishing testes syndrome, their presence does not universally necessitate surgical intervention"
+Base Qwen2.5-3B,106,yes,no,False,"No
+
+Rationale: The abstract suggests that eligibility for an adjuvant chemotherapy protocol did not represent a good prognostic factor after radical cystectomy for bladder cancer. It indicates that patients who were"
+Base Qwen2.5-3B,107,yes,yes,True,"Yes
+
+Rationale: The study found that the observed distribution of manic and mixed episodes over an 11-year period was significantly different from what would be expected by chance, indicating that the manic/m"
+Base Qwen2.5-3B,108,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that patients with psychotic BDD (defined as those with delusional preoccupation and lack of insight) may have a higher rate of lifetime DSM-III"
+Base Qwen2.5-3B,109,yes,yes,True,"Yes
+
+Rationale: The abstract provides direct evidence supporting the idea that mossy fibers release GABA. It mentions that mossy fiber terminals show intense immunoreactivity for GABA and GAD6"
+Base Qwen2.5-3B,110,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that the 7th TNM staging system may be more suitable for predicting clinical behavior in early gastric cancer (EGC) compared to the 6th"
+Base Qwen2.5-3B,111,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that preoperative tracheobronchoscopy (TBS) can be beneficial in detecting unsuspected anatomical abnormalities in newborns with esophageal at"
+Base Qwen2.5-3B,112,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence that laparoscopic reoperation is feasible for treating patients whose antireflux surgery has failed. It describes a case series of 46 patients who underwent"
+Base Qwen2.5-3B,113,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that transcranial direct current stimulation (tDCS) may help differentiate between unresponsive wakefulness syndrome (UWS) and minimally conscious state ("
+Base Qwen2.5-3B,114,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence from the ORIGIN trial that severe hypoglycaemia is associated with increased risks of cardiovascular death, non-fatal myocardial infarction, stroke"
+Base Qwen2.5-3B,115,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract discusses various aspects of corneal biomechanics and healing following different types of excimer laser keratorefractive surgeries but does not specifically compare the outcomes between"
+Base Qwen2.5-3B,116,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence that homemade alcohol (Raksi) can be effective in preserving dead bodies in rats, as it successfully arrested postmortem changes up to 72 hours"
+Base Qwen2.5-3B,117,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that while there may be some advantages to being treated at high-volume centers, such as potentially better surgical outcomes like lymph node yield and neoadjuvant chem"
+Base Qwen2.5-3B,118,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract does not directly address the specific research question regarding the safety of performing rectal anastomosis without a diverting stoma in gynecological debulking"
+Base Qwen2.5-3B,119,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that there may be some unique clinicopathological features in young patients with colorectal cancer compared to older patients, as indicated by differences in risk factors, presentation"
+Base Qwen2.5-3B,120,yes,yes,True,"Yes
+
+Rationale: The provided abstract indicates that among the various renal anatomical factors evaluated, only the height of the infundibulum significantly differed between patients who achieved complete stone clearance (NR group"
+Base Qwen2.5-3B,121,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that while the h-index is positively correlated with securing NIH grants, it does not predict greater funding success once the threshold of an h-index above 10"
+Base Qwen2.5-3B,122,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that atropine may be beneficial in reducing hypersalivation and vomiting associated with ketamine sedation, but it does not definitively answer if atrop"
+Base Qwen2.5-3B,123,yes,yes,True,"Yes
+
+Rationale: The abstract provides clear evidence supporting the hypothesis that elective re-siting of intravenous cannulae decreases the incidence and severity of peripheral thrombophlebitis. It reports"
+Base Qwen2.5-3B,124,yes,yes,True,"Yes
+
+Rationale: The provided abstract demonstrates that anorectal endosonography is valuable in identifying dysfunction of the anal sphincter and/or the puborectalis muscle in patients with dys"
+Base Qwen2.5-3B,125,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence that tranexamic acid, when used in combination with desmopressin, significantly reduces the need for blood transfusions and decreases fibrinolytic"
+Base Qwen2.5-3B,126,yes,yes,True,"Yes
+
+Rationale: The provided abstract evidence directly supports the research question by demonstrating that perivascular adipose tissue (pWAT) contributes to the production of chemokines that can induce chem"
+Base Qwen2.5-3B,127,yes,yes,True,"Yes
+
+Rationale: The provided abstract evidence clearly indicates that children's teaching hospitals (CTHs) have significantly higher risk-adjusted total costs and lengths of stay for inpatient tonsillectom"
+Base Qwen2.5-3B,128,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence that a significant portion (28%) of patients with motor neuron disease exhibited global cognitive dysfunction and language deficits, including both dementia and aphasia. This align"
+Base Qwen2.5-3B,129,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that patellar position does influence ligament balancing in total knee arthroplasty, as it shows differences in gap measurements between reduced, subluxated,"
+Base Qwen2.5-3B,130,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that rapid prescreening (RPS) can detect glandular cell abnormalities (≥AGC) in Pap smears, with some cases being identified only"
+Base Qwen2.5-3B,131,yes,yes,True,"Yes
+
+Rationale: The provided abstract clearly addresses the research question by exploring patients' views on using color to describe osteoarthritis pain. It mentions conducting six group interviews with 17 patients"
+Base Qwen2.5-3B,132,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence that in a series of patients with primary eosinophilic esophagitis, there was a notable finding of extremely fragile, inelastic, and delicate"
+Base Qwen2.5-3B,133,yes,yes,True,"Yes
+
+Rationale: The abstract clearly demonstrates that lung ischemia and reperfusion (IR) led to significant decreases in total coronary flow (TCF) in a swine model. It also"
+Base Qwen2.5-3B,134,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that diffusion-weighted echo-planar MR imaging (epiDWI) can differentiate between some types of primary parotid gland tumors based on apparent diffusion"
+Base Qwen2.5-3B,135,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests a relationship between the duration of psychological treatment and the likelihood of returning to mental health care, but it does so with some caveats. It indicates that patients"
+Base Qwen2.5-3B,136,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence that a dedicated discharge coordinator significantly improved the discharge planning process, reduced problems experienced by patients after discharge, and decreased perceived need for medical and healthcare services. Although"
+Base Qwen2.5-3B,137,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that Paget's disease has been documented in India through a case series of 21 patients. However, it does not provide a comprehensive overview of the"
+Base Qwen2.5-3B,138,yes,yes,True,"Yes
+
+Rationale: The provided abstract demonstrates that vitamin D supplementation led to an increase in the percentage of regulatory T cells (Tregs) in apparently healthy subjects. This finding is consistent with the hypothesis"
+Base Qwen2.5-3B,139,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that semi-closed endarterectomy of the superficial femoral artery combined with a short venous bypass can be an effective treatment option for critical leg ischemia"
+Base Qwen2.5-3B,140,yes,yes,True,"Yes
+
+Rationale: The provided abstract indicates that in the studied population of MS patients, there was a significant association (P<0.05) between the presence of cervical cord plaques and"
+Base Qwen2.5-3B,141,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence from a randomized controlled trial showing that nurse-led preoperative education significantly reduced anxiety levels in cardiac surgery patients compared to standard ward information. It also indicates a trend"
+Base Qwen2.5-3B,142,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence that suggests evidence-based practice (EBP) may improve patient outcomes. Specifically, it reports a decrease in mortality rate and length of stay for patients treated by"
+Base Qwen2.5-3B,143,yes,maybe,False,"Maybe
+
+Rationale: The evidence suggests that patients admitted to top-ranked hospitals had lower adjusted 30-day mortality compared to other hospitals, indicating potentially better performance. However, this advantage diminished when adjusted"
+Base Qwen2.5-3B,144,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that technical factors such as selective embolization may have an impact on prognosis for patients undergoing hepatic arterial embolization for unresectable hepatocellular"
+Base Qwen2.5-3B,145,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that holmium:YAG laser lithotripsy is effective and safe for treating ureteral stones, with high success rates and low complication rates."
+Base Qwen2.5-3B,146,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that in a randomized controlled trial involving 60 TAVI patients, omitting balloon predilatation did not result in significant differences in early hem"
+Base Qwen2.5-3B,147,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that there are associations between health status, disease activity, and damage in Systemic Lupus Erythematosus (SLE) patients. It mentions"
+Base Qwen2.5-3B,148,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that third trimester (specifically after 32 weeks gestation) ultrasound can predict the presentation of the first twin at delivery with high accuracy (positive"
+Base Qwen2.5-3B,149,yes,yes,True,"Yes
+
+Rationale: The study demonstrates that a trained urology nurse practitioner (UNP) can achieve comparable accuracy to a consultant urologist in detecting bladder tumors during flexible cystoscopy"
+Base Qwen2.5-3B,150,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests differences in gastric cancer characteristics between Korean and U.S. populations, particularly regarding tumor location and prognosis. However, it does not directly compare gastric cancer across both"
+Base Qwen2.5-3B,151,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that the nomograms examined can predict both biochemical recurrence (BCR) and prostate cancer-specific mortality (PCSM) in patients who underwent radical prostatectomy"
+Base Qwen2.5-3B,152,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence that socioeconomic differences in mortality do indeed persist after retirement. It shows that employment grade, as a measure of socioeconomic status, remains a strong predictor of mortality even"
+Base Qwen2.5-3B,153,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence that 3D ultrasound-validated large-core needle biopsy (LCNB) is a reliable method for the histological assessment of breast lesions. It demonstrates that"
+Base Qwen2.5-3B,154,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that Fournier's gangrene remains a dangerous condition with high mortality rates even with antibiotic and aggressive debridement treatments. It also indicates that there is"
+Base Qwen2.5-3B,155,yes,yes,True,"Yes
+
+Rationale: The provided abstract clearly demonstrates that sonographic needle guidance significantly improved clinical outcomes of intraarticular injections as evidenced by reduced procedural pain, lower absolute pain scores, higher responder rates,"
+Base Qwen2.5-3B,156,yes,yes,True,"Yes.
+Rationale: The study demonstrates that nursing students who created concept maps had higher mean scores on cumulative tests compared to those who took traditional quizzes. This indicates that concept mapping may enhance learning outcomes for"
+Base Qwen2.5-3B,157,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that there may be a subgroup of schizophrenia patients with high intelligence who exhibit different symptom profiles compared to those with typical intelligence. It indicates that this subgroup has lower"
+Base Qwen2.5-3B,158,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that some behavioral risk factors, such as higher alcohol intake and waist circumference, may contribute to the development of hypertension in individuals who initially have optimal blood pressure."
+Base Qwen2.5-3B,159,yes,yes,True,"Yes
+
+Rationale: The provided abstract clearly indicates that the study examined changes in the use of complementary and alternative medicine (CAM) therapies by U.S. adults with chronic disease-related functional limitations between "
+Base Qwen2.5-3B,160,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that there may be a difference in the volume of cerebral infarction between right and left hemisphere strokes based on NIHSS scores, but it does not specifically"
+Base Qwen2.5-3B,161,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests a potential link between febrile reactions to platelets and increased risk of red blood cell alloimmunization, but it does not definitively answer the"
+Base Qwen2.5-3B,162,yes,yes,True,"Yes
+
+Rationale: The provided abstract demonstrates that teaching medical students about investigating medication errors through a patient-safety curriculum led to significant improvements in their attitudes towards patient safety. Specifically, it shows that after"
+Base Qwen2.5-3B,163,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests mixed results regarding the influence of sex on the response to intravenous thrombolysis in ischemic stroke. While it indicates that men had better functional outcomes and"
+Base Qwen2.5-3B,164,yes,yes,True,"Yes
+
+Rationale: The abstract clearly demonstrates that a zero CLABSI rate was achieved and sustained for over 600 days following the implementation of evidence-based catheter care practices. This indicates"
+Base Qwen2.5-3B,165,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests an association between beta-endorphin levels and anxiety during alcohol withdrawal, supporting part of the research question. However, it does not conclusively prove that withdrawal"
+Base Qwen2.5-3B,166,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that betamethasone alone causes cochlear toxicity, as does otic gentamicin. However, when used together, otic gentamicin"
+Base Qwen2.5-3B,167,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that magnetic resonance imaging can identify certain MRI features that may predict concordant pain during provocative disc injection, particularly when a high intensity zone is present along with"
+Base Qwen2.5-3B,168,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests a positive correlation between knee extensor strength and dynamic postural stability, and a negative correlation between dynamic postural stability and disease severity in Parkinson's disease."
+Base Qwen2.5-3B,169,yes,yes,True,"Yes
+
+Rationale: The provided abstract evidence directly addresses the research question by showing that individuals who were passive smokers during childhood (exposed to environmental tobacco smoke at home) had an increased risk of long"
+Base Qwen2.5-3B,170,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that non-HDL-cholesterol (non-HDL-C) may be a better predictor of long-term outcomes in patients after acute myocardial infar"
+Base Qwen2.5-3B,171,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that weight scales with height squared, indicating a relationship between height and body mass. However, it does not directly address the specific association between adult body circumferences"
+Base Qwen2.5-3B,172,yes,maybe,False,"Maybe
+
+Rationale: The evidence suggests that while nurses' subjective assessments (VAS) tend to overestimate admissions, they perform comparably to an objective scoring system (GAPS) in terms of overall"
+Base Qwen2.5-3B,173,yes,yes,True,"Yes
+
+Rationale: The provided abstract evidence directly supports the research question by demonstrating that children with protracted bacterial bronchitis (PBB) and bronchiectasis exhibit defective alveolar macro"
+Base Qwen2.5-3B,174,yes,maybe,False,"Maybe
+
+Rationale: The abstract suggests that an instruction manual consisting of four diagrams enabled laypersons to successfully insert and ventilate a Laryngeal Mask Supreme® (LMAS) in a man"
+Base Qwen2.5-3B,175,yes,yes,True,"Yes
+
+Rationale: The abstract clearly indicates that the study evaluated the cost-effectiveness of adopting the IADPSG criteria for diagnosing gestational diabetes mellitus (GDM) compared to the"
+Base Qwen2.5-3B,176,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that ibuprofen may increase perioperative blood loss during hip arthroplasty, as evidenced by a statistically significant higher blood loss in the ibuprofen"
+Base Qwen2.5-3B,177,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that virtual planning and guided surgery can potentially reduce costs associated with mandibular reconstruction surgeries, but it does not directly address the economic viability for all types of"
+Base Qwen2.5-3B,178,yes,yes,True,"Yes
+
+Rationale: The provided abstract demonstrates that the multidisciplinary breast cancer clinic (MDBCC) at Henry Ford Hospital improved patient satisfaction and reduced the time between diagnosis and treatment initiation. These positive"
+Base Qwen2.5-3B,179,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that ultrasonography can be used to estimate Schanz pin placement, but it underestimates the actual protrusion length by about 10%. It"
+Base Qwen2.5-3B,180,yes,yes,True,"Yes
+
+Rationale: The provided abstract suggests a positive correlation between reductions in spasticity and improvements in arm function in patients treated with botulinum toxin. Specifically, it indicates that there is a"
+Base Qwen2.5-3B,181,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that laparoscopic adrenalectomy can be used safely and effectively for adrenal masses larger than 7 cm, as evidenced by a retrospective study of "
+Base Qwen2.5-3B,182,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that having a special interest in laparoscopy (specialized surgeons) may lead to better outcomes in terms of successful laparoscopic treatment for acute ch"
+Base Qwen2.5-3B,183,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that student examiners may perform similarly to faculty examiners in some areas but not others, particularly in certain stations like ""PE"". However, the results are"
+Base Qwen2.5-3B,184,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that the atopy patch test with house dust mites is more likely to be positive in individuals with atopic dermatitis compared to non-atopic subjects."
+Base Qwen2.5-3B,185,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence that the presence of spinal cord involvement as indicated by T2 High Signal Intensity Areas (T2 HIA) on MRI, the number of T2"
+Base Qwen2.5-3B,186,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that there may be differences in hospital admission rates between children treated with inhaled steroids and those treated with cromones, but the specific comparison requested (in"
+Base Qwen2.5-3B,187,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests a strong association between HIV infection and the presentation of both simple and plunging ranulas, which are types of mucoceles. However, it does"
+Base Qwen2.5-3B,188,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that there were no significant differences in headache relief between the two groups (2 min bolus vs 15 min infusion) and no significant differences in side"
+Base Qwen2.5-3B,189,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that older adults with advanced cancer undergoing phase I clinical trials experience worse outcomes if they have more than three symptoms. However, it does not directly address whether symptoms"
+Base Qwen2.5-3B,190,yes,yes,True,"Yes
+
+Rationale: The provided abstract describes a randomized controlled trial that investigated the effect of a multimodal cervical physical therapy treatment on tinnitus complaints in patients with cervicogenic somatic tinnitus ("
+Base Qwen2.5-3B,191,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that the prognosis for allergic contact dermatitis differs based on the ubiquity of the allergen. However, it does not directly address the two-year follow-up"
+Base Qwen2.5-3B,192,yes,yes,True,"Yes
+
+Rationale: The provided abstract discusses a retrospective analysis examining the relationship between the Deformity Angular Ratio (DAR) and the likelihood of neurological complications during spinal deformity corrective surgeries in pediatric"
+Base Qwen2.5-3B,193,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that primary angioplasty and thrombolysis both lead to high patient satisfaction overall, but with some differences. While primary angioplasty is associated with higher"
+Base Qwen2.5-3B,194,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence that 2-methoxyestradiol (2ME) can have an additive inhibitory effect when combined with certain chemotherapeutic drugs on human ovarian"
+Base Qwen2.5-3B,195,yes,yes,True,"Yes
+
+Rationale: The provided abstract indicates that the study found increased carotid artery pulsatility and resistance indexes in young obese males compared to age-matched healthy controls. This directly supports the hypothesis"
+Base Qwen2.5-3B,196,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract does not directly address the specific research question regarding gender differences in reasons for delaying medical help among African Americans for AMI symptoms. While it mentions that women, particularly"
+Base Qwen2.5-3B,197,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that while volumetric analysis (automated segmentation) is faster than manual area tracing, it has larger smallest detectable differences, which may not be ideal for"
+Base Qwen2.5-3B,198,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that there is potential for discordance between clinical pathologists (CPs) and clinicians regarding the interpretation of red blood cell (RBC) morphology (R"
+Base Qwen2.5-3B,199,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence supporting the development of a real-time PCR approach for the rapid and accurate detection and quantification of airborne allergenic pollen taxa. It describes modifications to DNA isolation"
+Base Qwen2.5-3B,200,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract does not directly address the specific concern about the continued use of cold preparations in young children after FDA warnings. While it describes a study on the use and delivery of"
+Base Qwen2.5-3B,201,yes,yes,True,"Yes
+
+Rationale: The abstract provides data indicating that 90% of the home blood pressure readings recorded by stroke patients in a study were exactly the same as the actual readings from the BP monitors"
+Base Qwen2.5-3B,202,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that flexible instruments can create femoral tunnel lengths greater than 20 mm at 90° of knee flexion, which partially addresses part of the"
+Base Qwen2.5-3B,203,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that within a specific family, a higher prevalence of nasal polyposis was observed compared to the general population (19.7% vs. 2"
+Base Qwen2.5-3B,204,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that there may be room for improvement in Dutch primary school food policies, as indicated by several findings. Firstly, while most schools have a written food policy,"
+Base Qwen2.5-3B,205,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests a difference in adenoma detection rates between Golytely and MiraLAX, with Golytely showing a higher rate (26."
+Base Qwen2.5-3B,206,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that while ESC can make drivers feel safer and more confident, there is potential for behavioral adaptation or overreliance on the system. However, the studies"
+Base Qwen2.5-3B,207,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that memory-provoked rCBF-SPECT (MP-SPECT) may show promise in detecting rCBF reductions in specific brain regions in Alzheimer's"
+Base Qwen2.5-3B,208,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests a correlation between certain states having higher rates of specific types of injuries and lower rates of road traffic deaths. However, it does not provide direct information on overall"
+Base Qwen2.5-3B,209,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that case-mix based reimbursement may stimulate the establishment of care programs through process-oriented performance measures, indicating a shift towards a more coordinated approach. However, it"
+Base Qwen2.5-3B,210,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that open access articles have a higher citation count compared to non-open access articles, particularly in the highest citation range. However, the overall difference in citations between"
+Base Qwen2.5-3B,211,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence that neutrophils isolated from the peripheral blood of patients admitted after major trauma exhibit enhanced migratory activity in response to interleukin-8, which is"
+Base Qwen2.5-3B,212,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence that Nd:YAG laser-induced thermo therapy (LITT) can locally disrupt the blood-brain barrier (BBB), allowing for the extravasation"
+Base Qwen2.5-3B,213,yes,maybe,False,"Maybe
+
+Rationale: The evidence suggests an improvement in survival for women with recurrent breast cancer over time, as indicated by the unadjusted analysis showing a statistically significant improvement across different years of recurrence. However"
+Base Qwen2.5-3B,214,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that cup-cage reconstruction with oversized acetabular components may provide some initial stability in THA for osteoporotic acetabular fractures, as evidenced by"
+Base Qwen2.5-3B,215,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that surgical treatment of lower limb fractures in patients with chronic spinal cord injuries may have better clinical outcomes compared to conservative treatment, including improved range of motion, bone"
+Base Qwen2.5-3B,216,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that there is a moderate correlation between autoCPAP pressure and OSA severity in a group of obese individuals, but it does not explicitly address the influence of"
+Base Qwen2.5-3B,217,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that there is a strong correlation (r = 0.84) between tacrolimus concentrations measured by the affinity column-mediated immunoassay ("
+Base Qwen2.5-3B,218,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence that exercise training has different effects on heart rate and QT interval in healthy young individuals based on gender. Specifically, it shows that while exercise training reduces the QT"
+Base Qwen2.5-3B,219,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence that patients with diabetes mellitus have a significantly higher prevalence of complex coronary lesions, specifically bifurcation and ostial lesions, compared to those without diabetes."
+Base Qwen2.5-3B,220,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that there is some association between lower socioeconomic status and poorer quality of life in lung cancer patients, particularly at baseline assessments. However, the study found no significant"
+Base Qwen2.5-3B,221,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that there may be an association between the risk of serious infections and the use of infliximab versus etanercept, particularly in older patients ("
+Base Qwen2.5-3B,222,yes,yes,True,"Yes
+
+Rationale: The study directly compares the use of polyglactin 910 sutures with ethyl-2-cyanoacrylate glue (cyanoacrylate"
+Base Qwen2.5-3B,223,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that while there is no significant difference in Ki-67 levels among different response groups (pCR, partial response, stable disease), it does show differences"
+Base Qwen2.5-3B,224,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence that suggests an optimal time for intragastric acid suppression for maximal healing of reflux oesophagitis. Specifically, it indicates that maximal healing rates"
+Base Qwen2.5-3B,225,yes,yes,True,"Yes
+
+Rationale: The provided abstract indicates that there is a statistically significant difference in student confidence ratings regarding their skills in working with culturally diverse populations between Pathway (students who have undergone the Global Long"
+Base Qwen2.5-3B,226,yes,maybe,False,"Maybe
+
+Rationale: The evidence suggests that fenofibrate may have a beneficial effect on reducing the percentage of time with SpO(2)<90% and non-cortical micro-aw"
+Base Qwen2.5-3B,227,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract discusses the feasibility and implementation of the GFRUP guidelines for limiting treatments in critically ill children but does not directly address whether these recommendations are applicable. While it provides"
+Base Qwen2.5-3B,228,yes,yes,True,"Yes
+
+Rationale: The provided abstract clearly indicates that there is a significant association between pelvic pain and defecatory symptoms in women with pelvic organ prolapse. Specifically, it mentions that women with pelvic"
+Base Qwen2.5-3B,229,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that geriatric oncology consultations can lead to modifications in cancer treatment plans for elderly patients, as indicated by the fact that 38.7% of"
+Base Qwen2.5-3B,230,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that baseline factors such as elevated plasma viscosity and initial prednisolone dose can predict the duration of steroid therapy in polymyalgia rheumatica (PM"
+Base Qwen2.5-3B,231,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that routine laboratory markers, particularly the mean corpuscular volume (MCV) and the AST/ALT ratio, may be useful in differentiating between nonal"
+Base Qwen2.5-3B,232,yes,yes,True,"Yes
+
+Rationale: The provided abstract indicates that both early-life urban exposure and the proportion of urban life years were independently associated with increased risk factors for non-communicable diseases (NCDs)."
+Base Qwen2.5-3B,233,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that cytokine concentrations in pancreatic juice can potentially predict the presence of certain pancreatic diseases, specifically chronic pancreatitis and pancreatic cancer. However, it does not provide"
+Base Qwen2.5-3B,234,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that comparing the effective orifice area (EOA) to the patient's aortic annulus area ratio may be a useful method to compare different biop"
+Base Qwen2.5-3B,235,yes,maybe,False,"Maybe
+
+Rationale: The evidence suggests that while there is a decrease in saturated fatty acids and an increase in phosphorus intake when transitioning to a gluten-free diet, it also indicates a deficient intake of"
+Base Qwen2.5-3B,236,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that there is an association between contact with specialist care and certain lifestyle factors, specifically higher educational level, among women reporting gynecological cancer alarm symptoms. However"
+Base Qwen2.5-3B,237,yes,yes,True,"Yes
+
+Rationale: The provided abstract describes successful experimental per-oral transgastric splenectomy in a porcine model. This demonstrates that the technique is technically feasible, which directly addresses"
+Base Qwen2.5-3B,238,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests an association between oxybutynin hydrochloride and QT interval changes leading to cardiac arrhythmia in children. However, it is a subset study from"
+Base Qwen2.5-3B,239,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that a subset of children with low-risk pediatric thyroid cancer might be adequately treated with lobectomy rather than total thyroidectomy. This aligns with the research question"
+Base Qwen2.5-3B,240,yes,maybe,False,"Maybe
+
+Rationale: While the abstract discusses the potential benefits and challenges of specialty pharmaceuticals, it does not directly address the specific question of whether these drugs are ""worth the price."" It outlines the"
+Base Qwen2.5-3B,241,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence that trabecular bone properties, such as trabecular number, thickness, bone volume density, and trabecular BMD, are correlated with primary"
+Base Qwen2.5-3B,242,yes,yes,True,"Yes
+
+Rationale: The provided abstract indicates that Florida's Medicaid Demonstration resulted in lower per member per month (PMPM) Medicaid expenditures overall, and specifically, provider service networks (PSNs"
+Base Qwen2.5-3B,243,yes,maybe,False,"Maybe
+
+Rationale: The evidence suggests that circulating androgens, particularly testosterone androstenedione, are associated with sexual desire in women, but not specifically with ADT-G. The study found"
+Base Qwen2.5-3B,244,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence that remote physician-examiners (REs) can effectively replace on-site physician-examiners (LEs) in an Objective Structured Clinical Examination ("
+Base Qwen2.5-3B,245,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests an association between the anatomy of the aortic arch (specifically the aortic arch angle) and the severity of traumatic aortic injuries (TAI)."
+Base Qwen2.5-3B,246,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that insulin sensitivity plays a significant role in the relationship between hyperglycemia (both fasting and 2-hour plasma glucose) and cardiovascular risk, as indicated"
+Base Qwen2.5-3B,247,yes,yes,True,"Yes
+
+Rationale: The abstract provides evidence from a longitudinal study conducted in Denmark using a nationally representative sample of individuals aged 92 or 93 born in 1905. It"
+Base Qwen2.5-3B,248,yes,maybe,False,"Maybe
+
+Rationale: The abstract provides evidence that zeolite (QuikClot) can reduce blood loss and improve some physiological parameters in an animal model of arterial injury. However, it does"
+Base Qwen2.5-3B,249,yes,yes,True,"Yes
+
+Rationale: The provided abstract demonstrates that the OraQuick® HIV-1/2 Assay performed well when applied to sputum samples from tuberculosis patients, achieving high sensitivity (9"
+Base Qwen2.5-3B,250,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that sparing one parotid gland may reduce the incidence of xerostomia compared to sparing both glands, but it does not definitively prove that"
+Base Qwen2.5-3B,251,yes,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that radiotherapy of the primary rectal cancer does have an impact on outcomes after pelvic exenteration for local recurrence, particularly affecting resection margins, surgical"
+Base Qwen2.5-3B,252,yes,yes,True,"Yes
+
+Rationale: The provided abstract evidence discusses a cost-effectiveness analysis of financial incentives up to £400 for smoking cessation during pregnancy. It presents both direct costs and quality-adjusted life"
+Base Qwen2.5-3B,253,no,no,True,"No
+
+Rationale: The study found no evidence of an increase in reported unsafe sexual behavior among HIV-infected individuals over time. While the study identified certain subgroups (females, younger individuals,"
+Base Qwen2.5-3B,254,no,yes,False,"Yes
+
+Rationale: The abstract clearly indicates that this study investigates the necessity of adjusting for reporting heterogeneity in the context of sleep disorders. It employs anchoring vignettes to evaluate factors associated with sleep"
+Base Qwen2.5-3B,255,no,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that a preoperative medically supervised weight loss program may not improve bariatric surgery outcomes, particularly weight loss, for patients undergoing laparoscopic adjustable gastric band"
+Base Qwen2.5-3B,256,no,no,True,"No
+
+Rationale: The provided abstract does not support the conclusion that ultrasound-scored synovitis depends on the pharmacokinetics of subcutaneous anti-TNF agents in patients with rheumatoid"
+Base Qwen2.5-3B,257,no,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that there may be some differences between juvenile and adult ankylosing spondylitis in the Indian population, but it does not definitively conclude that these"
+Base Qwen2.5-3B,258,no,no,True,"No
+
+Rationale: The study found that while PET/CT provided new findings in 17 patients, these findings led to changes in therapeutic strategy in only 8 cases, where the additional information"
+Base Qwen2.5-3B,259,no,yes,False,"Yes
+
+Rationale: The study demonstrates that ureteroscopy for the retrieval of lower ureteric stones can be performed effectively without the use of fluoroscopy in most cases. It shows that"
+Base Qwen2.5-3B,260,no,no,True,"No
+
+Rationale: The study suggests that clinician assessment for acute chest syndrome in febrile patients with sickle cell disease may not be accurate enough. It indicates that only 39%"
+Base Qwen2.5-3B,261,no,no,True,"No
+
+Rationale: The provided abstract indicates that while an analysis of microelement concentrations in hair and urine was conducted to predict urinary stone composition, only a few incidental correlations were found between the stone composition"
+Base Qwen2.5-3B,262,no,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that calibration methods can contribute to variation in testosterone measurements using LC-MS/MS, but it does not definitively conclude that calibration is the sole cause of"
+Base Qwen2.5-3B,263,no,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that growth hormone replacement therapy may not significantly reduce overall mortality in adults with growth hormone deficiency, but it does not definitively answer the research question. While the"
+Base Qwen2.5-3B,264,no,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that there is no significant difference in hospitalization costs between patients receiving regional anesthesia and those receiving general anesthesia for hip fracture surgery in geriatric patients. However,"
+Base Qwen2.5-3B,265,no,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that oral α-galactosidase (AG) may have some benefit in reducing symptoms of abdominal bloating and flatulence in irritable bowel syndrome"
+Base Qwen2.5-3B,266,no,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that while there may be delays in antibiotic prescription-to-administration times between day and off-hours, the overall time from specimen collection to antibiotic administration is shorter for"
+Base Qwen2.5-3B,267,no,maybe,False,"Maybe
+
+Rationale: The evidence suggests that manual resuscitators can deliver tidal volumes, but the accuracy is influenced by various factors such as hand size, grip power, and method used (one"
+Base Qwen2.5-3B,268,no,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that FDG-PET has comparable diagnostic ability in detecting metastatic lesions and primary tumors/local recurrences in patients with diabetes mellitus (DM) compared to"
+Base Qwen2.5-3B,269,no,no,True,"No
+
+Rationale: The provided abstract does not support a clear association between arch form and sagittal molar relationship regarding tooth-size discrepancy. While it mentions that Bolton ratio was calculated and no association was"
+Base Qwen2.5-3B,270,no,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that birth characteristics (such as low birth weight, shortness, and small head circumference) are associated with lower intellectual performance in early adulthood, independent of socioeconomic"
+Base Qwen2.5-3B,271,no,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that while some clinical identifiers for early-stage primary/idiopathic adhesive capsulitis have been validated, there is still a lack of a recognized reference standard for"
+Base Qwen2.5-3B,272,no,no,True,"No.
+Rationale: The abstract indicates that there were no significant differences in neuropsychological test performance among patients who experienced loss of consciousness (LOC), no LOC, or uncertain LOC. This suggests that"
+Base Qwen2.5-3B,273,no,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that there is some evidence of meropenem's interstitial fluid (ISF) concentrations being higher than plasma concentrations in critically ill patients undergoing continuous renal replacement"
+Base Qwen2.5-3B,274,no,maybe,False,"Maybe
+
+Rationale: The evidence suggests that while midwives who completed the Perinatal Education Programme (PEP) showed improvements in their knowledge, there were no significant changes observed in obstetric practices"
+Base Qwen2.5-3B,275,no,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that in patients with metastatic carcinoma to cervical lymph nodes from an unknown head and neck primary site, the inclusion of neck dissection did not significantly improve overall"
+Base Qwen2.5-3B,276,no,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that the number of needles used in acupuncture treatment for neck pain did not significantly affect the clinical efficacy when compared in a study involving 36 patients. However"
+Base Qwen2.5-3B,277,no,no,True,"No.
+
+Rationale: The provided abstract suggests that despite a long-term mass drug administration (MDA) program in Northern Samar, Philippines, the prevalence of schistosomiasis remains high at"
+Base Qwen2.5-3B,278,no,no,True,"No
+
+Rationale: The study found that while trauma-trained surgeons had a slightly lower mean post-operative DFV (8.7°) compared to non-trauma trained surgeons (10.7"
+Base Qwen2.5-3B,279,no,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that there is no significant difference in postpartum quality of life between women who delivered vaginally and those who had cesarean sections in rural China."
+Base Qwen2.5-3B,280,no,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that neoadjuvant chemotherapy (NACT) can influence the distribution and extent of lymph node metastasis in cervical cancer, potentially reducing the number of involved"
+Base Qwen2.5-3B,281,no,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that patients with Werlhof's disease (WD) may be at increased risk for bleeding complications during cardiac surgery with extracorporeal circulation. It indicates"
+Base Qwen2.5-3B,282,no,no,True,"No
+
+Rationale: The study found that unenhanced T1-weighted fat-saturated MRI did not reliably differentiate bone infarcts from acute osteomyelitis in children with sickle cell"
+Base Qwen2.5-3B,283,no,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that routine dissection of station 9 lymph nodes may not be necessary for primary lung cancer, as the metastasis rate is low and does not significantly impact"
+Base Qwen2.5-3B,284,no,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that while some colorectal cancers may indeed be due to missed adenomas, the specific proportion (1.3%) is relatively low based on the data presented"
+Base Qwen2.5-3B,285,no,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that normothermic normokalemic simultaneous antegrade/retrograde perfusion (NNSP) may improve myocardial oxygenation and energy"
+Base Qwen2.5-3B,286,no,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that reducing lengths of stay did not consistently lead to adverse effects on quality of care as measured by readmission rates and physician visits for the studied conditions. However"
+Base Qwen2.5-3B,287,no,no,True,"No
+
+Rationale: The provided abstract does not support the hypothesis that higher body mass index contributes to worse asthma control in an urban population. The study found no association between obesity or increasing BMI levels and"
+Base Qwen2.5-3B,288,no,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that ultrasonography had limited utility in detecting undescended testes, particularly when the testes were not palpable. It indicates that ultrasonography"
+Base Qwen2.5-3B,289,no,yes,False,"Yes
+
+Rationale: The provided abstract discusses how Canada's Compassionate Care Benefit (CCB) operates as a public health response to addressing caregiver burden in end-of-life care. It mentions that informal"
+Base Qwen2.5-3B,290,no,maybe,False,"Maybe
+
+Rationale: The provided abstract suggests that anastomotic leakage does not significantly impact continence function as measured by the Cleveland Clinic Continence Score and anorectal manometry in the short"
+Qwen2.5-3B + PubMedQA LoRA,1,yes,maybe,False,"Decision: maybe
+Rationale: Male sex is an independent risk factor for conversion to open cholecystectomy and bile duct injury during laparoscopic cholecystectomy."
+Qwen2.5-3B + PubMedQA LoRA,2,yes,yes,True,"Decision: yes
+Rationale: A combination of ECG and echocardiographic features can help to differentiate ATTR amyloidosis from HCM."
+Qwen2.5-3B + PubMedQA LoRA,3,yes,yes,True,"Decision: yes
+Rationale: The Main Gate Syndrome is a new format in mass-casualty victim ""surge"" management. It allows the rapid identification of the most severely injured patients who"
+Qwen2.5-3B + PubMedQA LoRA,4,yes,maybe,False,"Decision: maybe
+Rationale: Our results suggest that the CYP2D6*4 allele may be protective against breast cancer in the Spanish population."
+Qwen2.5-3B + PubMedQA LoRA,5,yes,yes,True,"Decision: yes
+Rationale: The majority of patients do not mind being called by their first names by doctors. However, most patients do not want to call the doctor by his or her first name"
+Qwen2.5-3B + PubMedQA LoRA,6,yes,maybe,False,"Decision: maybe
+Rationale: There are significant differences in PoD across geographical groups. These findings highlight the need for targeted interventions to improve access to hospice care for those born in Asia and Africa"
+Qwen2.5-3B + PubMedQA LoRA,7,yes,yes,True,"Decision: yes
+Rationale: Upper airway surgery can improve lipid profiles in OSA patients. The effects may be more pronounced in patients with hypertriglyceridemia or mixed hyperlipid"
+Qwen2.5-3B + PubMedQA LoRA,8,yes,yes,True,"Decision: yes
+Rationale: These results suggest that uremic plasma contains both carbohydrate- and lipid-derived autoxidation products, and that oxidative stress may be involved in the pathogenesis of ure"
+Qwen2.5-3B + PubMedQA LoRA,9,yes,maybe,False,"Decision: maybe
+Rationale: The present cases suggest that HTLV-I infection may be involved in the pathogenesis of slowly progressive myelopathy with abnormal MRI lesions in the cervical cord levels."
+Qwen2.5-3B + PubMedQA LoRA,10,yes,no,False,"Decision: no
+Rationale: Manuscripts that cite the reviewer's work did not receive higher scores from reviewers. However, reviewers did suggest adding citations to other authors' work."
+Qwen2.5-3B + PubMedQA LoRA,11,yes,maybe,False,"Decision: maybe
+Rationale: The results suggest that the lunar cycle may have an influence on the timing of spontaneous deliveries."
+Qwen2.5-3B + PubMedQA LoRA,12,yes,maybe,False,"Decision: maybe
+Rationale: The use of quilting suture does not seem to be effective in preventing seroma formation in abdominoplasty."
+Qwen2.5-3B + PubMedQA LoRA,13,yes,maybe,False,"Decision: maybe
+Rationale: The authors believe that pediatricians should be aware of the syndrome and be prepared to discuss it with patients who present with symptoms suggestive of AEA."
+Qwen2.5-3B + PubMedQA LoRA,14,yes,maybe,False,"Decision: maybe
+Rationale: The results suggest that maternal and infant factors such as antenatal care attendance, mode of delivery and nursery type may be useful predictors of discordant outcomes among all infants"
+Qwen2.5-3B + PubMedQA LoRA,15,yes,yes,True,"Decision: yes
+Rationale: A systolic blood pressure difference of more than 10 mm Hg is a strong predictor of SSS."
+Qwen2.5-3B + PubMedQA LoRA,16,yes,yes,True,"Decision: yes
+Rationale: The difference between measured and expected CRL at the time of NT screening is significantly greater in severely macrosomic neonates than in AGA neonates. This difference may"
+Qwen2.5-3B + PubMedQA LoRA,17,yes,yes,True,"Decision: yes
+Rationale: Double balloon enteroscopy is safe and effective in a community setting. It can be performed in less than one hour and allows for endoscopic therapy including electrocaut"
+Qwen2.5-3B + PubMedQA LoRA,18,yes,maybe,False,"Decision: maybe
+Rationale: In this study, we found that prostate morphology did not affect the postoperative outcomes after holmium laser enucleation of the prostate. However, the trilobar"
+Qwen2.5-3B + PubMedQA LoRA,19,yes,yes,True,"Decision: yes
+Rationale: Written information sheets improve patients' recall of information given during the consent interview."
+Qwen2.5-3B + PubMedQA LoRA,20,yes,maybe,False,"Decision: maybe
+Rationale: MRI is useful in detecting occult post-traumatic bone and cartilage injuries of the knee. It is particularly helpful in identifying osteochondral injuries, which are often missed"
+Qwen2.5-3B + PubMedQA LoRA,21,yes,yes,True,"Decision: yes
+Rationale: Pancreas retransplantation is safe and effective. It should be considered as a therapeutic option for diabetic patients with end-stage renal disease and previous pancreas failure"
+Qwen2.5-3B + PubMedQA LoRA,22,yes,yes,True,"Decision: yes
+Rationale: Low serum chloride levels are associated with an increased risk of total and cardiovascular mortalities."
+Qwen2.5-3B + PubMedQA LoRA,23,yes,maybe,False,"Decision: maybe
+Rationale: Patterns of knowledge and attitudes exist among unvaccinated seniors. Understanding these differences may help identify subgroups most likely to respond to vaccination promotion efforts."
+Qwen2.5-3B + PubMedQA LoRA,24,yes,yes,True,"Decision: yes
+Rationale: DT appears to be a viable alternative to NCCT for the follow-up of nephrolithiasis."
+Qwen2.5-3B + PubMedQA LoRA,25,yes,yes,True,"Decision: yes
+Rationale: Access to GP hospitals appears to be associated with reduced use of general hospital services. This may be due to more effective management of chronic conditions in primary care, or to"
+Qwen2.5-3B + PubMedQA LoRA,26,yes,yes,True,"Decision: yes
+Rationale: Medical students can make valuable contributions to QA processes in day surgery. This is achieved through direct involvement in the day surgery process, critical analysis of data collected and presentation of"
+Qwen2.5-3B + PubMedQA LoRA,27,yes,yes,True,"Decision: yes
+Rationale: Patients with SMI are more likely to be admitted to nursing homes with more deficiencies in care than other patients. This finding suggests that nursing homes may need to implement additional"
+Qwen2.5-3B + PubMedQA LoRA,28,yes,maybe,False,"Decision: maybe
+Rationale: Patients with<or =5 metastatic lesions had a better prognosis than those with>5 lesions. However, the survival rate and the interval from the date of diagnosis"
+Qwen2.5-3B + PubMedQA LoRA,29,yes,yes,True,"Decision: yes
+Rationale: The results suggest that weekend hospitalization is associated with delayed treatment and increased costs and adverse health outcomes."
+Qwen2.5-3B + PubMedQA LoRA,30,yes,maybe,False,"Decision: maybe
+Rationale: Gender difference in survival of resected non-small cell lung cancer was observed in adenocarcinoma but not in non-adenocarcinoma. This"
+Qwen2.5-3B + PubMedQA LoRA,31,yes,yes,True,"Decision: yes
+Rationale: The ambulatory teaching centers of the Northeast Ohio universities are similar to community practices in terms of patient demographics and most common reasons for visit. However, there are differences in"
+Qwen2.5-3B + PubMedQA LoRA,32,yes,yes,True,"Decision: yes
+Rationale: The results of this study show that telmisartan has a protective effect against hepatic fibrosis in diabetic rats."
+Qwen2.5-3B + PubMedQA LoRA,33,yes,yes,True,"Decision: yes
+Rationale: Orthostatic myoclonus is a common cause of unsteadiness/gait impairment in neurodegenerative diseases. It should be considered in the differential diagnosis"
+Qwen2.5-3B + PubMedQA LoRA,34,yes,yes,True,"Decision: yes
+Rationale: LUS is a useful tool for intraoperative staging of colorectal cancer. It allows a better definition of the extent of disease than laparoscopy alone."
+Qwen2.5-3B + PubMedQA LoRA,35,yes,yes,True,"Decision: yes
+Rationale: The results confirm that the strategic use of PMS is a key factor in improving processes of care in health care organizations. The findings also suggest that the strategic use of"
+Qwen2.5-3B + PubMedQA LoRA,36,yes,maybe,False,"Decision: maybe
+Rationale: Delay in transfer to a rehabilitation ward is associated with a longer total hospital length of stay but does not appear to be associated with an increased risk of discharge to a more"
+Qwen2.5-3B + PubMedQA LoRA,37,yes,yes,True,"Decision: yes
+Rationale: The results of this study suggest that there may be a link between rheumatoid arthritis and periodontal disease. Further investigation into the mechanisms behind this association is warranted"
+Qwen2.5-3B + PubMedQA LoRA,38,yes,no,False,"Decision: no
+Rationale: The Barthel index is not a good predictor of long term outcome after stroke. It does not correlate well with most of the other outcome measures used."
+Qwen2.5-3B + PubMedQA LoRA,39,yes,yes,True,"Decision: yes
+Rationale: Cardiac reoperations in octogenarians are feasible and safe. The results are comparable to those of younger patients. The high rate of survival and good quality of life"
+Qwen2.5-3B + PubMedQA LoRA,40,yes,maybe,False,"Decision: maybe
+Rationale: Our results suggest that viral infections may be involved in the pathogenesis of BPPV."
+Qwen2.5-3B + PubMedQA LoRA,41,yes,maybe,False,"Decision: maybe
+Rationale: Open access endoscopy may result in inadequate patient preparation for the procedure and may be associated with decreased patient satisfaction. However, the majority of patients still received their results"
+Qwen2.5-3B + PubMedQA LoRA,42,yes,yes,True,"Decision: yes
+Rationale: The pattern of endothelial cell invasion into the tumor substance may be useful in distinguishing between low-grade and higher grade astrocytomas."
+Qwen2.5-3B + PubMedQA LoRA,43,yes,yes,True,"Decision: yes
+Rationale: Prior benign prostate biopsy is associated with better pathologic features and lower rates of biochemical failure after radical prostatectomy. This finding suggests that prior benign biopsy may be an"
+Qwen2.5-3B + PubMedQA LoRA,44,yes,no,False,"Decision: no
+Rationale: The results of this study do not support the hypothesis that occupational exposure to ionizing radiation in a nuclear power plant affects conception and pregnancy."
+Qwen2.5-3B + PubMedQA LoRA,45,yes,yes,True,"Decision: yes
+Rationale: The results of our study suggest that fear of anaphylaxis and/or dissemination is the main reason why surgeons in northern Jordan do not adopt laparoscopic or per"
+Qwen2.5-3B + PubMedQA LoRA,46,yes,yes,True,"Decision: yes
+Rationale: Physician underestimation of asthma severity is more common among black patients. Among black patients, physician underestimation of asthma severity is associated with worse asthma control and lower"
+Qwen2.5-3B + PubMedQA LoRA,47,yes,maybe,False,"Decision: maybe
+Rationale: Our results suggest that bezafibrate may have a protective effect against colon cancer in patients with coronary artery disease. Further studies are needed to confirm this hypothesis."
+Qwen2.5-3B + PubMedQA LoRA,48,yes,maybe,False,"Decision: maybe
+Rationale: Topical NAC application did not significantly accelerate the healing of tympanic membrane perforations. However, it caused otorrhea in some animals."
+Qwen2.5-3B + PubMedQA LoRA,49,yes,yes,True,"Decision: yes
+Rationale: Urinary ACR is a significant predictor of adverse maternal and neonatal outcomes in women with suspected preeclampsia. It may be useful as a prognost"
+Qwen2.5-3B + PubMedQA LoRA,50,yes,maybe,False,"Decision: maybe
+Rationale: The clinical course of this patient suggests that AFOP may be the consequence of immune dysregulation rather than a direct effect of the underlying disease."
+Qwen2.5-3B + PubMedQA LoRA,51,yes,yes,True,"Decision: yes
+Rationale: The findings suggest that suicide prevention programmes should target young men who are unemployed and living alone."
+Qwen2.5-3B + PubMedQA LoRA,52,yes,maybe,False,"Decision: maybe
+Rationale: The results suggest that the increase in TNFalpha and the decrease in IL-4 may be involved in the pathogenesis of post-ERCP pancreatitis."
+Qwen2.5-3B + PubMedQA LoRA,53,yes,maybe,False,"Decision: maybe
+Rationale: Vitamin C may be effective in preventing complex regional pain syndrome in elderly women with wrist fractures."
+Qwen2.5-3B + PubMedQA LoRA,54,yes,maybe,False,"Decision: maybe
+Rationale: Topical administration of ropivacaine hydrochloride does not seem to be effective in reducing post-operative pain after tonsillectomy."
+Qwen2.5-3B + PubMedQA LoRA,55,yes,yes,True,"Decision: yes
+Rationale: Kidneys from elderly donors can be safely transplanted into young recipients. However, there is a tendency towards higher rates of chronic renal failure."
+Qwen2.5-3B + PubMedQA LoRA,56,yes,maybe,False,"Decision: maybe
+Rationale: In this series, we found that QC is feasible in most patients with EOC relapse, even in those with extensive disease. However, the rate of complete tum"
+Qwen2.5-3B + PubMedQA LoRA,57,yes,maybe,False,"Decision: maybe
+Rationale: These findings suggest that although there is some variability in EBT delivery, it is possible to train therapists to deliver high-quality interventions."
+Qwen2.5-3B + PubMedQA LoRA,58,yes,yes,True,"Decision: yes
+Rationale: The STANDING is a quick, simple and reliable tool that can be used by EPs to identify patients with central acute vertigo."
+Qwen2.5-3B + PubMedQA LoRA,59,yes,yes,True,"Decision: yes
+Rationale: Etoricoxib is effective in preventing heterotopic ossification after primary total hip arthroplasty."
+Qwen2.5-3B + PubMedQA LoRA,60,yes,maybe,False,"Decision: maybe
+Rationale: The results of this study suggest that SLT should be considered as an alternative to LRT in selected cases."
+Qwen2.5-3B + PubMedQA LoRA,61,yes,yes,True,"Decision: yes
+Rationale: Patient coaching can help reduce racial/ethnic disparities in pain control."
+Qwen2.5-3B + PubMedQA LoRA,62,yes,yes,True,"Decision: yes
+Rationale: The results of this study suggest that wound cultures may be useful in identifying patients at risk for developing BSI."
+Qwen2.5-3B + PubMedQA LoRA,63,yes,yes,True,"Decision: yes
+Rationale: Post-tonsillectomy late haemorrhage occurs more frequently at night-time than during the day. This finding may be useful to plan the timing of the"
+Qwen2.5-3B + PubMedQA LoRA,64,yes,maybe,False,"Decision: maybe
+Rationale: These results suggest that mitochondrial dynamics may be involved in lace plant leaf PCD. The data indicate that mitochondrial dynamics change as PCD progresses, and that PTP formation"
+Qwen2.5-3B + PubMedQA LoRA,65,yes,no,False,"Decision: no
+Rationale: Amoxapine does not conform to the profile of other atypical antipsychotics. Its low D2 occupancy may explain why it has fewer extrapyram"
+Qwen2.5-3B + PubMedQA LoRA,66,yes,maybe,False,"Decision: maybe
+Rationale: Our results suggest that the risk of transition to psychosis increases as the number of UHR criteria present increases. This may be due to the fact that the more severe the"
+Qwen2.5-3B + PubMedQA LoRA,67,yes,maybe,False,"Decision: maybe
+Rationale: The results suggest that the horizontal canal ocular reflex is influenced by the input from the otolith organs."
+Qwen2.5-3B + PubMedQA LoRA,68,yes,yes,True,"Decision: yes
+Rationale: Automatic transmission seems to be beneficial for older drivers."
+Qwen2.5-3B + PubMedQA LoRA,69,yes,maybe,False,"Decision: maybe
+Rationale: The majority of MDT decisions were concordant with subsequent patient management. However, there were still 4.5% of discordant decisions. This highlights the"
+Qwen2.5-3B + PubMedQA LoRA,70,yes,yes,True,"Decision: yes
+Rationale: Our data suggest that uNK cells may play an important role in the pathogenesis of irregular bleeding in HT users. Further studies are needed to confirm these findings and to"
+Qwen2.5-3B + PubMedQA LoRA,71,yes,maybe,False,"Decision: maybe
+Rationale: Loss of DKK3 expression in gastric cancer is closely related to clinicopathological features and poor prognosis. Preoperative DKK3 expression may be useful for predicting lymph"
+Qwen2.5-3B + PubMedQA LoRA,72,yes,yes,True,"Decision: yes
+Rationale: Our results show that CLBP patients perform worse than healthy subjects in general motor tasks. Moreover, our results suggest that pain-related cognitions may play a role in the"
+Qwen2.5-3B + PubMedQA LoRA,73,yes,yes,True,"Decision: yes
+Rationale: Micro-CT is a reliable method to assess bone density and the microstructure of the maxillary alveolar bone."
+Qwen2.5-3B + PubMedQA LoRA,74,yes,maybe,False,"Decision: maybe
+Rationale: The present results suggest that high blood pressure may be protective against the development of low back pain in women. Further studies are needed to confirm these findings."
+Qwen2.5-3B + PubMedQA LoRA,75,yes,maybe,False,"Decision: maybe
+Rationale: Chemical shift subtraction and dynamic contrast subtraction images were valuable for the demonstration and differentiation of both benign and malignant lesions in dense breasts."
+Qwen2.5-3B + PubMedQA LoRA,76,yes,maybe,False,"Decision: maybe
+Rationale: Position emission tomography has a limited role in the management of primary rectal cancer. It is most useful in those patients who have failed to respond to initial staging investigations"
+Qwen2.5-3B + PubMedQA LoRA,77,yes,maybe,False,"Decision: maybe
+Rationale: Eliminating ""missed opportunities"" for influenza vaccination in office-based settings could substantially increase influenza vaccination rates among racial and ethnic minorities."
+Qwen2.5-3B + PubMedQA LoRA,78,yes,maybe,False,"Decision: maybe
+Rationale: There are differences between PBP and NBP, but not between NBP and self-measured BP. The use of NBP as a screening tool for hypertension is"
+Qwen2.5-3B + PubMedQA LoRA,79,yes,yes,True,"Decision: yes
+Rationale: Our findings suggest that biofeedback training can be effective in enhancing athletes' psychophysiological control over competitive anxiety and may lead to improved athletic performance."
+Qwen2.5-3B + PubMedQA LoRA,80,yes,yes,True,"Decision: yes
+Rationale: Gingival crevicular blood can be relied upon for assessing blood glucose level."
+Qwen2.5-3B + PubMedQA LoRA,81,yes,yes,True,"Decision: yes
+Rationale: Expert breast pathology assessment is essential for the accurate assessment of DCIS. This results in improved risk assessment and treatment recommendations."
+Qwen2.5-3B + PubMedQA LoRA,82,yes,maybe,False,"Decision: maybe
+Rationale: Our results suggest that ADMA levels may be useful markers of endothelial dysfunction in young adults born preterm."
+Qwen2.5-3B + PubMedQA LoRA,83,yes,maybe,False,"Decision: maybe
+Rationale: This study suggests that some infants may be sensitive to water, like adults with aquagenic urticaria."
+Qwen2.5-3B + PubMedQA LoRA,84,yes,maybe,False,"Decision: maybe
+Rationale: Our results suggest that US is useful for diagnosing megarectum and fecal load in constipated children. However, it does not seem to be helpful in"
+Qwen2.5-3B + PubMedQA LoRA,85,yes,yes,True,"Decision: yes
+Rationale: Day case laparoscopic cholecystectomy is safe and acceptable. The low admission rate suggests that this procedure can be safely performed in a day surgical unit."
+Qwen2.5-3B + PubMedQA LoRA,86,yes,maybe,False,"Decision: maybe
+Rationale: Nonoperative treatment is possible for some type II SCHFs. A scoring system based on the presence or absence of rotational deformity, coronal angulation, and shaft"
+Qwen2.5-3B + PubMedQA LoRA,87,yes,yes,True,"Decision: yes
+Rationale: Women who received RT around the time of pregnancy have a significantly increased risk of breast cancer compared with women who did not receive RT around the time of pregnancy."
+Qwen2.5-3B + PubMedQA LoRA,88,yes,yes,True,"Decision: yes
+Rationale: There is sufficient evidence from randomized controlled trials to support the use of dexamethasone as an effective alternative to oral prednisone in the treatment of pediatric asthma"
+Qwen2.5-3B + PubMedQA LoRA,89,yes,yes,True,"Decision: yes
+Rationale: Our data suggest that high cumulative insulin exposure is associated with atherosclerosis in type 1 diabetes."
+Qwen2.5-3B + PubMedQA LoRA,90,yes,yes,True,"Decision: yes
+Rationale: The teleoncology model of care enabled safe delivery of chemotherapy to patients in Mount Isa."
+Qwen2.5-3B + PubMedQA LoRA,91,yes,yes,True,"Decision: yes
+Rationale: Our findings suggest that OTC syringe sales may be associated with reduced crime rates."
+Qwen2.5-3B + PubMedQA LoRA,92,yes,yes,True,"Decision: yes
+Rationale: The type of remission after a major depressive episode is an important risk factor to relapses in a 4-year follow up."
+Qwen2.5-3B + PubMedQA LoRA,93,yes,maybe,False,"Decision: maybe
+Rationale: Intrapartum VAS is an effective predictor of fetal acidosis in the first stage of labor. However, its ability to predict fetal acidosis in the second"
+Qwen2.5-3B + PubMedQA LoRA,94,yes,yes,True,"Decision: yes
+Rationale: The scrotal approach to undescended testis is safe and effective. It allows diagnosis and treatment of impalpable testes without conversion to lapar"
+Qwen2.5-3B + PubMedQA LoRA,95,yes,maybe,False,"Decision: maybe
+Rationale: The attendance rate in the NBCSP was lower in the Sami population compared with the non-Sami population. The results suggest that ethnic differences may be present in the"
+Qwen2.5-3B + PubMedQA LoRA,96,yes,no,False,"Decision: no
+Rationale: Serial segmental artery sacrifice during TAA/A repair does not appear to be associated with significant neurologic morbidity. The authors recommend that this technique be routinely employed during"
+Qwen2.5-3B + PubMedQA LoRA,97,yes,yes,True,"Decision: yes
+Rationale: Women residents are more likely than men to perceive that having children during residency will threaten their careers. This finding suggests that policies aimed at reducing barriers to childbearing during residency"
+Qwen2.5-3B + PubMedQA LoRA,98,yes,yes,True,"Decision: yes
+Rationale: The results suggest that Chile's traffic law reform and subsequent increase in police traffic enforcement have contributed to reducing traffic fatalities and severe injuries."
+Qwen2.5-3B + PubMedQA LoRA,99,yes,yes,True,"Decision: yes
+Rationale: Physicians' specialties significantly influence the depth and frequency of documentation of the medication history information recorded in patient medical records."
+Qwen2.5-3B + PubMedQA LoRA,100,yes,maybe,False,"Decision: maybe
+Rationale: Pulmonary valve replacement in patients with chronic TOF and PR does not appear to be associated with significant RV dysfunction. However, patients with preoperative RV dysfunction have a"
+Qwen2.5-3B + PubMedQA LoRA,101,yes,yes,True,"Decision: yes
+Rationale: Our results suggest that combined therapy with hyperbaric oxygen and GH is more effective than either treatment alone in the healing of both ischemic and non-ischemic col"
+Qwen2.5-3B + PubMedQA LoRA,102,yes,yes,True,"Decision: yes
+Rationale: Community palliative care services can successfully implement an advance care planning model. The success of this implementation is dependent on the organizational readiness of the service to embrace change and the"
+Qwen2.5-3B + PubMedQA LoRA,103,yes,yes,True,"Decision: yes
+Rationale: Serum can be used for analyzing the EGFR mutation status in patients with advanced NSCLC."
+Qwen2.5-3B + PubMedQA LoRA,104,yes,yes,True,"Decision: yes
+Rationale: Surgery and radiation therapy have significant impact on survival in EPSCC. Genitourinary and gastrointestinal EPSCC have the best prognosis with surgery and/or radiation."
+Qwen2.5-3B + PubMedQA LoRA,105,yes,maybe,False,"Decision: maybe
+Rationale: The presence of viable germ cell elements within the testicular remnant does not appear to be common. However, because of the potential for malignancy, we recommend that"
+Qwen2.5-3B + PubMedQA LoRA,106,yes,maybe,False,"Decision: maybe
+Rationale: Eligibility to an adjuvant chemotherapy protocol does not appear to be a good prognostic factor after radical cystectomy for bladder cancer."
+Qwen2.5-3B + PubMedQA LoRA,107,yes,yes,True,"Decision: yes
+Rationale: The authors conclude that the manic/mixed episode distinction is stable over time in this population."
+Qwen2.5-3B + PubMedQA LoRA,108,yes,no,False,"Decision: no
+Rationale: Although patients with psychotic BDD had a higher rate of lifetime DSM-III-R psychotic disorder diagnoses than did patients with nonpsychotic BDD, they did not differ"
+Qwen2.5-3B + PubMedQA LoRA,109,yes,yes,True,"Decision: yes
+Rationale: Our results demonstrate that mossy fibers release GABA and provide the first electrophysiologic evidence that GABAergic transmission occurs at mossy fiber-CA3 syn"
+Qwen2.5-3B + PubMedQA LoRA,110,yes,maybe,False,"Decision: maybe
+Rationale: Seventh TNM staging is more useful than sixth TNM staging for predicting clinical behavior of EGC."
+Qwen2.5-3B + PubMedQA LoRA,111,yes,yes,True,"Decision: yes
+Rationale: Preoperative TBS is useful in diagnosing unsuspected anomalies and in modifying the surgical approach. It should be considered as a routine procedure in all centers performing EA repair"
+Qwen2.5-3B + PubMedQA LoRA,112,yes,yes,True,"Decision: yes
+Rationale: Laparoscopic reoperation is feasible and safe. Laparoscopic techniques can be used to treat patients whose antireflux surgery has failed. Laparoscopic reoperation"
+Qwen2.5-3B + PubMedQA LoRA,113,yes,maybe,False,"Decision: maybe
+Rationale: Our results suggest that a-tDCS could be helpful in identifying patients with DOC who may have residual functional networks sustaining some behavioral patterns, even when no conscious behavior can"
+Qwen2.5-3B + PubMedQA LoRA,114,yes,yes,True,"Decision: yes
+Rationale: Severe hypoglycaemia is strongly associated with adverse outcomes in patients with dysglycaemia and high CV risk."
+Qwen2.5-3B + PubMedQA LoRA,115,yes,maybe,False,"Decision: maybe
+Rationale: The results of this study suggest that ASA may be less likely to cause corneal ectasia than conventional LASIK because of its superior mechanical properties. However, ASA"
+Qwen2.5-3B + PubMedQA LoRA,116,yes,yes,True,"Decision: yes
+Rationale: The results of this study suggest that Raksi can be used as an alternative to standard embalming constituents if they are not available."
+Qwen2.5-3B + PubMedQA LoRA,117,yes,no,False,"Decision: no
+Rationale: In this population-based study, patients who traveled to high-volume centers had better outcomes than those who traveled to low-volume centers."
+Qwen2.5-3B + PubMedQA LoRA,118,yes,yes,True,"Decision: yes
+Rationale: Rectal anastomosis can be safely performed without a diverting stoma in selected patients undergoing gynaecological cytoreductive surgery."
+Qwen2.5-3B + PubMedQA LoRA,119,yes,maybe,False,"Decision: maybe
+Rationale: Young patients with colorectal cancer have a different clinical profile than older patients. This may be due to differences in risk factors, presentation, and stage at diagnosis. However"
+Qwen2.5-3B + PubMedQA LoRA,120,yes,yes,True,"Decision: yes
+Rationale: In our series, SWL is effective in the treatment of lower calyceal stones. The height of the infundibulum seems to be the most important"
+Qwen2.5-3B + PubMedQA LoRA,121,yes,maybe,False,"Decision: maybe
+Rationale: In this small cohort of academic radiologists, h-indices were significantly correlated with NIH funding success. However, h-indices>10 were not significantly predictive of"
+Qwen2.5-3B + PubMedQA LoRA,122,yes,yes,True,"Decision: yes
+Rationale: Atropine is effective in reducing hypersalivation without increasing the risk of other adverse events. It may be considered as an alternative to atropine in children receiving"
+Qwen2.5-3B + PubMedQA LoRA,123,yes,yes,True,"Decision: yes
+Rationale: Elective re-siting of intravenous cannulae every 48 hours significantly decreases the incidence and severity of PVT."
+Qwen2.5-3B + PubMedQA LoRA,124,yes,yes,True,"Decision: yes
+Rationale: Anorectal endosonography is useful for demonstrating dysfunction of the anal sphincter and/or the m. puborectalis in patients with dyschesia"
+Qwen2.5-3B + PubMedQA LoRA,125,yes,yes,True,"Decision: yes
+Rationale: Tranexamic acid significantly decreases the need for blood products during desmopressin administration."
+Qwen2.5-3B + PubMedQA LoRA,126,yes,yes,True,"Decision: yes
+Rationale: These data suggest that pWAT contributes to the development of atherosclerosis by producing chemokines that attract inflammatory cells to the arterial wall."
+Qwen2.5-3B + PubMedQA LoRA,127,yes,maybe,False,"Decision: maybe
+Rationale: The CTHs have higher costs and complication rates than NCTHs and NTHs. However, the CTHs cared for more complex patients. Further"
+Qwen2.5-3B + PubMedQA LoRA,128,yes,maybe,False,"Decision: maybe
+Rationale: The results suggest that dementia and aphasia may occur more frequently than previously thought in MND. This may have important implications for the management of these patients."
+Qwen2.5-3B + PubMedQA LoRA,129,yes,maybe,False,"Decision: maybe
+Rationale: In this study, we found that patella position influences ligament balancing in total knee arthroplasty. Patella eversion demonstrated smaller gaps compared to patella"
+Qwen2.5-3B + PubMedQA LoRA,130,yes,yes,True,"Decision: yes
+Rationale: Our data suggest that RPS is effective in detecting glandular cell abnormalities."
+Qwen2.5-3B + PubMedQA LoRA,131,yes,maybe,False,"Decision: maybe
+Rationale: The results suggest that colour may be an acceptable and feasible way of describing pain for some patients with OA. However, there is a need for further research into the accept"
+Qwen2.5-3B + PubMedQA LoRA,132,yes,yes,True,"Decision: yes
+Rationale: Fragile esophageal mucosa may be considered a pathognomonic sign of primary eosinophilic esophagitis. This finding should prompt physicians to"
+Qwen2.5-3B + PubMedQA LoRA,133,yes,yes,True,"Decision: yes
+Rationale: Lung IR injury is associated with significant TCF reduction and myocardial injury. This study suggests that lung IR injury may be involved in the development of post-lung-trans"
+Qwen2.5-3B + PubMedQA LoRA,134,yes,maybe,False,"Decision: maybe
+Rationale: EpiDWI is a promising tool for the differentiation of pleomorphic adenomas from other benign tumors of the parotid gland. However, it does not seem"
+Qwen2.5-3B + PubMedQA LoRA,135,yes,maybe,False,"Decision: maybe
+Rationale: Duration of treatment does not seem to be related to return into mental health care. However, it is important to note that the sample consisted of patients who had received treatment"
+Qwen2.5-3B + PubMedQA LoRA,136,yes,maybe,False,"Decision: maybe
+Rationale: The discharge coordinator had a positive impact on the quality of discharge planning, but did not result in more timely or efficient provision of community services after discharge, or in better"
+Qwen2.5-3B + PubMedQA LoRA,137,yes,yes,True,"Decision: yes
+Rationale: PD does exist in India. It is more common in males and usually presents with back pain, headache and bone pains. Radiologically it is often polyostotic."
+Qwen2.5-3B + PubMedQA LoRA,138,yes,yes,True,"Decision: yes
+Rationale: Our results suggest that vitamin D supplementation increases %Tregs in apparently healthy subjects."
+Qwen2.5-3B + PubMedQA LoRA,139,yes,maybe,False,"Decision: maybe
+Rationale: Semiclosed endarterectomy of the superficial femoral artery combined with a short venous bypass is not a reliable method for the treatment of critical leg ischemia."
+Qwen2.5-3B + PubMedQA LoRA,140,yes,yes,True,"Decision: yes
+Rationale: Our results suggest that there may be a relationship between cervical discopathy and cervical cord plaques in MS patients."
+Qwen2.5-3B + PubMedQA LoRA,141,yes,yes,True,"Decision: yes
+Rationale: Preoperative education by specially trained nurses reduces anxiety and decreases the incidence of postoperative chest infection."
+Qwen2.5-3B + PubMedQA LoRA,142,yes,yes,True,"Decision: yes
+Rationale: Our data suggest that EBP improves patient outcomes without increasing workload."
+Qwen2.5-3B + PubMedQA LoRA,143,yes,maybe,False,"Decision: maybe
+Rationale: Top-ranked hospitals had lower short-term mortality than other hospitals, but this difference was partly explained by higher rates of aspirin and beta-blocker use."
+Qwen2.5-3B + PubMedQA LoRA,144,yes,maybe,False,"Decision: maybe
+Rationale: Technical factors such as the use of iodized oil and selective embolization may be important prognostic factors."
+Qwen2.5-3B + PubMedQA LoRA,145,yes,yes,True,"Decision: yes
+Rationale: Holmium:YAG laser lithotripsy is safe and effective for ureteral stones."
+Qwen2.5-3B + PubMedQA LoRA,146,yes,no,False,"Decision: no
+Rationale: Balloon predilatation does not seem to be necessary for successful TAVI."
+Qwen2.5-3B + PubMedQA LoRA,147,yes,maybe,False,"Decision: maybe
+Rationale: Our results suggest that disease activity is associated with physical function, whereas disease damage is more closely related to emotional limitations."
+Qwen2.5-3B + PubMedQA LoRA,148,yes,yes,True,"Decision: yes
+Rationale: Ultrasound can be used to predict the presentation of twin A at delivery with high accuracy."
+Qwen2.5-3B + PubMedQA LoRA,149,yes,yes,True,"Decision: yes
+Rationale: The results demonstrate that a trained UNP is able to detect bladder tumours with the same degree of accuracy as a consultant urologist. This study suggests that"
+Qwen2.5-3B + PubMedQA LoRA,150,yes,maybe,False,"Decision: maybe
+Rationale: Although there are some differences in the characteristics of GC by tumor location between Korean and U.S. populations, these differences do not appear to affect prognosis."
+Qwen2.5-3B + PubMedQA LoRA,151,yes,yes,True,"Decision: yes
+Rationale: The DPC, JHH, and CPDR/CaPSURE nomograms were able to predict PCSM more accurately than they predicted BCR. This suggests that"
+Qwen2.5-3B + PubMedQA LoRA,152,yes,maybe,False,"Decision: maybe
+Rationale: Socioeconomic differences in mortality persist after retirement. The decline in the ability of employment grade to predict mortality after retirement may be due to changes in the distribution of socioeconomic"
+Qwen2.5-3B + PubMedQA LoRA,153,yes,yes,True,"Decision: yes
+Rationale: 3D ultrasound-validated LCNB is a safe and accurate technique for the histological assessment of breast lesions."
+Qwen2.5-3B + PubMedQA LoRA,154,yes,maybe,False,"Decision: maybe
+Rationale: Despite aggressive treatment, mortality rate remains high. Leukocytosis seems to be a prognostic indicator of mortality."
+Qwen2.5-3B + PubMedQA LoRA,155,yes,yes,True,"Decision: yes
+Rationale: Sonographic guidance for IA joint injections results in significantly less procedural pain, more rapid pain relief, and better clinical outcomes than palpation-guided techniques."
+Qwen2.5-3B + PubMedQA LoRA,156,yes,yes,True,"Decision: yes
+Rationale: Concept mapping is an effective teaching strategy that enhances learning outcomes of nursing students."
+Qwen2.5-3B + PubMedQA LoRA,157,yes,maybe,False,"Decision: maybe
+Rationale: These data suggest that high-IQ schizophrenia patients may represent a distinct clinical subtype of schizophrenia, characterised by fewer negative and disorganised symptoms, better insight and global"
+Qwen2.5-3B + PubMedQA LoRA,158,yes,maybe,False,"Decision: maybe
+Rationale: Our data suggest that γ-glutamyltransferase, alcohol intake, and waist circumference are important predictors of BP changes in African populations. Further longitudinal studies are needed"
+Qwen2.5-3B + PubMedQA LoRA,159,yes,yes,True,"Decision: yes
+Rationale: The use of CAM therapies by U.S. adults with chronic disease-related functional limitations has increased significantly between 2002 and 2007."
+Qwen2.5-3B + PubMedQA LoRA,160,yes,maybe,False,"Decision: maybe
+Rationale: The NIHSS may not be equally sensitive to lesions in the left and right hemispheres. This finding may explain why the NIHSS has been shown to be more"
+Qwen2.5-3B + PubMedQA LoRA,161,yes,yes,True,"Decision: yes
+Rationale: In this retrospective study, we found that recipients who had an FTR to PLTs were at increased risk for RBC alloimmunization compared with those who did"
+Qwen2.5-3B + PubMedQA LoRA,162,yes,yes,True,"Decision: yes
+Rationale: Teaching medical students to investigate medication errors can improve their attitudes towards patient safety."
+Qwen2.5-3B + PubMedQA LoRA,163,yes,no,False,"Decision: no
+Rationale: Our data suggest that sex does not influence the response to intravenous thrombolysis in ischemic stroke. However, male sex is associated with a higher risk of sympt"
+Qwen2.5-3B + PubMedQA LoRA,164,yes,yes,True,"Decision: yes
+Rationale: Our data suggest that adoption of evidence-based practices for CLABSI prevention can be sustained for at least 1 year."
+Qwen2.5-3B + PubMedQA LoRA,165,yes,yes,True,"Decision: yes
+Rationale: Our results suggest that beta E may play an important role in the pathophysiology of anxiety and craving during alcohol withdrawal."
+Qwen2.5-3B + PubMedQA LoRA,166,yes,no,False,"Decision: no
+Rationale: Ototoxicity from otic GM is not reduced by otic BM."
+Qwen2.5-3B + PubMedQA LoRA,167,yes,yes,True,"Decision: yes
+Rationale: In this study, MR imaging was found to be useful in identifying a disc with concordant pain. The combination of an HIZ and disc contour abnormalities was the"
+Qwen2.5-3B + PubMedQA LoRA,168,yes,yes,True,"Decision: yes
+Rationale: These data suggest that knee extensor strength is related to both dynamic postural stability and disease severity in PD. Additionally, dynamic postural stability appears to be related to"
+Qwen2.5-3B + PubMedQA LoRA,169,yes,yes,True,"Decision: yes
+Rationale: Nurses' aides who were exposed to ETS at home during childhood had increased risk of long-term sick leave due to neck pain, high back pain, low back pain"
+Qwen2.5-3B + PubMedQA LoRA,170,yes,maybe,False,"Decision: maybe
+Rationale: In this Thai population, non-HDL-C was more predictive of MACE than LDL-C. However, LDL-C >100 mg/dl"
+Qwen2.5-3B + PubMedQA LoRA,171,yes,yes,True,"Decision: yes
+Rationale: Circumferences do not scale to height in the same manner as weight does. However, after adjustment for age and race, both WC and HC scaled to height with"
+Qwen2.5-3B + PubMedQA LoRA,172,yes,maybe,False,"Decision: maybe
+Rationale: Triage nurses' subjective assessment of likelihood of admission is inaccurate. However, when combined with objective triage data, it can be more accurate than either method alone."
+Qwen2.5-3B + PubMedQA LoRA,173,yes,yes,True,"Decision: yes
+Rationale: In children with bronchiectasis or PBB, alveolar macrophage phagocytic dysfunction is present, suggesting that defective phagocytosis"
+Qwen2.5-3B + PubMedQA LoRA,174,yes,yes,True,"Decision: yes
+Rationale: An instruction manual consisting of four diagrams is sufficient to enable laypersons to insert the Laryngeal Mask Supreme® in the manikin within the first two minutes"
+Qwen2.5-3B + PubMedQA LoRA,175,yes,maybe,False,"Decision: maybe
+Rationale: The IADPSG recommendations are cost-effective only if postdelivery care is implemented. If postdelivery care is not implemented, the IADPSG recommendations are not"
+Qwen2.5-3B + PubMedQA LoRA,176,yes,yes,True,"Decision: yes
+Rationale: Ibuprofen increases perioperative blood loss during hip arthroplasty."
+Qwen2.5-3B + PubMedQA LoRA,177,yes,yes,True,"Decision: yes
+Rationale: Virtual planning and guided surgery can result in significant time savings during surgery. These time savings can be used to offset the additional cost of planning and cutting guides."
+Qwen2.5-3B + PubMedQA LoRA,178,yes,yes,True,"Decision: yes
+Rationale: The authors conclude that the MDBCC is effective in improving patient satisfaction and reducing the time between diagnosis and treatment initiation."
+Qwen2.5-3B + PubMedQA LoRA,179,yes,maybe,False,"Decision: maybe
+Rationale: Ultrasonography is a useful adjunct to confirm Schanz pin placement in the extremities, but it is not precise enough to be used as the sole method for confirming"
+Qwen2.5-3B + PubMedQA LoRA,180,yes,yes,True,"Decision: yes
+Rationale: These data suggest that there is a relationship between reduction in spasticity and improvement in arm function. This relationship may be more marked in patients treated with lower doses of"
+Qwen2.5-3B + PubMedQA LoRA,181,yes,maybe,False,"Decision: maybe
+Rationale: Laparoscopic adrenalectomy is technically feasible for adrenal masses larger than 7 cm. However, it is associated with a high rate of intraoperative complications and"
+Qwen2.5-3B + PubMedQA LoRA,182,yes,maybe,False,"Decision: maybe
+Rationale: Laparoscopic specialists have a higher rate of successful laparoscopic treatment of AC than do general surgeons who perform only laparoscopic cholecystectomy. However,"
+Qwen2.5-3B + PubMedQA LoRA,183,yes,maybe,False,"Decision: maybe
+Rationale: Our results suggest that SE can be considered as reasonable substitutes for FE in most OSCE stations, but not in all."
+Qwen2.5-3B + PubMedQA LoRA,184,yes,yes,True,"Decision: yes
+Rationale: The APT with HDM is specific for AD. The results obtained with the two allergen extracts used in this study were similar."
+Qwen2.5-3B + PubMedQA LoRA,185,yes,yes,True,"Decision: yes
+Rationale: The presence of T2 HIA on MRI, the number of T2 HIA on MRI and conversion to surgery were found to be significant prognostic factors for"
+Qwen2.5-3B + PubMedQA LoRA,186,yes,maybe,False,"Decision: maybe
+Rationale: The results suggest that inhaled steroids may be more effective than cromones in preventing hospitalization for asthma in children."
+Qwen2.5-3B + PubMedQA LoRA,187,yes,yes,True,"Decision: yes
+Rationale: Oral mucoceles/ranulas are common lesions in young people. They are more frequent in HIV-positive patients than in the general population. The most common location"
+Qwen2.5-3B + PubMedQA LoRA,188,yes,no,False,"Decision: no
+Rationale: The results of this study suggest that there is no difference in the therapeutic effect of intravenous metoclopramide administered as a bolus or an infusion over "
+Qwen2.5-3B + PubMedQA LoRA,189,yes,yes,True,"Decision: yes
+Rationale: Older adults with AC on PICT have high symptom burden and poor outcomes. Multidisciplinary care is needed to improve quality of life."
+Qwen2.5-3B + PubMedQA LoRA,190,yes,maybe,False,"Decision: maybe
+Rationale: A multimodal cervical physical therapy treatment seems to have a positive effect on tinnitus complaints in patients with CST."
+Qwen2.5-3B + PubMedQA LoRA,191,yes,maybe,False,"Decision: maybe
+Rationale: The prognosis for patients allergic to ubiquitous allergens is worse than for those allergic to nonubiquitous allergens. However, change of job may improve the prognosis."
+Qwen2.5-3B + PubMedQA LoRA,192,yes,yes,True,"Decision: yes
+Rationale: The DAR may be useful as a predictor of potential spinal cord monitoring alerts during thoracic 3-column spinal deformity corrective surgery."
+Qwen2.5-3B + PubMedQA LoRA,193,yes,maybe,False,"Decision: maybe
+Rationale: Patients and carers were generally satisfied with care provided at either intervention or control sites. However, there were differences in patient satisfaction with some aspects of care between the two"
+Qwen2.5-3B + PubMedQA LoRA,194,yes,maybe,False,"Decision: maybe
+Rationale: The results suggest that the combination of 2ME with epirubicine and carboplatin may result in a reduction of the dosage of these chemotherapeutic substances"
+Qwen2.5-3B + PubMedQA LoRA,195,yes,yes,True,"Decision: yes
+Rationale: Our data suggest that increased common carotid artery pulsatility and resistance indexes are early signs of vascular abnormalities in young obese males."
+Qwen2.5-3B + PubMedQA LoRA,196,yes,maybe,False,"Decision: maybe
+Rationale: Delayed help-seeking for AMI is common among both men and women. However, women who receive advice to seek help or call 911 upon symptom onset"
+Qwen2.5-3B + PubMedQA LoRA,197,yes,maybe,False,"Decision: maybe
+Rationale: The manual area tracing method was found to be the most reproducible method for measuring paragangliomas. It is also the fastest method, which makes it suitable"
+Qwen2.5-3B + PubMedQA LoRA,198,yes,maybe,False,"Decision: maybe
+Rationale: Clinicians and CPs have different expectations regarding RBC-M reporting. CPs should consider reporting more RBC-M findings than currently done, and clinicians should be aware"
+Qwen2.5-3B + PubMedQA LoRA,199,yes,yes,True,"Decision: yes
+Rationale: This study demonstrates the feasibility of developing a real-time PCR approach for the identification and quantification of airborne pollen."
+Qwen2.5-3B + PubMedQA LoRA,200,yes,maybe,False,"Decision: maybe
+Rationale: Despite FDA warnings, many caregivers continue to use cough and cold medications inappropriately in young children. Further education is needed to ensure safe use of these products."
+Qwen2.5-3B + PubMedQA LoRA,201,yes,yes,True,"Decision: yes
+Rationale: Home BP monitoring is feasible and reliable in stroke patients."
+Qwen2.5-3B + PubMedQA LoRA,202,yes,maybe,False,"Decision: maybe
+Rationale: The results of this study suggest that it may be possible to create adequate femoral tunnel lengths with a flexible reamer system at 90° of knee flexion"
+Qwen2.5-3B + PubMedQA LoRA,203,yes,yes,True,"Decision: yes
+Rationale: Our results suggest that NP may have a genetic component. Further studies should be performed to identify the genetic factors involved in the pathogenesis of NP."
+Qwen2.5-3B + PubMedQA LoRA,204,yes,maybe,False,"Decision: maybe
+Rationale: The results show that there is room for improvement in the development of a school food policy. The current study shows that there is a need for clear rules and guidelines for"
+Qwen2.5-3B + PubMedQA LoRA,205,yes,maybe,False,"Decision: maybe
+Rationale: Golytely was more likely to result in a high quality bowel preparation compared to MiraLAX. However, this did not translate into a statistically significant increase"
+Qwen2.5-3B + PubMedQA LoRA,206,yes,maybe,False,"Decision: maybe
+Rationale: The results of this study suggest that drivers of ESC-equipped vehicles are aware of the technology and believe that it has made them safer drivers. However, some drivers have demonstrated"
+Qwen2.5-3B + PubMedQA LoRA,207,yes,maybe,False,"Decision: maybe
+Rationale: Memory provocation seems to increase the diagnostic sensitivity of rCBF-SPECT in detecting AD."
+Qwen2.5-3B + PubMedQA LoRA,208,yes,yes,True,"Decision: yes
+Rationale: These results suggest that there may be common factors in the states with high and low rates of road traffic deaths that could be targeted for prevention programs."
+Qwen2.5-3B + PubMedQA LoRA,209,yes,maybe,False,"Decision: maybe
+Rationale: Case-mix based reimbursement stimulates hospitals to adopt care programmes, but does not yet lead to a shift towards process-oriented care delivery."
+Qwen2.5-3B + PubMedQA LoRA,210,yes,maybe,False,"Decision: maybe
+Rationale: Open access publishing increases the number of citations in the long term, but not immediately after publication."
+Qwen2.5-3B + PubMedQA LoRA,211,yes,yes,True,"Decision: yes
+Rationale: These data suggest that increased neutrophil migratory activity in the early postinjury phase may be a critical factor in the pathogenesis of ARDS."
+Qwen2.5-3B + PubMedQA LoRA,212,yes,yes,True,"Decision: yes
+Rationale: Locoregional disruption of the BBB by LITT may be a promising approach to enhance the delivery of chemotherapeutic agents into the brain parenchyma."
+Qwen2.5-3B + PubMedQA LoRA,213,yes,maybe,False,"Decision: maybe
+Rationale: Although the survival of women with recurrent breast cancer has not improved dramatically over time, there is a trend toward better survival in more recent cohorts."
+Qwen2.5-3B + PubMedQA LoRA,214,yes,no,False,"Decision: no
+Rationale: Cup-cage reconstruction with oversized acetabular components provides inadequate initial stability in THA for osteoporotic acetabular fractures."
+Qwen2.5-3B + PubMedQA LoRA,215,yes,yes,True,"Decision: yes
+Rationale: Surgical treatment of lower limb fractures in patients with chronic spinal cord injuries should be considered as an option for those who have failed conservative treatment."
+Qwen2.5-3B + PubMedQA LoRA,216,yes,no,False,"Decision: no
+Rationale: The relationship between autoCPAP pressure and OSA severity is strong, but there is no relationship with obesity. This suggests that the pressures delivered by autoCPAP may"
+Qwen2.5-3B + PubMedQA LoRA,217,yes,yes,True,"Decision: yes
+Rationale: The results of this study suggest that the ACMIA method can be considered as an alternative to the MEIA method for measuring tacrolimus concentrations in clinical practice."
+Qwen2.5-3B + PubMedQA LoRA,218,yes,yes,True,"Decision: yes
+Rationale: The present data suggest that exercise training has beneficial effects on heart rate and ventricular repolarization in both men and women. However, the gender difference in the relation"
+Qwen2.5-3B + PubMedQA LoRA,219,yes,yes,True,"Decision: yes
+Rationale: The prevalence of bifurcation and ostial lesions is significantly greater in diabetic patients than in nondiabetic patients. This may be due to the increased incidence of a"
+Qwen2.5-3B + PubMedQA LoRA,220,yes,maybe,False,"Decision: maybe
+Rationale: The results suggest that socioeconomic status is associated with poorer health-related quality of life in lung cancer patients. However, this association may be due to other factors such as age"
+Qwen2.5-3B + PubMedQA LoRA,221,yes,maybe,False,"Decision: maybe
+Rationale: In this population-based cohort, the risk of serious infections associated with infliximab was higher than that associated with etanercept in younger patients."
+Qwen2.5-3B + PubMedQA LoRA,222,yes,yes,True,"Decision: yes
+Rationale: Ethyl-2-cyanoacrylate glue is a good and reliable alternative to polyglactin 910 sutures in intestinal anastom"
+Qwen2.5-3B + PubMedQA LoRA,223,yes,maybe,False,"Decision: maybe
+Rationale: Our results show that Ki-67 does not have a significant impact on predicting the response to neoadjuvant chemotherapy. However, Ki-67 may be"
+Qwen2.5-3B + PubMedQA LoRA,224,yes,maybe,False,"Decision: maybe
+Rationale: The results suggest that there may be an optimal time of intragastric acid suppression for maximal healing of reflux oesophagitis."
+Qwen2.5-3B + PubMedQA LoRA,225,yes,yes,True,"Decision: yes
+Rationale: Medical students who participated in the Pathway program demonstrated greater confidence in their ability to work with culturally diverse populations than did non-Pathway students."
+Qwen2.5-3B + PubMedQA LoRA,226,yes,maybe,False,"Decision: maybe
+Rationale: Fenofibrate treatment reduced SpO(2)<90% and obstructive apnoeas without affecting the AHI. Further studies are needed to confirm these"
+Qwen2.5-3B + PubMedQA LoRA,227,yes,yes,True,"Decision: yes
+Rationale: The GFRUP guidelines are feasible in our PICU. Limitation of treatments is often necessary to improve survival. The decision-making process is rapid and acceptable to parents"
+Qwen2.5-3B + PubMedQA LoRA,228,yes,yes,True,"Decision: yes
+Rationale: Defecatory symptoms are significantly more common in women with POP who report pelvic pain. Further investigation into the pathophysiology of this relationship may lead to improved treatment options"
+Qwen2.5-3B + PubMedQA LoRA,229,yes,maybe,False,"Decision: maybe
+Rationale: A geriatric oncology consultation may be useful to modify the treatment plan for elderly patients."
+Qwen2.5-3B + PubMedQA LoRA,230,yes,maybe,False,"Decision: maybe
+Rationale: Elevated PV and initial prednisolone dose>15 mg are independent predictors of prolonged steroid therapy in PMR. Female sex, HLA-DRB1"
+Qwen2.5-3B + PubMedQA LoRA,231,yes,yes,True,"Decision: yes
+Rationale: The MCV is the most powerful predictor of ASH. The AST/ALT ratio and age are also useful."
+Qwen2.5-3B + PubMedQA LoRA,232,yes,maybe,False,"Decision: maybe
+Rationale: The results suggest that both early-life urban exposure and the proportion of urban life years may be important determinants of NCD risk factors. This highlights the importance of considering"
+Qwen2.5-3B + PubMedQA LoRA,233,yes,yes,True,"Decision: yes
+Rationale: Cytokine concentrations in pancreatic juice may be useful in discriminating the presence of pancreatic diseases."
+Qwen2.5-3B + PubMedQA LoRA,234,yes,no,False,"Decision: no
+Rationale: The EOA/annulus area ratio does not appear to be a useful parameter for comparing the hemodynamic performance of different bioprostheses."
+Qwen2.5-3B + PubMedQA LoRA,235,yes,no,False,"Decision: no
+Rationale: Gluten-free diet does not seem to be deficient in nutrients."
+Qwen2.5-3B + PubMedQA LoRA,236,yes,maybe,False,"Decision: maybe
+Rationale: The results indicate that most women do not seek specialist care after reporting gynecological cancer alarm symptoms to their general practitioner. However, women with higher educational level have a"
+Qwen2.5-3B + PubMedQA LoRA,237,yes,yes,True,"Decision: yes
+Rationale: Per-oral transgastric splenectomy is technically feasible. Further studies are needed to evaluate the safety and efficacy of this technique."
+Qwen2.5-3B + PubMedQA LoRA,238,yes,yes,True,"Decision: yes
+Rationale: Oxybutynin hydrochloride may cause arrhythmia in children with bladder dysfunction."
+Qwen2.5-3B + PubMedQA LoRA,239,yes,maybe,False,"Decision: maybe
+Rationale: Our data suggest that a subset of children with WDTC may be safely managed with lobectomy. This may be particularly relevant in the setting of limited surgical experience with total"
+Qwen2.5-3B + PubMedQA LoRA,240,yes,maybe,False,"Decision: maybe
+Rationale: Specialty pharmaceuticals offer tremendous potential to improve the lives of patients with serious and life-threatening diseases. However, the high cost of these agents requires careful consideration of their value"
+Qwen2.5-3B + PubMedQA LoRA,241,yes,yes,True,"Decision: yes
+Rationale: The results suggest that trabecular bone is important for the primary stability of miniscrews. The authors recommend using the iliac crest as it has higher trab"
+Qwen2.5-3B + PubMedQA LoRA,242,yes,yes,True,"Decision: yes
+Rationale: The Demonstration appears to have had a positive impact on Medicaid expenditures, particularly for SSI enrollees. Further research is needed to understand the mechanisms behind these savings"
+Qwen2.5-3B + PubMedQA LoRA,243,yes,no,False,"Decision: no
+Rationale: Our data suggest that sexual desire is not correlated with total androgens in all age groups of women. In younger women, sexual desire correlates with TT, FT,"
+Qwen2.5-3B + PubMedQA LoRA,244,yes,yes,True,"Decision: yes
+Rationale: Our results suggest that remote physician-examiners can reliably assess medical students in an OSCE. This pilot study demonstrates the feasibility of using remote examination technology to bridge the"
+Qwen2.5-3B + PubMedQA LoRA,245,yes,maybe,False,"Decision: maybe
+Rationale: The aortic arch angle may be an important factor in predicting the severity of TAI."
+Qwen2.5-3B + PubMedQA LoRA,246,yes,maybe,False,"Decision: maybe
+Rationale: Our data suggest that the association between hyperglycemia and CVD risk is partly mediated by insulin resistance."
+Qwen2.5-3B + PubMedQA LoRA,247,yes,maybe,False,"Decision: maybe
+Rationale: Our results suggest that an optimistic outlook may be associated with better survival among the oldest-old, although the effect seems to be weaker after adjustment for confounders."
+Qwen2.5-3B + PubMedQA LoRA,248,yes,yes,True,"Decision: yes
+Rationale: The use of QC reduced blood loss and improved hemodynamic stability."
+Qwen2.5-3B + PubMedQA LoRA,249,yes,yes,True,"Decision: yes
+Rationale: The OraQuick® HIV-1/2 Assay in sputum is a valid tool for HIV surveillance among TB patients."
+Qwen2.5-3B + PubMedQA LoRA,250,yes,maybe,False,"Decision: maybe
+Rationale: Dose reduction to one parotid gland did not prevent xerostomia in our series. However, the incidence of grade III xerostomia"
+Qwen2.5-3B + PubMedQA LoRA,251,yes,yes,True,"Decision: yes
+Rationale: Radiotherapy of the primary rectal cancer increases the likelihood of requiring more radical exenteration and lowers the rate of clear resection margins. These factors contribute to worse"
+Qwen2.5-3B + PubMedQA LoRA,252,yes,maybe,False,"Decision: maybe
+Rationale: Financial incentives of up to £400 for smoking cessation during pregnancy appear to be cost-effective when compared with usual care. However, further research is needed to confirm"
+Qwen2.5-3B + PubMedQA LoRA,253,no,no,True,"Decision: no
+Rationale: The results suggest that the increase in new diagnoses of HIV infection may be due to other factors such as increased testing rates, changes in sexual behaviour patterns, or both."
+Qwen2.5-3B + PubMedQA LoRA,254,no,maybe,False,"Decision: maybe
+Rationale: Adjustment for reporting heterogeneity is necessary when estimating the association between socio-demographic and life-style factors and sleep disorders."
+Qwen2.5-3B + PubMedQA LoRA,255,no,no,True,"Decision: no
+Rationale: In this pilot study, we found no evidence that participation in a MSWM program improved weight loss outcomes after LAGB."
+Qwen2.5-3B + PubMedQA LoRA,256,no,no,True,"Decision: no
+Rationale: The pharmacokinetics of s.c. anti-TNF agents does not seem to be related to the degree of synovitis assessed by US."
+Qwen2.5-3B + PubMedQA LoRA,257,no,maybe,False,"Decision: maybe
+Rationale: Our data suggest that there may be some differences between JAS and AAS in the Indian population."
+Qwen2.5-3B + PubMedQA LoRA,258,no,maybe,False,"Decision: maybe
+Rationale: The addition of PET/CT to MDCT did not improve the accuracy of preoperative staging of LMCRC. However, it may be helpful in the detection of"
+Qwen2.5-3B + PubMedQA LoRA,259,no,yes,False,"Decision: yes
+Rationale: Ureteroscopy is safe and effective for the treatment of lower ureteric stones without the need for fluoroscopy."
+Qwen2.5-3B + PubMedQA LoRA,260,no,no,True,"Decision: no
+Rationale: Clinician assessment of febrile patients with SCD does not accurately predict ACS. Empiric CXR is not indicated in this population."
+Qwen2.5-3B + PubMedQA LoRA,261,no,no,True,"Decision: no
+Rationale: The results obtained do not allow us to predict the composition of urinary stones based on the analysis of microelements in urine and hair."
+Qwen2.5-3B + PubMedQA LoRA,262,no,no,True,"Decision: no
+Rationale: The results suggest that the variation in testosterone measurements is not due to differences in calibration."
+Qwen2.5-3B + PubMedQA LoRA,263,no,maybe,False,"Decision: maybe
+Rationale: GH treatment reduces all-cause mortality in GHD adults. The beneficial effect is more pronounced in women. The lack of an effect on cancer mortality suggests that the observed"
+Qwen2.5-3B + PubMedQA LoRA,264,no,no,True,"Decision: no
+Rationale: Regional anesthesia did not result in lower morbidity, mortality or hospitalization costs compared to general anesthesia for surgery for hip fracture."
+Qwen2.5-3B + PubMedQA LoRA,265,no,maybe,False,"Decision: maybe
+Rationale: Oral AG seems to be effective in reducing abdominal bloating and flatulence in IBS patients. However, it does not seem to improve QoL."
+Qwen2.5-3B + PubMedQA LoRA,266,no,no,True,"Decision: no
+Rationale: Invasive diagnosis of nosocomial pneumonia during off-hours does not appear to delay appropriate treatment."
+Qwen2.5-3B + PubMedQA LoRA,267,no,maybe,False,"Decision: maybe
+Rationale: The volume delivered by the squeezing method depends on the number of hands used and the education and practice level of the subject."
+Qwen2.5-3B + PubMedQA LoRA,268,no,no,True,"Decision: no
+Rationale: In conclusion, FDG-PET has high accuracy in detecting both metastatic lesions and primary tumours/local recurrence in patients with cervical cancer, regardless of their DM status"
+Qwen2.5-3B + PubMedQA LoRA,269,no,no,True,"Decision: no
+Rationale: The present study did not reveal any association between arch form, Bolton tooth-size discrepancy, and sagittal molar relationship."
+Qwen2.5-3B + PubMedQA LoRA,270,no,maybe,False,"Decision: maybe
+Rationale: Our results suggest that fetal growth restriction is associated with low intellectual performance independently of socioeconomic and familial factors."
+Qwen2.5-3B + PubMedQA LoRA,271,no,maybe,False,"Decision: maybe
+Rationale: Pain at the end of range of all measured active movements was the only identifier validated in this study. However, it was associated with reduced odds of a PAR. This"
+Qwen2.5-3B + PubMedQA LoRA,272,no,no,True,"Decision: no
+Rationale: The present data suggest that LOC does not appear to be an important predictor of neuropsychological test performance in patients with mild traumatic brain injury."
+Qwen2.5-3B + PubMedQA LoRA,273,no,maybe,False,"Decision: maybe
+Rationale: Meropenem ISF concentrations were higher than plasma concentrations during CVVHDF. The extent of meropenem penetration into the ISF may be sufficient to maintain"
+Qwen2.5-3B + PubMedQA LoRA,274,no,maybe,False,"Decision: maybe
+Rationale: Completion of the PEP resulted in an improvement in knowledge among the midwives. However, there was no significant improvement in practice."
+Qwen2.5-3B + PubMedQA LoRA,275,no,no,True,"Decision: no
+Rationale: Patients with metastatic carcinoma to cervical lymph nodes from an unknown head and neck primary site have a good prognosis. Neck dissection does not appear to be necessary in these"
+Qwen2.5-3B + PubMedQA LoRA,276,no,no,True,"Decision: no
+Rationale: The present study suggests that the number of needles used does not influence the clinical outcome of acupuncture for neck pain."
+Qwen2.5-3B + PubMedQA LoRA,277,no,no,True,"Decision: no
+Rationale: Despite the long-standing MDA program in Northern Samar, the prevalence of schistosomiasis remains high, and there is still significant morbidity from the disease"
+Qwen2.5-3B + PubMedQA LoRA,278,no,no,True,"Decision: no
+Rationale: Our results suggest that trauma fellowship training does not appear to have a significant impact on post-operative DFV following IMN of diaphyseal femur fractures."
+Qwen2.5-3B + PubMedQA LoRA,279,no,no,True,"Decision: no
+Rationale: Delivery mode does not seem to have an impact on women's postnatal quality of life in rural China. However, some other factors such as husband education level and male"
+Qwen2.5-3B + PubMedQA LoRA,280,no,maybe,False,"Decision: maybe
+Rationale: The extent of lymphadenectomy could be modified by NACT in cervical cancer. However, the clinical benefit of NACT should be confirmed by randomized trials."
+Qwen2.5-3B + PubMedQA LoRA,281,no,no,True,"Decision: no
+Rationale: Patients with WD do not seem to be at increased risk for bleeding complications when undergoing cardiac surgery with extracorporeal circulation. However, they have a tendency to develop"
+Qwen2.5-3B + PubMedQA LoRA,282,no,no,True,"Decision: no
+Rationale: Unenhanced T1-W fat-saturated MRI does not appear to be useful in differentiating bone infarct from acute osteomyelitis in children with S"
+Qwen2.5-3B + PubMedQA LoRA,283,no,no,True,"Decision: no
+Rationale: Dissection of station 9 lymph nodes is unnecessary for most patients with primary lung cancer."
+Qwen2.5-3B + PubMedQA LoRA,284,no,no,True,"Decision: no
+Rationale: The data suggest that most colorectal cancers are not due to missed adenomas."
+Qwen2.5-3B + PubMedQA LoRA,285,no,maybe,False,"Decision: maybe
+Rationale: NNSP improves myocardial oxygenation and energy metabolism of hypertrophied hearts relative to NNAP."
+Qwen2.5-3B + PubMedQA LoRA,286,no,no,True,"Decision: no
+Rationale: Discharging patients earlier from Winnipeg hospitals did not appear to adversely affect quality of care as measured by readmission rates and mean number of physician visits after discharge."
+Qwen2.5-3B + PubMedQA LoRA,287,no,no,True,"Decision: no
+Rationale: In this ethnically diverse urban population, obesity or increasing BMI level is not associated with worse asthma control as measured by 4 different validated asthma control questionnaires."
+Qwen2.5-3B + PubMedQA LoRA,288,no,maybe,False,"Decision: maybe
+Rationale: Ultrasonography is useful for detecting the testes that are palpable during physical examination but it has limited value in the diagnosis of the non-palpable test"
+Qwen2.5-3B + PubMedQA LoRA,289,no,maybe,False,"Decision: maybe
+Rationale: While the CCB does provide some financial assistance to informal caregivers, it does not adequately address all of the determinants of health that contribute to caregiver burden. The C"
+Qwen2.5-3B + PubMedQA LoRA,290,no,no,True,"Decision: no
+Rationale: Anastomotic leakage does not seem to impair continence function after sphincter-preserving rectal cancer surgery."
