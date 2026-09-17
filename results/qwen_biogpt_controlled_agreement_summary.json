@@ -1,0 +1,27 @@
+{
+  "system": "Qwen2.5-3B primary model with independent BioGPT-Large agreement gate",
+  "checkpoint_selection_rule": "Qwen epoch 1 was selected using validation loss before final test evaluation.",
+  "acceptance_rule": "Accept only when Qwen predicts yes, BioGPT independently predicts yes, and Qwen meets a validation-selected confidence threshold.",
+  "threshold_selection_rule": "Maximum validation coverage with zero observed true-no to predicted-yes false accepts.",
+  "selected_qwen_confidence_margin": 1.7808837890625,
+  "validation": {
+    "rows": 100,
+    "model_agreement_rows": 77,
+    "model_agreement_rate": 0.77,
+    "accepted_rows": 30,
+    "human_review_rows": 70,
+    "automated_coverage": 0.3,
+    "accepted_accuracy": 1.0,
+    "unsafe_false_accepts": 0
+  },
+  "untouched_test": {
+    "rows": 200,
+    "model_agreement_rows": 143,
+    "model_agreement_rate": 0.715,
+    "accepted_rows": 47,
+    "human_review_rows": 153,
+    "automated_coverage": 0.235,
+    "accepted_accuracy": 0.936,
+    "unsafe_false_accepts": 3
+  }
+}
