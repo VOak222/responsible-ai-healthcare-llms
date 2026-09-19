@@ -1,0 +1,80 @@
+{
+  "benchmark_name": "Controlled Med-HALT Hallucination Detection Benchmark",
+  "task_definition": "Binary classification of a candidate healthcare answer as supported or hallucinated using the supplied question and evidence.",
+  "seed": 42,
+  "labels": {
+    "supported": 0,
+    "hallucinated": 1
+  },
+  "source_policy": {
+    "training": "Med-HALT Reasoning FCT dev plus Med-HALT Reasoning Fake train question groups.",
+    "validation": "Med-HALT Reasoning FCT val plus a held-out group-disjoint portion of Med-HALT Reasoning Fake train.",
+    "frozen_test": "A fixed, balanced, question-group-disjoint subset drawn only from the original Med-HALT Reasoning FCT test split."
+  },
+  "leakage_controls": [
+    "All answer variants for the same normalized question are kept in one split.",
+    "No original Med-HALT FCT test question group is used for training or validation.",
+    "The frozen test benchmark is selected deterministically with seed 42.",
+    "Each selected question group contributes one supported and one hallucinated answer."
+  ],
+  "requested_question_groups": {
+    "fct_training": 1200,
+    "fake_training": 800,
+    "fct_validation": 300,
+    "fake_validation": 200,
+    "fct_frozen_test": 500
+  },
+  "splits": {
+    "training": {
+      "rows": 4000,
+      "question_groups": 2000,
+      "labels": {
+        "supported": 2000,
+        "hallucinated": 2000
+      },
+      "dataset_rows": {
+        "medhalt_reasoning_fake": 1600,
+        "medhalt_reasoning_fct": 2400
+      },
+      "original_source_splits": {
+        "dev": 2400,
+        "train": 1600
+      }
+    },
+    "validation": {
+      "rows": 1000,
+      "question_groups": 500,
+      "labels": {
+        "supported": 500,
+        "hallucinated": 500
+      },
+      "dataset_rows": {
+        "medhalt_reasoning_fake": 400,
+        "medhalt_reasoning_fct": 600
+      },
+      "original_source_splits": {
+        "train": 400,
+        "val": 600
+      }
+    },
+    "frozen_test": {
+      "rows": 1000,
+      "question_groups": 500,
+      "labels": {
+        "supported": 500,
+        "hallucinated": 500
+      },
+      "dataset_rows": {
+        "medhalt_reasoning_fct": 1000
+      },
+      "original_source_splits": {
+        "test": 1000
+      }
+    }
+  },
+  "files": {
+    "train": "data\\processed\\controlled_medhalt_hallucination_train.jsonl",
+    "validation": "data\\processed\\controlled_medhalt_hallucination_validation.jsonl",
+    "frozen_test": "data\\processed\\controlled_medhalt_hallucination_test.jsonl"
+  }
+}
