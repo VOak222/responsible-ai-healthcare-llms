@@ -1,0 +1,12 @@
+{
+  "evaluation": "Unseen Med-HALT Reasoning Fake stress test",
+  "model": "Qwen2.5-3B + Med-HALT Hallucination LoRA",
+  "evaluated_rows": 1000,
+  "correct_predictions": 991,
+  "total_errors": 9,
+  "false_positives_supported_flagged": 9,
+  "false_negatives_missed_hallucinations": 0,
+  "finding": "The selected LoRA adapter missed no hallucinated answers on this held-out Reasoning Fake stress test. All observed errors were supported answers conservatively flagged as hallucinated.",
+  "error_cases_file": "results\\qwen2_5_3b_unseen_fake_stress_error_cases.csv",
+  "case_summary_file": "results\\qwen2_5_3b_unseen_fake_error_type_summary.csv"
+}

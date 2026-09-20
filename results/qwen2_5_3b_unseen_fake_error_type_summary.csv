@@ -1,0 +1,4 @@
+case_type,error_type,rows
+fake_answer_option,correct,500
+safe_refusal,correct,491
+safe_refusal,false_positive_supported_flagged,9
