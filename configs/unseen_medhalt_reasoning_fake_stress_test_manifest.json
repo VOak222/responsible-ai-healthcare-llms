@@ -1,0 +1,14 @@
+{
+  "benchmark_name": "Unseen Med-HALT Reasoning Fake Stress Test",
+  "seed": 113,
+  "rows": 1000,
+  "question_groups": 500,
+  "labels": {
+    "supported": 500,
+    "hallucinated": 500
+  },
+  "source_policy": "Only Med-HALT Reasoning Fake question groups excluded from the controlled Qwen training set were eligible.",
+  "leakage_control": "Every Fake question group used during Qwen training was removed before this fixed stress-test subset was selected.",
+  "prompt_policy": "The exact controlled-training prompt structure was reused; only the question, evidence, and candidate answer content changed.",
+  "output_file": "data\\processed\\unseen_medhalt_reasoning_fake_stress_test.jsonl"
+}

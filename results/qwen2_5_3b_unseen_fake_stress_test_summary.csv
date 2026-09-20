@@ -1,0 +1,3 @@
+model,rows,accuracy,macro_f1,supported_precision,supported_recall,supported_f1,hallucination_precision,hallucination_recall,hallucination_f1,missed_hallucinations,supported_answers_flagged_as_hallucinations
+Base Qwen2.5-3B,1000,0.703,0.6747,0.9951,0.408,0.5787,0.6277,0.998,0.7707,1,296
+Qwen2.5-3B + Med-HALT Hallucination LoRA,1000,0.991,0.991,1.0,0.982,0.9909,0.9823,1.0,0.9911,0,9
