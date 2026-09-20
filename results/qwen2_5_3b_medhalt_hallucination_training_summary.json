@@ -1,0 +1,39 @@
+{
+  "model": "Qwen/Qwen2.5-3B-Instruct",
+  "task": "Controlled Med-HALT binary hallucination detection: supported versus hallucinated answer.",
+  "training_data": "data\\processed\\controlled_medhalt_hallucination_train.jsonl",
+  "validation_data": "data\\processed\\controlled_medhalt_hallucination_validation.jsonl",
+  "frozen_test_policy": "The controlled Med-HALT test split was not used for training, checkpoint selection, or calibration.",
+  "training_configuration": {
+    "max_length": 768,
+    "epochs": 2,
+    "learning_rate": 0.0002,
+    "gradient_accumulation_steps": 8,
+    "lora_rank": 16,
+    "lora_alpha": 32,
+    "lora_dropout": 0.05,
+    "quantization": "4-bit NF4",
+    "compute_dtype": "torch.bfloat16"
+  },
+  "trainable_parameters": 29933568,
+  "all_parameters": 1728606208,
+  "trainable_parameter_percent": 1.731659,
+  "best_epoch": 1,
+  "best_validation_loss": 0.000256,
+  "best_adapter": "artifacts\\adapters\\qwen2_5_3b_medhalt_hallucination_best_validation",
+  "final_adapter": "artifacts\\adapters\\qwen2_5_3b_medhalt_hallucination_final",
+  "epochs": [
+    {
+      "epoch": 1,
+      "train_loss": 0.358596,
+      "validation_loss": 0.000256,
+      "checkpoint": "artifacts\\checkpoints\\qwen2_5_3b_medhalt_hallucination\\epoch_1"
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.007109,
+      "validation_loss": 0.001791,
+      "checkpoint": "artifacts\\checkpoints\\qwen2_5_3b_medhalt_hallucination\\epoch_2"
+    }
+  ]
+}
