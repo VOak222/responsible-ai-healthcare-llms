@@ -1,0 +1,114 @@
+{
+  "model": "TF-IDF + Logistic Regression",
+  "task": "Controlled Med-HALT binary hallucination detection: supported versus hallucinated candidate answer.",
+  "feature_configuration": {
+    "ngram_range": [
+      1,
+      2
+    ],
+    "min_df": 2,
+    "max_df": 0.98,
+    "max_features": 60000,
+    "sublinear_tf": true,
+    "vocabulary_size": 60000
+  },
+  "model_selection": {
+    "selection_data": "validation split only",
+    "candidate_c_values": [
+      0.1,
+      0.3,
+      1.0,
+      3.0
+    ],
+    "selected_c": 0.3,
+    "candidates": [
+      {
+        "C": 0.1,
+        "validation_accuracy": 0.503,
+        "validation_macro_f1": 0.4475,
+        "validation_hallucination_recall": 0.82,
+        "validation_missed_hallucinations": 90
+      },
+      {
+        "C": 0.3,
+        "validation_accuracy": 0.501,
+        "validation_macro_f1": 0.4991,
+        "validation_hallucination_recall": 0.44,
+        "validation_missed_hallucinations": 280
+      },
+      {
+        "C": 1.0,
+        "validation_accuracy": 0.504,
+        "validation_macro_f1": 0.4753,
+        "validation_hallucination_recall": 0.27,
+        "validation_missed_hallucinations": 365
+      },
+      {
+        "C": 3.0,
+        "validation_accuracy": 0.504,
+        "validation_macro_f1": 0.4742,
+        "validation_hallucination_recall": 0.266,
+        "validation_missed_hallucinations": 367
+      }
+    ]
+  },
+  "validation": {
+    "rows": 1000,
+    "accuracy": 0.501,
+    "macro_f1": 0.4991,
+    "supported_precision": 0.5009,
+    "supported_recall": 0.562,
+    "supported_f1": 0.5297,
+    "hallucination_precision": 0.5011,
+    "hallucination_recall": 0.44,
+    "hallucination_f1": 0.4686,
+    "missed_hallucinations": 280,
+    "supported_answers_flagged_as_hallucinations": 219,
+    "confusion_matrix": {
+      "labels": [
+        "supported",
+        "hallucinated"
+      ],
+      "rows_true_labels": [
+        [
+          281,
+          219
+        ],
+        [
+          280,
+          220
+        ]
+      ]
+    }
+  },
+  "frozen_test": {
+    "rows": 1000,
+    "accuracy": 0.501,
+    "macro_f1": 0.501,
+    "supported_precision": 0.501,
+    "supported_recall": 0.506,
+    "supported_f1": 0.5035,
+    "hallucination_precision": 0.501,
+    "hallucination_recall": 0.496,
+    "hallucination_f1": 0.4985,
+    "missed_hallucinations": 252,
+    "supported_answers_flagged_as_hallucinations": 247,
+    "confusion_matrix": {
+      "labels": [
+        "supported",
+        "hallucinated"
+      ],
+      "rows_true_labels": [
+        [
+          253,
+          247
+        ],
+        [
+          252,
+          248
+        ]
+      ]
+    }
+  },
+  "safety_interpretation": "Missed hallucinations are rows where a hallucinated answer was incorrectly predicted as supported. These require particular attention because the unsafe answer would not be flagged."
+}

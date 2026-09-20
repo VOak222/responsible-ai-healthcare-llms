@@ -8,20 +8,20 @@
   },
   "source_policy": {
     "training": "Med-HALT Reasoning FCT dev plus Med-HALT Reasoning Fake train question groups.",
-    "validation": "Med-HALT Reasoning FCT val plus a held-out group-disjoint portion of Med-HALT Reasoning Fake train.",
+    "validation": "Med-HALT Reasoning FCT val only, so checkpoint selection matches the same task family as the frozen FCT test.",
     "frozen_test": "A fixed, balanced, question-group-disjoint subset drawn only from the original Med-HALT Reasoning FCT test split."
   },
   "leakage_controls": [
-    "All answer variants for the same normalized question are kept in one split.",
-    "No original Med-HALT FCT test question group is used for training or validation.",
-    "The frozen test benchmark is selected deterministically with seed 42.",
+    "All answer variants for the same normalized question stay in one split.",
+    "No original FCT test question group is used for training or validation.",
+    "Validation and frozen test are both FCT-only.",
+    "The frozen test is selected deterministically with seed 42.",
     "Each selected question group contributes one supported and one hallucinated answer."
   ],
   "requested_question_groups": {
     "fct_training": 1200,
     "fake_training": 800,
-    "fct_validation": 300,
-    "fake_validation": 200,
+    "fct_validation": 500,
     "fct_frozen_test": 500
   },
   "splits": {
@@ -49,12 +49,10 @@
         "hallucinated": 500
       },
       "dataset_rows": {
-        "medhalt_reasoning_fake": 400,
-        "medhalt_reasoning_fct": 600
+        "medhalt_reasoning_fct": 1000
       },
       "original_source_splits": {
-        "train": 400,
-        "val": 600
+        "val": 1000
       }
     },
     "frozen_test": {

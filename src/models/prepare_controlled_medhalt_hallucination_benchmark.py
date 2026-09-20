@@ -7,16 +7,11 @@ import pandas as pd
 
 SEED = 42
 
-# Kept practical for the RTX 4070 Laptop GPU while being much larger
-# and more reliable than the earlier 100-row pilot.
+# Practical benchmark size for local Qwen LoRA training.
 FCT_TRAIN_QUESTION_GROUPS = 1200
 FAKE_TRAIN_QUESTION_GROUPS = 800
-
-FCT_VALIDATION_QUESTION_GROUPS = 300
-FAKE_VALIDATION_QUESTION_GROUPS = 200
-
+FCT_VALIDATION_QUESTION_GROUPS = 500
 FCT_TEST_QUESTION_GROUPS = 500
-
 
 PROJECT_DIR = Path(__file__).resolve().parents[2]
 DATA_DIR = PROJECT_DIR / "data" / "processed"
@@ -38,9 +33,12 @@ def normalize_question(question):
     return " ".join(str(question).lower().split())
 
 
-def question_group_id(dataset_name, question):
+def make_question_group_id(dataset_name, question):
     text = f"{dataset_name}::{normalize_question(question)}"
-    return hashlib.sha256(text.encode("utf-8")).hexdigest()[:20]
+
+    return hashlib.sha256(
+        text.encode("utf-8")
+    ).hexdigest()[:20]
 
 
 def make_prompt(row):
@@ -57,8 +55,8 @@ def make_prompt(row):
     )
 
 
-def load_source(path):
-    dataframe = pd.read_csv(path)
+def load_source_data(file_path):
+    dataframe = pd.read_csv(file_path)
 
     required_columns = {
         "dataset_name",
@@ -72,14 +70,18 @@ def load_source(path):
         "source_file",
     }
 
-    missing = required_columns - set(dataframe.columns)
+    missing_columns = required_columns - set(dataframe.columns)
 
-    if missing:
-        raise ValueError(f"{path.name} is missing columns: {sorted(missing)}")
+    if missing_columns:
+        raise ValueError(
+            f"{file_path.name} is missing columns: "
+            f"{sorted(missing_columns)}"
+        )
 
     dataframe = dataframe.copy()
+
     dataframe["question_group_id"] = dataframe.apply(
-        lambda row: question_group_id(
+        lambda row: make_question_group_id(
             row["dataset_name"],
             row["question"],
         ),
@@ -94,58 +96,70 @@ def load_source(path):
     )
 
     if dataframe["label"].isna().any():
-        raise ValueError(f"Unexpected labels found in {path.name}")
+        raise ValueError(
+            f"Unexpected is_hallucinated value in {file_path.name}"
+        )
 
     return dataframe
 
 
 def make_balanced_question_pairs(dataframe):
     """
-    Keep at most one supported and one hallucinated candidate per question.
+    Keep one supported and one hallucinated answer per question group.
 
-    This creates exactly balanced question groups and prevents answer variants
-    for the same question from being separated across train/validation/test.
+    This guarantees balanced labels and prevents answer variants of the same
+    question from being separated across benchmark splits.
     """
     selected_rows = []
 
     for _, group in dataframe.groupby("question_group_id", sort=True):
-        supported = group[group["label"] == "supported"].sort_values(
-            "record_id"
-        )
-        hallucinated = group[group["label"] == "hallucinated"].sort_values(
-            "record_id"
-        )
+        supported_rows = group[
+            group["label"] == "supported"
+        ].sort_values("record_id")
 
-        if supported.empty or hallucinated.empty:
+        hallucinated_rows = group[
+            group["label"] == "hallucinated"
+        ].sort_values("record_id")
+
+        if supported_rows.empty or hallucinated_rows.empty:
             continue
 
-        selected_rows.append(supported.iloc[0].to_dict())
-        selected_rows.append(hallucinated.iloc[0].to_dict())
+        selected_rows.append(supported_rows.iloc[0].to_dict())
+        selected_rows.append(hallucinated_rows.iloc[0].to_dict())
 
-    paired = pd.DataFrame(selected_rows)
+    paired_dataframe = pd.DataFrame(selected_rows)
 
-    if paired.empty:
-        raise RuntimeError("No balanced question pairs could be created.")
+    if paired_dataframe.empty:
+        raise RuntimeError(
+            "No supported/hallucinated question pairs could be created."
+        )
 
-    return paired.sort_values(
+    return paired_dataframe.sort_values(
         ["question_group_id", "label", "record_id"]
     ).reset_index(drop=True)
 
 
-def choose_question_groups(dataframe, number_of_groups, seed, split_name):
-    groups = sorted(dataframe["question_group_id"].unique())
+def choose_question_groups(
+    dataframe,
+    number_of_groups,
+    random_state,
+    split_name,
+):
+    available_groups = sorted(
+        dataframe["question_group_id"].unique()
+    )
 
-    if len(groups) < number_of_groups:
+    if len(available_groups) < number_of_groups:
         raise ValueError(
             f"{split_name}: requested {number_of_groups} question groups, "
-            f"but only {len(groups)} are available."
+            f"but only {len(available_groups)} are available."
         )
 
     chosen_groups = (
-        pd.Series(groups)
+        pd.Series(available_groups)
         .sample(
             n=number_of_groups,
-            random_state=seed,
+            random_state=random_state,
             replace=False,
         )
         .tolist()
@@ -166,7 +180,7 @@ def remove_question_groups(dataframe, group_ids):
     ].copy()
 
 
-def assert_no_group_overlap(named_splits):
+def assert_no_question_leakage(named_splits):
     split_names = list(named_splits.keys())
 
     for left_index, left_name in enumerate(split_names):
@@ -179,13 +193,46 @@ def assert_no_group_overlap(named_splits):
                 named_splits[right_name]["question_group_id"].unique()
             )
 
-            overlap = left_groups & right_groups
+            shared_groups = left_groups & right_groups
 
-            if overlap:
+            if shared_groups:
                 raise RuntimeError(
-                    f"Question leakage detected between {left_name} and "
-                    f"{right_name}: {len(overlap)} shared question groups."
+                    f"Question leakage found between {left_name} and "
+                    f"{right_name}: {len(shared_groups)} shared groups."
                 )
+
+
+def get_label_counts(dataframe):
+    counts = dataframe["label"].value_counts().to_dict()
+
+    return {
+        "supported": int(counts.get("supported", 0)),
+        "hallucinated": int(counts.get("hallucinated", 0)),
+    }
+
+
+def describe_split(dataframe):
+    return {
+        "rows": int(len(dataframe)),
+        "question_groups": int(
+            dataframe["question_group_id"].nunique()
+        ),
+        "labels": get_label_counts(dataframe),
+        "dataset_rows": {
+            str(dataset_name): int(count)
+            for dataset_name, count in dataframe["dataset_name"]
+            .value_counts()
+            .sort_index()
+            .items()
+        },
+        "original_source_splits": {
+            str(source_split): int(count)
+            for source_split, count in dataframe["source_split"]
+            .value_counts()
+            .sort_index()
+            .items()
+        },
+    }
 
 
 def build_output_records(dataframe, split_name):
@@ -212,58 +259,36 @@ def build_output_records(dataframe, split_name):
     return records
 
 
-def save_jsonl(records, path):
-    with open(path, "w", encoding="utf-8") as file:
+def save_jsonl(records, output_path):
+    with open(output_path, "w", encoding="utf-8") as file:
         for record in records:
-            file.write(json.dumps(record, ensure_ascii=False) + "\n")
+            file.write(
+                json.dumps(record, ensure_ascii=False) + "\n"
+            )
 
 
-def label_counts(dataframe):
-    counts = dataframe["label"].value_counts().to_dict()
+def assert_balanced(split_name, dataframe):
+    counts = get_label_counts(dataframe)
 
-    return {
-        "supported": int(counts.get("supported", 0)),
-        "hallucinated": int(counts.get("hallucinated", 0)),
-    }
-
-
-def describe_split(dataframe):
-    return {
-        "rows": int(len(dataframe)),
-        "question_groups": int(
-            dataframe["question_group_id"].nunique()
-        ),
-        "labels": label_counts(dataframe),
-        "dataset_rows": {
-            str(name): int(count)
-            for name, count in dataframe["dataset_name"]
-            .value_counts()
-            .sort_index()
-            .items()
-        },
-        "original_source_splits": {
-            str(name): int(count)
-            for name, count in dataframe["source_split"]
-            .value_counts()
-            .sort_index()
-            .items()
-        },
-    }
+    if counts["supported"] != counts["hallucinated"]:
+        raise RuntimeError(
+            f"{split_name} is not balanced: {counts}"
+        )
 
 
 def main():
     CONFIG_DIR.mkdir(parents=True, exist_ok=True)
 
     print("Loading Med-HALT Reasoning FCT...")
-    fct = load_source(FCT_PATH)
+    fct_dataframe = load_source_data(FCT_PATH)
 
     print("Loading Med-HALT Reasoning Fake...")
-    fake = load_source(FAKE_PATH)
+    fake_dataframe = load_source_data(FAKE_PATH)
 
-    fct_pairs = make_balanced_question_pairs(fct)
-    fake_pairs = make_balanced_question_pairs(fake)
+    fct_pairs = make_balanced_question_pairs(fct_dataframe)
+    fake_pairs = make_balanced_question_pairs(fake_dataframe)
 
-    fct_dev = fct_pairs[
+    fct_dev_pool = fct_pairs[
         fct_pairs["source_split"] == "dev"
     ].copy()
 
@@ -280,7 +305,7 @@ def main():
     ].copy()
 
     if (
-        fct_dev.empty
+        fct_dev_pool.empty
         or fct_validation_pool.empty
         or fct_test_pool.empty
         or fake_train_pool.empty
@@ -289,63 +314,35 @@ def main():
             "Expected Med-HALT source partitions were not found."
         )
 
-    # The entire original FCT test partition is protected from training
-    # and validation, even before its fixed benchmark subset is selected.
+    # Protect every original FCT test question from train and validation,
+    # even before selecting the fixed frozen-test subset.
     all_fct_test_groups = set(
         fct_test_pool["question_group_id"].unique()
     )
 
-    fct_dev = remove_question_groups(
-        fct_dev,
+    fct_dev_pool = remove_question_groups(
+        fct_dev_pool,
         all_fct_test_groups,
     )
+
     fct_validation_pool = remove_question_groups(
         fct_validation_pool,
         all_fct_test_groups,
     )
 
-    # Fixed untouched FCT test benchmark: 500 question groups x 2 labels.
-    test_split = choose_question_groups(
-        fct_test_pool,
-        FCT_TEST_QUESTION_GROUPS,
-        SEED + 3,
-        "Frozen FCT test",
-    )
-
-    # Official FCT validation partition is reserved for validation.
-    fct_validation = choose_question_groups(
-        fct_validation_pool,
-        FCT_VALIDATION_QUESTION_GROUPS,
-        SEED + 2,
-        "FCT validation",
-    )
-
-    # Reasoning Fake has train only, so reserve question groups before
-    # training. This preserves question-level isolation.
-    fake_validation = choose_question_groups(
-        fake_train_pool,
-        FAKE_VALIDATION_QUESTION_GROUPS,
-        SEED + 1,
-        "Reasoning Fake validation",
-    )
-
-    fake_remaining = remove_question_groups(
-        fake_train_pool,
-        set(fake_validation["question_group_id"].unique()),
-    )
-
-    fake_train = choose_question_groups(
-        fake_remaining,
-        FAKE_TRAIN_QUESTION_GROUPS,
-        SEED,
-        "Reasoning Fake training",
-    )
-
+    # Training uses FCT dev plus Reasoning Fake train.
     fct_train = choose_question_groups(
-        fct_dev,
+        fct_dev_pool,
         FCT_TRAIN_QUESTION_GROUPS,
         SEED + 4,
         "FCT training",
+    )
+
+    fake_train = choose_question_groups(
+        fake_train_pool,
+        FAKE_TRAIN_QUESTION_GROUPS,
+        SEED,
+        "Reasoning Fake training",
     )
 
     train_split = pd.concat(
@@ -356,41 +353,49 @@ def main():
         random_state=SEED,
     ).reset_index(drop=True)
 
-    validation_split = pd.concat(
-        [fct_validation, fake_validation],
-        ignore_index=True,
+    # Validation and frozen test are FCT only. This makes checkpoint
+    # selection match the final evaluation task family.
+    validation_split = choose_question_groups(
+        fct_validation_pool,
+        FCT_VALIDATION_QUESTION_GROUPS,
+        SEED + 2,
+        "FCT validation",
     ).sample(
         frac=1,
         random_state=SEED + 1,
     ).reset_index(drop=True)
 
+    # The frozen test comes only from original FCT test data.
+    frozen_test_split = choose_question_groups(
+        fct_test_pool,
+        FCT_TEST_QUESTION_GROUPS,
+        SEED + 3,
+        "Frozen FCT test",
+    )
+
     named_splits = {
         "training": train_split,
         "validation": validation_split,
-        "frozen_test": test_split,
+        "frozen_test": frozen_test_split,
     }
 
-    assert_no_group_overlap(named_splits)
+    assert_no_question_leakage(named_splits)
 
-    # Every generated split must remain exactly balanced.
     for split_name, dataframe in named_splits.items():
-        counts = label_counts(dataframe)
-
-        if counts["supported"] != counts["hallucinated"]:
-            raise RuntimeError(
-                f"{split_name} is not balanced: {counts}"
-            )
+        assert_balanced(split_name, dataframe)
 
     save_jsonl(
         build_output_records(train_split, "train"),
         TRAIN_PATH,
     )
+
     save_jsonl(
         build_output_records(validation_split, "validation"),
         VALIDATION_PATH,
     )
+
     save_jsonl(
-        build_output_records(test_split, "test"),
+        build_output_records(frozen_test_split, "test"),
         TEST_PATH,
     )
 
@@ -414,8 +419,8 @@ def main():
                 "train question groups."
             ),
             "validation": (
-                "Med-HALT Reasoning FCT val plus a held-out group-disjoint "
-                "portion of Med-HALT Reasoning Fake train."
+                "Med-HALT Reasoning FCT val only, so checkpoint selection "
+                "matches the same task family as the frozen FCT test."
             ),
             "frozen_test": (
                 "A fixed, balanced, question-group-disjoint subset drawn "
@@ -423,21 +428,21 @@ def main():
             ),
         },
         "leakage_controls": [
-            "All answer variants for the same normalized question are kept in one split.",
-            "No original Med-HALT FCT test question group is used for training or validation.",
-            "The frozen test benchmark is selected deterministically with seed 42.",
+            "All answer variants for the same normalized question stay in one split.",
+            "No original FCT test question group is used for training or validation.",
+            "Validation and frozen test are both FCT-only.",
+            "The frozen test is selected deterministically with seed 42.",
             "Each selected question group contributes one supported and one hallucinated answer.",
         ],
         "requested_question_groups": {
             "fct_training": FCT_TRAIN_QUESTION_GROUPS,
             "fake_training": FAKE_TRAIN_QUESTION_GROUPS,
             "fct_validation": FCT_VALIDATION_QUESTION_GROUPS,
-            "fake_validation": FAKE_VALIDATION_QUESTION_GROUPS,
             "fct_frozen_test": FCT_TEST_QUESTION_GROUPS,
         },
         "splits": {
-            name: describe_split(dataframe)
-            for name, dataframe in named_splits.items()
+            split_name: describe_split(dataframe)
+            for split_name, dataframe in named_splits.items()
         },
         "files": {
             "train": str(TRAIN_PATH.relative_to(PROJECT_DIR)),
