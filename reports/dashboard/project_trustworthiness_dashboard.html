@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Responsible AI Healthcare LLM Dashboard</title>
+  <style>
+    :root {
+      --bg: #f7f8fb;
+      --panel: #ffffff;
+      --text: #172033;
+      --muted: #657084;
+      --line: #dfe4ec;
+      --navy: #0f172a;
+      --blue: #1f6feb;
+      --blue-soft: #dceafe;
+      --green: #157347;
+      --green-soft: #dcfce7;
+      --amber: #9a5b00;
+      --amber-soft: #fef3c7;
+      --red: #b42318;
+      --red-soft: #fee4e2;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    header {
+      background: var(--navy);
+      color: white;
+      padding: 32px 36px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+      font-size: 29px;
+    }
+
+    header p {
+      margin: 0;
+      max-width: 950px;
+      color: #cbd5e1;
+    }
+
+    main {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 28px 36px 44px;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(180px, 1fr));
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .metric-card,
+    section.block {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+    }
+
+    .metric-card { padding: 17px; }
+
+    .metric-title {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .metric-value {
+      font-size: 29px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .metric-subtitle {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    section.block {
+      padding: 21px;
+      margin-bottom: 18px;
+    }
+
+    h2 {
+      margin: 0 0 10px;
+      font-size: 20px;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+
+    .muted { color: var(--muted); }
+
+    .status,
+    .tag {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .status {
+      margin-left: 8px;
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .tag.good {
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .tag.review {
+      background: var(--amber-soft);
+      color: var(--amber);
+    }
+
+    .tag.limit {
+      background: var(--red-soft);
+      color: var(--red);
+    }
+
+    .notice {
+      border-left: 4px solid var(--blue);
+      background: #eff6ff;
+      padding: 13px 15px;
+      border-radius: 6px;
+      margin-top: 12px;
+    }
+
+    .warning {
+      border-left-color: var(--amber);
+      background: #fffbeb;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 760px;
+      background: white;
+    }
+
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+    }
+
+    th {
+      background: #f1f5f9;
+      color: #334155;
+      font-weight: 700;
+    }
+
+    tr:last-child td { border-bottom: 0; }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .bars {
+      display: grid;
+      gap: 11px;
+      margin-top: 13px;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 190px 1fr 60px;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .bar-label {
+      color: #334155;
+      font-size: 14px;
+    }
+
+    .bar-track {
+      height: 13px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: #e5e7eb;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: var(--blue);
+    }
+
+    .bar-fill.base { background: #64748b; }
+    .bar-fill.lora { background: var(--green); }
+
+    .bar-value {
+      color: var(--muted);
+      font-size: 14px;
+      text-align: right;
+      font-weight: 700;
+    }
+
+    ul {
+      margin: 8px 0 0;
+      padding-left: 20px;
+    }
+
+    footer {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 900px) {
+      header, main {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .metrics, .two-col {
+        grid-template-columns: 1fr;
+      }
+
+      .bar-row {
+        grid-template-columns: 1fr;
+        gap: 5px;
+      }
+
+      .bar-value { text-align: left; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Responsible AI Healthcare LLM Dashboard</h1>
+    <p>
+      Local open-source evaluation framework for evidence-based hallucination
+      detection, fairness review, trustworthiness scoring, and human-review routing.
+    </p>
+  </header>
+
+  <main>
+    <div class="metrics">
+      <section class="metric-card">
+        <div class="metric-title">FCT Frozen-Test Accuracy</div>
+        <div class="metric-value">100.0%</div>
+        <div class="metric-subtitle">Qwen 2.5 3B + selected LoRA</div>
+      </section>
+
+      <section class="metric-card">
+        <div class="metric-title">Fake Stress-Test Accuracy</div>
+        <div class="metric-value">99.1%</div>
+        <div class="metric-subtitle">500 unseen question groups</div>
+      </section>
+
+      <section class="metric-card">
+        <div class="metric-title">Missed Hallucinations</div>
+        <div class="metric-value">0</div>
+        <div class="metric-subtitle">On both final LoRA evaluations</div>
+      </section>
+
+      <section class="metric-card">
+        <div class="metric-title">Remaining Error Pattern</div>
+        <div class="metric-value">9</div>
+        <div class="metric-subtitle">Safe refusals conservatively flagged</div>
+      </section>
+    </div>
+
+    <section class="block">
+      <h2>Current Safety Position <span class="status">Evaluation Complete</span></h2>
+      <p>
+        The selected Qwen 2.5 3B LoRA adapter was chosen using FCT validation
+        only, then evaluated once on a frozen FCT test and a separate held-out
+        Reasoning Fake stress test. The final model is not a diagnostic system
+        and retains human-review routing for risky, ambiguous, or out-of-scope cases.
+      </p>
+
+      <div class="notice">
+        <strong>Key result:</strong> The LoRA adapter substantially improved over
+        both the TF-IDF baseline and base Qwen while preserving zero missed
+        hallucinations on the two final controlled evaluations.
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>Final Model Evaluation</h2>
+      <p class="muted">
+        Results are separated by benchmark because the FCT and Reasoning Fake
+        tasks test different healthcare-answer failure modes.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Benchmark</th>
+              <th>Model</th>
+              <th>Rows</th>
+              <th>Accuracy</th>
+              <th>Macro-F1</th>
+              <th>Hallucination Recall</th>
+              <th>Missed Hallucinations</th>
+              <th>Supported Answers Flagged</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Controlled Med-HALT FCT frozen test</td>
+              <td>TF-IDF + Logistic Regression</td>
+              <td>1,000</td>
+              <td>50.1%</td>
+              <td>0.501</td>
+              <td>49.6%</td>
+              <td>252</td>
+              <td>247</td>
+            </tr>
+            <tr>
+              <td>Controlled Med-HALT FCT frozen test</td>
+              <td>Base Qwen 2.5 3B</td>
+              <td>1,000</td>
+              <td>85.9%</td>
+              <td>0.857</td>
+              <td>99.2%</td>
+              <td>4</td>
+              <td>137</td>
+            </tr>
+            <tr>
+              <td>Controlled Med-HALT FCT frozen test</td>
+              <td><strong>Qwen 2.5 3B + Med-HALT LoRA</strong></td>
+              <td>1,000</td>
+              <td><strong>100.0%</strong></td>
+              <td><strong>1.000</strong></td>
+              <td><strong>100.0%</strong></td>
+              <td><strong>0</strong></td>
+              <td><strong>0</strong></td>
+            </tr>
+            <tr>
+              <td>Unseen Med-HALT Reasoning Fake stress test</td>
+              <td>Base Qwen 2.5 3B</td>
+              <td>1,000</td>
+              <td>70.3%</td>
+              <td>0.675</td>
+              <td>99.8%</td>
+              <td>1</td>
+              <td>296</td>
+            </tr>
+            <tr>
+              <td>Unseen Med-HALT Reasoning Fake stress test</td>
+              <td><strong>Qwen 2.5 3B + Med-HALT LoRA</strong></td>
+              <td>1,000</td>
+              <td><strong>99.1%</strong></td>
+              <td><strong>0.991</strong></td>
+              <td><strong>100.0%</strong></td>
+              <td><strong>0</strong></td>
+              <td><strong>9</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="two-col">
+      <section class="block">
+        <h2>FCT Frozen-Test Accuracy</h2>
+        <p class="muted">
+          Evidence-grounded correct-versus-incorrect answer checking.
+        </p>
+
+        <div class="bars">
+          <div class="bar-row">
+            <div class="bar-label">TF-IDF baseline</div>
+            <div class="bar-track"><div class="bar-fill base" style="width: 50.1%"></div></div>
+            <div class="bar-value">50.1%</div>
+          </div>
+
+          <div class="bar-row">
+            <div class="bar-label">Base Qwen 2.5 3B</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 85.9%"></div></div>
+            <div class="bar-value">85.9%</div>
+          </div>
+
+          <div class="bar-row">
+            <div class="bar-label">Qwen + LoRA</div>
+            <div class="bar-track"><div class="bar-fill lora" style="width: 100%"></div></div>
+            <div class="bar-value">100.0%</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>Unseen Fake Stress-Test Accuracy</h2>
+        <p class="muted">
+          Held-out question groups excluded from LoRA training.
+        </p>
+
+        <div class="bars">
+          <div class="bar-row">
+            <div class="bar-label">Base Qwen 2.5 3B</div>
+            <div class="bar-track"><div class="bar-fill base" style="width: 70.3%"></div></div>
+            <div class="bar-value">70.3%</div>
+          </div>
+
+          <div class="bar-row">
+            <div class="bar-label">Qwen + LoRA</div>
+            <div class="bar-track"><div class="bar-fill lora" style="width: 99.1%"></div></div>
+            <div class="bar-value">99.1%</div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section class="block">
+      <h2>Error Analysis and Human-Review Policy</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Observed finding</th>
+              <th>Evidence</th>
+              <th>Interpretation</th>
+              <th>Governance action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Zero missed hallucinations</td>
+              <td>0 on FCT frozen test; 0 on unseen Fake stress test</td>
+              <td><span class="tag good">Strong safety signal</span></td>
+              <td>Continue to measure hallucination recall in future evaluations.</td>
+            </tr>
+            <tr>
+              <td>Safe-refusal false positives</td>
+              <td>9 supported responses were flagged on the Fake stress test.</td>
+              <td><span class="tag review">Conservative error</span> All nine were safe-refusal variants for implausible prompts.</td>
+              <td>Route such cases to human review rather than treating them as automatic failures.</td>
+            </tr>
+            <tr>
+              <td>Real-world limitation</td>
+              <td>High scores come from controlled Med-HALT benchmarks.</td>
+              <td><span class="tag limit">Not clinical validation</span></td>
+              <td>Use only as decision support; require clinical and governance review before deployment.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="notice warning">
+        <strong>Routing rule:</strong> Any response with potentially unsafe clinical
+        content, low evidence support, fairness-risk indicators, or a safe-refusal
+        ambiguity should be escalated for human review.
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>Fairness and Trustworthiness Review</h2>
+      <p class="muted">
+        Existing EquityMedQA review outputs remain a separate governance layer.
+        They are not combined with Med-HALT accuracy figures.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Review layer</th>
+              <th>Current output</th>
+              <th>Decision</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>EquityMedQA trustworthiness routing</td>
+              <td>18 mandatory-human-review rows, 12 human-review rows, 3 accept rows</td>
+              <td>Keep fairness and clinical-risk review separate from hallucination accuracy.</td>
+            </tr>
+            <tr>
+              <td>Manual review shortlist</td>
+              <td>33 selected rows from fairness and safety checks</td>
+              <td>Use for structured human review before describing the system as clinically safe.</td>
+            </tr>
+            <tr>
+              <td>System-level governance</td>
+              <td>Hallucination detection + grounding + fairness review + routing</td>
+              <td>Maintain a human-in-the-loop workflow for high-risk healthcare content.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>Evaluation Controls</h2>
+      <ul>
+        <li>FCT frozen test data was not used for LoRA training, checkpoint selection, or calibration.</li>
+        <li>The selected adapter was chosen using FCT validation loss after epoch 1.</li>
+        <li>The Fake stress test used question groups excluded from the training set.</li>
+        <li>Results demonstrate controlled benchmark performance, not diagnosis, treatment recommendation, or real-world clinical reliability.</li>
+      </ul>
+    </section>
+
+    <footer>
+      Generated from local project evaluation outputs. Last updated with Qwen 2.5 3B Med-HALT LoRA benchmark results.
+    </footer>
+  </main>
+</body>
+</html>
