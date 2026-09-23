@@ -1,175 +1,56 @@
-import json
+"""FastAPI frontend for local evidence retrieval and manual answer evaluation."""
+
+from __future__ import annotations
+
+import sys
+from functools import lru_cache
 from pathlib import Path
 
-import pandas as pd
 import uvicorn
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import HTMLResponse
+from pydantic import BaseModel, Field
 
 
 PROJECT_DIR = Path(__file__).resolve().parents[2]
-DATA_DIR = PROJECT_DIR / "data" / "processed"
-RESULT_DIR = PROJECT_DIR / "results"
 
-STRESS_TEST_PATH = (
-    DATA_DIR / "unseen_medhalt_reasoning_fake_stress_test.jsonl"
-)
-SOURCE_PATH = DATA_DIR / "medhalt_reasoning_fake_common.csv"
-PREDICTIONS_PATH = (
-    RESULT_DIR / "qwen2_5_3b_unseen_fake_stress_test_predictions.csv"
-)
-ERROR_CASES_PATH = (
-    RESULT_DIR / "qwen2_5_3b_unseen_fake_stress_error_cases.csv"
+if str(PROJECT_DIR) not in sys.path:
+    sys.path.insert(0, str(PROJECT_DIR))
+
+from src.demo.evidence_retrieval import EvidenceRetriever
+from src.demo.live_evaluator import (
+    DualAdapterEvaluator,
+    append_manual_case_log,
 )
 
-LORA_MODEL_NAME = "Qwen2.5-3B + Med-HALT Hallucination LoRA"
 
 app = FastAPI(
-    title="Responsible AI Healthcare LLM Demo",
-    version="1.0.0",
+    title="Responsible AI Healthcare LLM Manual Evaluation",
+    version="2.0.0",
 )
 
 
-def load_jsonl(file_path):
-    with open(file_path, encoding="utf-8") as file:
-        return [json.loads(line) for line in file]
+class RetrievalRequest(BaseModel):
+    question: str = Field(min_length=8, max_length=2000)
+    candidate_answer: str = Field(min_length=3, max_length=4000)
 
 
-def as_text(value):
-    if pd.isna(value):
-        return ""
-    return str(value)
+class EvaluationRequest(RetrievalRequest):
+    evidence_override: str = Field(default="", max_length=7000)
 
 
-def label_text(label):
-    return str(label).replace("_", " ").title()
+@lru_cache(maxsize=1)
+def get_retriever():
+    return EvidenceRetriever()
 
 
-def make_case(row, scenario, error_type=""):
-    predicted_label = as_text(row["predicted_label"])
-    true_label = as_text(row["true_label"])
-
-    if error_type == "false_positive_supported_flagged":
-        action = "Human review required"
-        reason = (
-            "The model conservatively flagged a safe-refusal response. "
-            "A reviewer should verify that the refusal is appropriate."
-        )
-    elif predicted_label == "hallucinated":
-        action = "Human review required"
-        reason = (
-            "The response was flagged as hallucinated and should not be "
-            "treated as reliable clinical information."
-        )
-    else:
-        action = "Lower-priority human review"
-        reason = (
-            "The answer was evidence-supported in this controlled benchmark, "
-            "but the prototype does not provide clinical clearance."
-        )
-
-    return {
-        "id": scenario.lower().replace(" ", "_"),
-        "scenario": scenario,
-        "benchmark": "Unseen Med-HALT Reasoning Fake stress test",
-        "question": as_text(row["question"]),
-        "evidence": as_text(row["knowledge"]),
-        "candidate_answer": as_text(row["answer"]),
-        "model_prediction": label_text(predicted_label),
-        "reference_label": label_text(true_label),
-        "score_supported": round(float(row["score_supported"]), 3),
-        "score_hallucinated": round(float(row["score_hallucinated"]), 3),
-        "confidence_margin": round(float(row["confidence_margin"]), 3),
-        "error_type": error_type or "correct_prediction",
-        "routing_action": action,
-        "routing_reason": reason,
-    }
+@lru_cache(maxsize=1)
+def get_evaluator():
+    return DualAdapterEvaluator()
 
 
-def load_demo_cases():
-    required_paths = [
-        STRESS_TEST_PATH,
-        SOURCE_PATH,
-        PREDICTIONS_PATH,
-        ERROR_CASES_PATH,
-    ]
-
-    for file_path in required_paths:
-        if not file_path.exists():
-            raise FileNotFoundError(f"Required file not found: {file_path}")
-
-    stress_test = pd.DataFrame(load_jsonl(STRESS_TEST_PATH))
-    source_data = pd.read_csv(SOURCE_PATH)
-    predictions = pd.read_csv(PREDICTIONS_PATH)
-    error_cases = pd.read_csv(ERROR_CASES_PATH)
-
-    stress_test["id"] = stress_test["id"].astype(str)
-    stress_test["source_record_id"] = (
-        stress_test["source_record_id"].astype(str)
-    )
-    source_data["record_id"] = source_data["record_id"].astype(str)
-    predictions["id"] = predictions["id"].astype(str)
-
-    lora_predictions = predictions[
-        predictions["model"] == LORA_MODEL_NAME
-    ].copy()
-
-    if lora_predictions.empty:
-        raise RuntimeError("LoRA predictions were not found in the CSV.")
-
-    metadata = stress_test[
-        ["id", "source_record_id", "case_type", "question_group_id"]
-    ]
-
-    combined = lora_predictions.merge(
-        metadata,
-        on=["id", "case_type", "question_group_id"],
-        how="left",
-    ).merge(
-        source_data[
-            ["record_id", "question", "knowledge", "answer"]
-        ],
-        left_on="source_record_id",
-        right_on="record_id",
-        how="left",
-    )
-
-    if combined["question"].isna().any():
-        raise RuntimeError("Could not connect all predictions to source text.")
-
-    correct_hallucination = combined[
-        (combined["true_label"] == "hallucinated")
-        & (combined["predicted_label"] == "hallucinated")
-    ].iloc[0]
-
-    correct_supported = combined[
-        (combined["true_label"] == "supported")
-        & (combined["predicted_label"] == "supported")
-    ].iloc[0]
-
-    safe_refusal_error = error_cases[
-        error_cases["error_type"]
-        == "false_positive_supported_flagged"
-    ].iloc[0]
-
-    return {
-        "correct_hallucination": make_case(
-            correct_hallucination,
-            "Hallucinated response detected",
-        ),
-        "correct_supported": make_case(
-            correct_supported,
-            "Evidence-supported response",
-        ),
-        "safe_refusal_false_positive": make_case(
-            safe_refusal_error,
-            "Safe-refusal false positive",
-            "false_positive_supported_flagged",
-        ),
-    }
-
-
-DEMO_CASES = load_demo_cases()
+def clean_text(text):
+    return " ".join(text.strip().split())
 
 
 @app.get("/", response_class=HTMLResponse)
@@ -177,46 +58,151 @@ def home():
     return HTML_PAGE
 
 
-@app.get("/api/cases")
-def get_cases():
-    return [
+@app.get("/api/health")
+def health():
+    return {
+        "status": "ready",
+        "models": [
+            "Qwen 2.5 3B + Med-HALT LoRA",
+            "Qwen 2.5 3B + PubMedQA LoRA",
+        ],
+        "evidence_corpus": (
+            "Controlled PubMedQA training and validation abstracts only"
+        ),
+        "boundary": (
+            "Research prototype; no automatic clinical approval."
+        ),
+    }
+
+
+@app.post("/api/retrieve")
+def retrieve(request: RetrievalRequest):
+    question = clean_text(request.question)
+    candidate_answer = clean_text(request.candidate_answer)
+
+    try:
+        sources = get_retriever().retrieve(
+            question,
+            candidate_answer,
+        )
+    except Exception as error:
+        raise HTTPException(
+            status_code=500,
+            detail=str(error),
+        ) from error
+
+    return {
+        "sources": sources,
+        "source_label": "Local PubMedQA research corpus",
+        "notice": (
+            "These are locally retrieved research abstracts, not hospital "
+            "guidelines or clinical validation."
+        ),
+    }
+
+
+@app.post("/api/evaluate")
+def evaluate(request: EvaluationRequest):
+    question = clean_text(request.question)
+    candidate_answer = clean_text(request.candidate_answer)
+    evidence_override = request.evidence_override.strip()
+
+    if evidence_override:
+        evidence_mode = (
+            "User-supplied evidence "
+            "(unverified for prototype testing)"
+        )
+        evidence = evidence_override
+        sources = []
+    else:
+        try:
+            sources = get_retriever().retrieve(
+                question,
+                candidate_answer,
+            )
+        except Exception as error:
+            raise HTTPException(
+                status_code=500,
+                detail=str(error),
+            ) from error
+
+        if not sources:
+            return {
+                "sources": [],
+                "evaluation": None,
+                "routing_action": "Mandatory human review",
+                "routing_reasons": [
+                    "No local research evidence could be retrieved "
+                    "for this case."
+                ],
+            }
+
+        evidence_mode = (
+            "Automatically retrieved local research evidence"
+        )
+
+        # The LoRA adapters were trained on one evidence passage per case.
+        # Use the closest passage as evaluator input and show all top results.
+        evidence = sources[0]["evidence"]
+
+    try:
+        evaluation = get_evaluator().evaluate(
+            question,
+            candidate_answer,
+            evidence,
+        )
+    except Exception as error:
+        raise HTTPException(
+            status_code=500,
+            detail=str(error),
+        ) from error
+
+    response = {
+        "sources": sources,
+        "evidence_mode": evidence_mode,
+        "evaluation": evaluation,
+    }
+
+    append_manual_case_log(
         {
-            "id": case_id,
-            "scenario": case["scenario"],
+            "question": question,
+            "candidate_answer": candidate_answer,
+            "evidence_mode": evidence_mode,
+            "source_record_ids": [
+                source["record_id"]
+                for source in sources
+            ],
+            "evaluation": evaluation,
         }
-        for case_id, case in DEMO_CASES.items()
-    ]
+    )
+
+    return response
 
 
-@app.get("/api/cases/{case_id}")
-def get_case(case_id):
-    if case_id not in DEMO_CASES:
-        raise HTTPException(status_code=404, detail="Demo case not found.")
-
-    return DEMO_CASES[case_id]
-
-
-HTML_PAGE = """
+HTML_PAGE = r"""
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Responsible AI Healthcare LLM Demo</title>
+  <title>Responsible AI Healthcare LLM Manual Evaluation</title>
+
   <style>
     :root {
       --navy: #0f172a;
       --blue: #2563eb;
       --green: #15803d;
-      --red: #b91c1c;
       --amber: #a16207;
+      --red: #b91c1c;
       --bg: #f7f8fb;
       --panel: #ffffff;
       --line: #dbe2ea;
       --muted: #64748b;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
@@ -229,7 +215,7 @@ HTML_PAGE = """
     header {
       background: var(--navy);
       color: white;
-      padding: 26px 34px;
+      padding: 27px 34px;
     }
 
     header h1 {
@@ -240,75 +226,29 @@ HTML_PAGE = """
     header p {
       margin: 0;
       color: #cbd5e1;
-      max-width: 900px;
+      max-width: 950px;
     }
 
     main {
-      max-width: 1240px;
-      margin: 0 auto;
+      max-width: 1280px;
+      margin: auto;
       padding: 24px 34px 42px;
     }
 
     .notice {
       background: #fff7ed;
       border-left: 4px solid #ea580c;
-      padding: 13px 15px;
       border-radius: 6px;
+      padding: 13px 15px;
       margin-bottom: 18px;
       font-size: 14px;
     }
 
-    .controls, .panel {
+    .panel {
       background: var(--panel);
       border: 1px solid var(--line);
       border-radius: 10px;
       padding: 18px;
-    }
-
-    .controls {
-      display: flex;
-      gap: 12px;
-      align-items: end;
-      margin-bottom: 18px;
-    }
-
-    .field {
-      flex: 1;
-    }
-
-    label {
-      display: block;
-      font-weight: 700;
-      font-size: 14px;
-      margin-bottom: 6px;
-    }
-
-    select {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #b8c3d2;
-      border-radius: 6px;
-      font-size: 14px;
-      background: white;
-    }
-
-    button {
-      padding: 10px 16px;
-      color: white;
-      background: var(--blue);
-      border: 0;
-      border-radius: 6px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 18px;
-    }
-
-    .panel {
       margin-bottom: 18px;
     }
 
@@ -318,47 +258,132 @@ HTML_PAGE = """
     }
 
     h3 {
-      margin: 0 0 8px;
+      margin: 0 0 7px;
       font-size: 15px;
     }
 
-    .text-box {
-      white-space: pre-wrap;
-      background: #f8fafc;
-      border: 1px solid var(--line);
-      border-radius: 7px;
-      padding: 11px;
-      min-height: 62px;
+    label {
+      display: block;
+      font-weight: 700;
       font-size: 14px;
+      margin: 13px 0 6px;
     }
 
-    .stack {
+    textarea {
+      width: 100%;
+      min-height: 106px;
+      resize: vertical;
+      padding: 10px;
+      border: 1px solid #b8c3d2;
+      border-radius: 6px;
+      font: 14px Arial, sans-serif;
+    }
+
+    details {
+      margin-top: 14px;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 700;
+      color: #334155;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    button {
+      padding: 10px 15px;
+      border: 0;
+      border-radius: 6px;
+      background: var(--blue);
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button.secondary {
+      background: #475569;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
+
+    .grid {
       display: grid;
-      gap: 13px;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
     }
 
-    .result {
-      border-left: 5px solid var(--blue);
-      background: #eff6ff;
+    .source {
+      border: 1px solid var(--line);
+      background: #f8fafc;
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 10px;
+    }
+
+    .source-meta,
+    .small {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .source p {
+      margin: 8px 0 0;
+      white-space: pre-wrap;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 13px;
     }
 
     .label {
       color: var(--muted);
       font-size: 12px;
       font-weight: 700;
-      text-transform: uppercase;
       letter-spacing: 0.04em;
+      text-transform: uppercase;
     }
 
     .value {
-      font-size: 20px;
+      margin-top: 4px;
+      font-size: 21px;
       font-weight: 700;
-      margin-top: 3px;
     }
 
-    .risk {
+    .score {
+      margin-top: 8px;
+      color: #475569;
+      font-size: 13px;
+    }
+
+    .route {
+      border-left: 5px solid var(--amber);
+      background: #fffbeb;
+    }
+
+    .route.high {
+      border-left-color: var(--red);
+      background: #fef2f2;
+    }
+
+    .pill {
       display: inline-block;
-      margin-top: 4px;
       padding: 4px 9px;
       border-radius: 999px;
       color: white;
@@ -367,22 +392,17 @@ HTML_PAGE = """
       font-weight: 700;
     }
 
-    .scores {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 14px;
+    .pill.high {
+      background: var(--red);
     }
 
-    .score-card {
-      border: 1px solid var(--line);
-      border-radius: 7px;
-      padding: 10px;
+    ul {
+      padding-left: 20px;
+      margin-bottom: 0;
     }
 
-    .small {
-      color: var(--muted);
-      font-size: 13px;
+    .hidden {
+      display: none;
     }
 
     footer {
@@ -392,134 +412,368 @@ HTML_PAGE = """
     }
 
     @media (max-width: 800px) {
-      header, main { padding-left: 18px; padding-right: 18px; }
-      .controls, .grid { grid-template-columns: 1fr; display: grid; }
-      .scores { grid-template-columns: 1fr; }
+      header,
+      main {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .grid,
+      .cards {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
+
 <body>
   <header>
-    <h1>Responsible AI Healthcare LLM Demo</h1>
-    <p>Evidence-grounded hallucination review and human-review routing using saved held-out evaluation outputs.</p>
+    <h1>Responsible AI Healthcare LLM Manual Evaluation</h1>
+    <p>
+      Local evidence retrieval, task-specific hallucination assessment,
+      and human-review routing for research-stage healthcare-AI answers.
+    </p>
   </header>
 
   <main>
     <div class="notice">
-      <strong>Research prototype:</strong> This page presents reproducible benchmark cases and is not a diagnostic, treatment, or clinical-decision system.
+      <strong>Research prototype:</strong>
+      Do not enter patient-identifiable information. This tool does not
+      diagnose, prescribe, or approve a clinical decision. Every result
+      requires qualified human review.
     </div>
 
-    <section class="controls">
-      <div class="field">
-        <label for="caseSelect">Select an evaluated case</label>
-        <select id="caseSelect"></select>
+    <section class="panel">
+      <h2>1. Question and AI Draft Answer</h2>
+
+      <label for="question">Question</label>
+      <textarea
+        id="question"
+        placeholder="Example: Does the supplied research evidence support the proposed intervention for this condition?"
+      ></textarea>
+
+      <label for="answer">AI-generated candidate answer</label>
+      <textarea
+        id="answer"
+        placeholder="Paste the draft answer that should be checked against evidence."
+      ></textarea>
+
+      <details>
+        <summary>
+          Optional controlled testing: paste evidence manually
+        </summary>
+
+        <p class="small">
+          Use a research abstract or manager-provided source excerpt.
+          AI-generated text is accepted only for informal testing and
+          is marked unverified.
+        </p>
+
+        <textarea
+          id="override"
+          placeholder="Optional evidence override. Leave blank to retrieve local PubMedQA research abstracts automatically."
+        ></textarea>
+      </details>
+
+      <div class="actions">
+        <button
+          class="secondary"
+          id="retrieveButton"
+          onclick="retrieveEvidence()"
+        >
+          Retrieve evidence
+        </button>
+
+        <button
+          id="evaluateButton"
+          onclick="evaluateCase()"
+        >
+          Evaluate answer
+        </button>
       </div>
-      <button onclick="loadSelectedCase()">Load case</button>
+
+      <p id="status" class="small"></p>
     </section>
 
-    <div class="grid">
-      <section>
-        <div class="panel">
-          <h2>Input Case</h2>
-          <div class="stack">
-            <div>
-              <h3>Question</h3>
-              <div id="question" class="text-box"></div>
+    <div id="results" class="hidden">
+      <div class="grid">
+        <section class="panel">
+          <h2>2. Evidence Used</h2>
+          <p id="evidenceMode" class="small"></p>
+          <div id="sources"></div>
+        </section>
+
+        <section>
+          <div class="panel">
+            <h2>3. Task-Specific Model Signals</h2>
+
+            <div class="cards">
+              <div class="card">
+                <div class="label">
+                  Med-HALT hallucination check
+                </div>
+
+                <div id="medhaltLabel" class="value"></div>
+
+                <div id="medhaltScores" class="score"></div>
+              </div>
+
+              <div class="card">
+                <div class="label">
+                  PubMedQA evidence decision
+                </div>
+
+                <div id="pubmedLabel" class="value"></div>
+
+                <div id="pubmedScores" class="score"></div>
+              </div>
             </div>
-            <div>
-              <h3>Evidence / Knowledge Context</h3>
-              <div id="evidence" class="text-box"></div>
-            </div>
-            <div>
-              <h3>Candidate Answer</h3>
-              <div id="answer" class="text-box"></div>
-            </div>
+
+            <p class="small">
+              Scores are comparative label log-scores, not calibrated
+              probabilities. The two signals are shown separately and
+              are not combined into a clinical-performance score.
+            </p>
           </div>
-        </div>
-      </section>
 
-      <section>
-        <div class="panel result">
-          <h2>Model Assessment</h2>
-          <div class="label">Qwen 2.5 3B + selected LoRA</div>
-          <div id="prediction" class="value"></div>
+          <div id="routePanel" class="panel route">
+            <h2>4. Human-Review Routing</h2>
 
-          <div class="scores">
-            <div class="score-card">
-              <div class="label">Supported score</div>
-              <div id="supportedScore" class="value"></div>
-            </div>
-            <div class="score-card">
-              <div class="label">Hallucinated score</div>
-              <div id="hallucinatedScore" class="value"></div>
-            </div>
+            <span id="routeAction" class="pill"></span>
+
+            <ul id="routeReasons"></ul>
           </div>
-
-          <p class="small">
-            Scores are comparative model values, not calibrated probabilities.
-          </p>
-        </div>
-
-        <div class="panel">
-          <h2>Human-Review Routing</h2>
-          <div id="routingAction" class="risk"></div>
-          <p id="routingReason"></p>
-          <p class="small">
-            Benchmark reference label: <strong id="referenceLabel"></strong><br>
-            Case type: <strong id="scenario"></strong>
-          </p>
-        </div>
-
-        <div class="panel">
-          <h2>Governance Note</h2>
-          <p class="small">
-            The safe-refusal case demonstrates the final model’s known limitation:
-            it can conservatively flag an appropriate refusal on an implausible
-            prompt. This is why ambiguous cases are routed to a human reviewer.
-          </p>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
 
     <footer>
-      Source: frozen unseen Med-HALT Reasoning Fake stress-test outputs saved in this local project.
+      Automatic retrieval uses only the local controlled PubMedQA
+      training and validation corpus. Frozen benchmark test sets are
+      excluded from this demo retrieval index.
     </footer>
   </main>
 
   <script>
-    async function loadSelectedCase() {
-      const caseId = document.getElementById("caseSelect").value;
-      const response = await fetch(`/api/cases/${caseId}`);
-      const data = await response.json();
-
-      document.getElementById("question").textContent = data.question;
-      document.getElementById("evidence").textContent = data.evidence;
-      document.getElementById("answer").textContent = data.candidate_answer;
-      document.getElementById("prediction").textContent = data.model_prediction;
-      document.getElementById("supportedScore").textContent = data.score_supported;
-      document.getElementById("hallucinatedScore").textContent = data.score_hallucinated;
-      document.getElementById("routingAction").textContent = data.routing_action;
-      document.getElementById("routingReason").textContent = data.routing_reason;
-      document.getElementById("referenceLabel").textContent = data.reference_label;
-      document.getElementById("scenario").textContent = data.scenario;
+    function getValue(id) {
+      return document.getElementById(id).value.trim();
     }
 
-    async function start() {
-      const response = await fetch("/api/cases");
-      const cases = await response.json();
-      const select = document.getElementById("caseSelect");
-
-      cases.forEach((item) => {
-        const option = document.createElement("option");
-        option.value = item.id;
-        option.textContent = item.scenario;
-        select.appendChild(option);
-      });
-
-      loadSelectedCase();
+    function setStatus(message) {
+      document.getElementById("status").textContent = message;
     }
 
-    start();
+    function setBusy(isBusy, message) {
+      document.getElementById("retrieveButton").disabled = isBusy;
+      document.getElementById("evaluateButton").disabled = isBusy;
+
+      if (message) {
+        setStatus(message);
+      }
+    }
+
+    function escapeHtml(text) {
+      return String(text)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function requireInputs() {
+      const question = getValue("question");
+      const answer = getValue("answer");
+
+      if (question.length < 8 || answer.length < 3) {
+        setStatus(
+          "Enter a specific question and a candidate answer first."
+        );
+
+        return false;
+      }
+
+      return true;
+    }
+
+    function sourceHtml(source) {
+      return `
+        <div class="source">
+          <div class="source-meta">
+            ${escapeHtml(source.source_label)}
+            · record ${escapeHtml(source.record_id)}
+            · ${escapeHtml(source.split)} split
+            · similarity ${escapeHtml(source.similarity_score)}
+          </div>
+
+          <h3>Related question</h3>
+          <div>${escapeHtml(source.research_question)}</div>
+
+          <h3 style="margin-top: 10px">Retrieved abstract</h3>
+          <p>${escapeHtml(source.evidence)}</p>
+        </div>
+      `;
+    }
+
+    function showSources(sources, mode) {
+      document
+        .getElementById("results")
+        .classList
+        .remove("hidden");
+
+      document.getElementById("evidenceMode").textContent = mode;
+
+      const sourceContainer = document.getElementById("sources");
+
+      if (sources.length) {
+        sourceContainer.innerHTML = sources
+          .map(sourceHtml)
+          .join("");
+      } else {
+        sourceContainer.innerHTML = `
+          <p class="small">
+            No automatic sources were retrieved. A human reviewer must
+            verify any manually supplied evidence.
+          </p>
+        `;
+      }
+    }
+
+    async function retrieveEvidence() {
+      if (!requireInputs()) {
+        return;
+      }
+
+      setBusy(
+        true,
+        "Searching the local PubMedQA research corpus..."
+      );
+
+      try {
+        const response = await fetch("/api/retrieve", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            question: getValue("question"),
+            candidate_answer: getValue("answer"),
+          }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.detail || "Retrieval failed.");
+        }
+
+        showSources(
+          data.sources,
+          `${data.source_label}. ${data.notice}`
+        );
+
+        setStatus(
+          `Retrieved ${data.sources.length} local evidence passages.`
+        );
+      } catch (error) {
+        setStatus(error.message);
+      } finally {
+        setBusy(false);
+      }
+    }
+
+    async function evaluateCase() {
+      if (!requireInputs()) {
+        return;
+      }
+
+      setBusy(
+        true,
+        "Loading local models if needed and evaluating the answer..."
+      );
+
+      try {
+        const response = await fetch("/api/evaluate", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            question: getValue("question"),
+            candidate_answer: getValue("answer"),
+            evidence_override: getValue("override"),
+          }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.detail || "Evaluation failed.");
+        }
+
+        showSources(
+          data.sources || [],
+          data.evidence_mode || "No retrieved evidence"
+        );
+
+        const evaluation = data.evaluation;
+
+        if (evaluation) {
+          document.getElementById("medhaltLabel").textContent =
+            evaluation.medhalt.label;
+
+          document.getElementById("pubmedLabel").textContent =
+            evaluation.pubmedqa.label;
+
+          document.getElementById("medhaltScores").textContent =
+            `Supported: ${evaluation.medhalt.scores.supported} | ` +
+            `Hallucinated: ${evaluation.medhalt.scores.hallucinated} | ` +
+            `Margin: ${evaluation.medhalt.confidence_margin}`;
+
+          document.getElementById("pubmedScores").textContent =
+            `Yes: ${evaluation.pubmedqa.scores.yes} | ` +
+            `No: ${evaluation.pubmedqa.scores.no} | ` +
+            `Maybe: ${evaluation.pubmedqa.scores.maybe} | ` +
+            `Margin: ${evaluation.pubmedqa.confidence_margin}`;
+        }
+
+        const routingAction = evaluation
+          ? evaluation.routing_action
+          : data.routing_action;
+
+        const routingReasons = evaluation
+          ? evaluation.routing_reasons
+          : data.routing_reasons;
+
+        document.getElementById("routeAction").textContent =
+          routingAction;
+
+        document.getElementById("routeReasons").innerHTML =
+          routingReasons
+            .map(reason => `<li>${escapeHtml(reason)}</li>`)
+            .join("");
+
+        const mandatory = routingAction.includes("Mandatory");
+
+        document
+          .getElementById("routePanel")
+          .classList
+          .toggle("high", mandatory);
+
+        document
+          .getElementById("routeAction")
+          .classList
+          .toggle("high", mandatory);
+
+        setStatus(
+          "Manual case evaluated. It was logged separately from all benchmark results."
+        );
+      } catch (error) {
+        setStatus(error.message);
+      } finally {
+        setBusy(false);
+      }
+    }
   </script>
 </body>
 </html>
@@ -527,4 +781,8 @@ HTML_PAGE = """
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    uvicorn.run(
+        app,
+        host="127.0.0.1",
+        port=8000,
+    )
