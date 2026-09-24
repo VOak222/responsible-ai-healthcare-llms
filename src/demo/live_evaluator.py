@@ -45,22 +45,15 @@ MAX_EVIDENCE_CHARS = 2600
 LOW_MARGIN_THRESHOLD = 0.15
 
 
-def build_pubmedqa_prompt(question, candidate_answer, evidence):
-    """Use the PubMedQA adapter as an evidence-support signal."""
-
-    support_question = (
-        "Does the supplied PubMed abstract evidence support the following "
-        "candidate answer?\n\n"
-        f"Original question: {question}\n\n"
-        f"Candidate answer: {candidate_answer}"
-    )
+def build_pubmedqa_prompt(question, evidence):
+    """Use the PubMedQA adapter for its original question-level task."""
 
     return f"""You are a biomedical evidence assistant.
 Use only the supplied PubMed abstract evidence.
 Answer with one decision: yes, no, or maybe.
 
 Research question:
-{support_question}
+{question}
 
 PubMed abstract evidence:
 {evidence}
@@ -263,7 +256,6 @@ class DualAdapterEvaluator:
 
         pubmedqa_prompt = build_pubmedqa_prompt(
             question,
-            candidate_answer,
             evidence,
         )
 
@@ -360,10 +352,10 @@ class DualAdapterEvaluator:
                 "as hallucinated."
             )
 
-        if pubmedqa_label in {"no", "maybe"}:
-            reasons.append(
-                "The PubMedQA evidence adapter did not give a clear yes "
-                "decision from the supplied evidence."
+        if pubmedqa_label == "maybe":
+           reasons.append(
+                "The PubMedQA evidence conclusion was inconclusive "
+                "(maybe), so reviewer interpretation is needed."
             )
 
         if (
@@ -382,7 +374,6 @@ class DualAdapterEvaluator:
 
         if (
             medhalt_label == "hallucinated"
-            or pubmedqa_label in {"no", "maybe"}
         ):
             return "Mandatory human review", reasons
 
@@ -392,8 +383,9 @@ class DualAdapterEvaluator:
         return (
             "Lower-priority human review",
             [
-                "Both task-specific signals were favourable, but this "
-                "research prototype never grants automatic clinical approval."
+                "The Med-HALT adapter did not flag hallucination, and no "
+                "additional review trigger fired. This research prototype "
+                "never grants automatic clinical approval."
             ],
         )
 

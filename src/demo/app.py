@@ -520,7 +520,7 @@ HTML_PAGE = r"""
 
               <div class="card">
                 <div class="label">
-                  PubMedQA evidence decision
+                  PubMedQA evidence conclusion
                 </div>
 
                 <div id="pubmedLabel" class="value"></div>
@@ -530,9 +530,10 @@ HTML_PAGE = r"""
             </div>
 
             <p class="small">
-              Scores are comparative label log-scores, not calibrated
-              probabilities. The two signals are shown separately and
-              are not combined into a clinical-performance score.
+               PubMedQA answers the original research question from the supplied
+               evidence. It does not directly judge the candidate answer.
+               Scores are comparative label log-scores, not calibrated
+               probabilities, and should not be interpreted as clinical confidence.
             </p>
           </div>
 
