@@ -1,8 +1,9 @@
-"""Live local evaluation using the final Qwen 2.5 3B LoRA adapters."""
+"""Live local evaluation using the selected validated Qwen 2.5 3B LoRA adapters."""
 
 from __future__ import annotations
 
 import csv
+import re
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -23,14 +24,15 @@ MEDHALT_ADAPTER = (
     PROJECT_DIR
     / "artifacts"
     / "adapters"
-    / "qwen2_5_3b_medhalt_hallucination_final"
+    / "qwen2_5_3b_medhalt_hallucination_best_validation"
 )
 
 PUBMEDQA_ADAPTER = (
     PROJECT_DIR
     / "artifacts"
-    / "adapters"
+    / "checkpoints"
     / "qwen2_5_3b_controlled_benchmark"
+    / "epoch_1"
 )
 
 MANUAL_LOG_PATH = (
@@ -79,6 +81,101 @@ Candidate answer:
 Is the candidate answer hallucinated?
 Reply with exactly one label: hallucinated or supported.
 Label:"""
+
+
+def infer_candidate_conclusion(candidate_answer):
+    """Conservatively infer an explicit yes/no/maybe stance from the answer."""
+
+    normalized = " ".join(candidate_answer.strip().lower().split())
+
+    if not normalized:
+        return "uncertain"
+
+    explicit_patterns = {
+        "yes": [
+            r"^yes\b",
+            r"^answer\s*:\s*yes\b",
+            r"^the answer is yes\b",
+            r"^the conclusion is yes\b",
+        ],
+        "no": [
+            r"^no\b",
+            r"^answer\s*:\s*no\b",
+            r"^the answer is no\b",
+            r"^the conclusion is no\b",
+        ],
+        "maybe": [
+            r"^maybe\b",
+            r"^answer\s*:\s*maybe\b",
+            r"^the answer is maybe\b",
+            r"^the conclusion is maybe\b",
+            r"^(it is|it's) (unclear|uncertain|inconclusive)\b",
+            r"^(unclear|uncertain|inconclusive)\b",
+        ],
+    }
+
+    for label, patterns in explicit_patterns.items():
+        if any(re.search(pattern, normalized) for pattern in patterns):
+            return label
+
+    uncertainty_phrases = [
+        "insufficient evidence",
+        "not enough evidence",
+        "cannot determine",
+        "can't determine",
+        "cannot be determined",
+        "evidence is mixed",
+        "evidence remains mixed",
+    ]
+
+    if any(phrase in normalized for phrase in uncertainty_phrases):
+        return "maybe"
+
+    return "uncertain"
+
+
+def assess_candidate_evidence_consistency(
+    evidence_conclusion,
+    candidate_conclusion,
+):
+    """Compare an explicit candidate stance with the PubMedQA conclusion."""
+
+    if (
+        evidence_conclusion in {"yes", "no"}
+        and candidate_conclusion in {"yes", "no"}
+    ):
+        if evidence_conclusion == candidate_conclusion:
+            return (
+                "consistent",
+                "The candidate's explicit yes/no conclusion matches the "
+                "PubMedQA evidence conclusion.",
+            )
+
+        return (
+            "contradiction",
+            "The candidate's explicit yes/no conclusion conflicts with the "
+            "PubMedQA evidence conclusion.",
+        )
+
+    if evidence_conclusion == "maybe":
+        return (
+            "uncertain",
+            "The PubMedQA evidence conclusion is inconclusive, so a firm "
+            "candidate-evidence comparison is not appropriate.",
+        )
+
+    if candidate_conclusion == "maybe":
+        return (
+            "uncertain",
+            "The candidate answer itself is inconclusive, so it cannot be "
+            "cleanly matched to a yes/no evidence conclusion.",
+        )
+
+    return (
+        "uncertain",
+        "The candidate answer does not state a clear yes/no/maybe conclusion "
+        "that can be compared conservatively.",
+    )
 
 
 def clip_evidence(evidence):
@@ -296,12 +393,25 @@ class DualAdapterEvaluator:
             - pubmedqa_ordered_scores[1]
         )
 
+        candidate_conclusion = infer_candidate_conclusion(
+            candidate_answer
+        )
+
+        consistency_label, consistency_explanation = (
+            assess_candidate_evidence_consistency(
+                pubmedqa_label,
+                candidate_conclusion,
+            )
+        )
+
         routing_action, routing_reasons = self.route_case(
             medhalt_label,
             pubmedqa_label,
             medhalt_margin,
             pubmedqa_margin,
             candidate_answer,
+            consistency_label=consistency_label,
+            candidate_conclusion=candidate_conclusion,
         )
 
         return {
@@ -321,6 +431,14 @@ class DualAdapterEvaluator:
                 },
                 "confidence_margin": round(pubmedqa_margin, 3),
             },
+            "candidate_conclusion": {
+                "label": candidate_conclusion,
+                "method": "conservative explicit-stance parser",
+            },
+            "consistency": {
+                "label": consistency_label,
+                "explanation": consistency_explanation,
+            },
             "routing_action": routing_action,
             "routing_reasons": routing_reasons,
             "evidence_used": evidence,
@@ -333,6 +451,8 @@ class DualAdapterEvaluator:
         medhalt_margin,
         pubmedqa_margin,
         candidate_answer,
+        consistency_label=None,
+        candidate_conclusion=None,
     ):
         reasons = []
 
@@ -353,9 +473,23 @@ class DualAdapterEvaluator:
             )
 
         if pubmedqa_label == "maybe":
-           reasons.append(
+            reasons.append(
                 "The PubMedQA evidence conclusion was inconclusive "
                 "(maybe), so reviewer interpretation is needed."
+            )
+
+        if consistency_label == "contradiction":
+            reasons.append(
+                "The candidate's explicit conclusion contradicts the "
+                "PubMedQA evidence conclusion."
+            )
+        elif (
+            consistency_label == "uncertain"
+            and pubmedqa_label != "maybe"
+        ):
+            reasons.append(
+                "Candidate-evidence consistency could not be determined "
+                "confidently from an explicit yes/no conclusion."
             )
 
         if (
@@ -374,6 +508,7 @@ class DualAdapterEvaluator:
 
         if (
             medhalt_label == "hallucinated"
+            or consistency_label == "contradiction"
         ):
             return "Mandatory human review", reasons
 
