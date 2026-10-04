@@ -237,7 +237,7 @@ def automatic_disposition(
     ):
         return {
             "label": (
-                "Benchmark fail ? "
+                "Benchmark fail — "
                 "evidence conflict"
             ),
             "kind": "fail",
@@ -266,7 +266,7 @@ def automatic_disposition(
     ):
         return {
             "label": (
-                "Benchmark fail ? "
+                "Benchmark fail — "
                 "evidence conflict"
             ),
             "kind": "fail",
