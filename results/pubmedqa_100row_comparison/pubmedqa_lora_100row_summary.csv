@@ -1,0 +1,2 @@
+model,adapter,rows,correct,accuracy,macro_f1_yes_no,yes_recall,no_recall,predicted_yes,predicted_no,predicted_maybe
+Qwen2.5-3B + PubMedQA LoRA,C:\responsible-ai-healthcare-llms\artifacts\checkpoints\qwen2_5_3b_controlled_benchmark\epoch_1,100,82,0.82,0.8193496587715776,0.88,0.76,56,44,0

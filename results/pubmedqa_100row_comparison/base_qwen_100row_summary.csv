@@ -1,0 +1,2 @@
+model,rows,correct,accuracy,macro_f1_yes_no,yes_recall,no_recall,predicted_yes,predicted_no,predicted_maybe
+Base Qwen2.5-3B-Instruct,100,3,0.03,0.058069381598793365,0.04,0.02,2,1,97

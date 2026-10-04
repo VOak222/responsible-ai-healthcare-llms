@@ -1,0 +1,2 @@
+model,evaluation,rows,correct,accuracy,macro_f1,supported_precision,supported_recall,hallucination_precision,hallucination_recall,missed_hallucinations,supported_flagged_as_hallucinations,predicted_supported,predicted_hallucinated
+Base Qwen2.5-3B-Instruct,PubMedQA-derived Med-HALT cross-dataset stress test,100,51,0.51,0.3551783129359126,1.0,0.02,0.5050505050505051,1.0,0,49,1,99
