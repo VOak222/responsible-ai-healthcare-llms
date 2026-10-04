@@ -1,0 +1,2 @@
+model,evaluation,rows,correct,accuracy,macro_f1,supported_precision,supported_recall,hallucination_precision,hallucination_recall,missed_hallucinations,supported_flagged_as_hallucinations,predicted_supported,predicted_hallucinated
+Base Qwen2.5-3B-Instruct,PubMedQA-derived natural-language counterfactual V3 stress test,100,63,0.63,0.5783475783475784,0.9333333333333333,0.28,0.5764705882352941,0.98,1,36,15,85

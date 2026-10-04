@@ -1,0 +1,2 @@
+model,evaluation,rows,correct,accuracy,macro_f1,supported_precision,supported_recall,hallucination_precision,hallucination_recall,missed_hallucinations,supported_flagged_as_hallucinations,predicted_supported,predicted_hallucinated,adapter
+Qwen2.5-3B + Med-HALT LoRA,PubMedQA-derived natural-language counterfactual V3 stress test,100,86,0.86,0.8599439775910365,0.8461538461538461,0.88,0.875,0.84,8,6,52,48,C:\responsible-ai-healthcare-llms\artifacts\adapters\qwen2_5_3b_medhalt_hallucination_best_validation
